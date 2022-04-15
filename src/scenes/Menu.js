@@ -14,13 +14,18 @@ class Menu extends Phaser.Scene {
 
   
     this.player = new Player(this, 480,342, 'spaceship').setOrigin(0.5, 0);
-
-    //let ground = this.add.sprite(0,500,'ground');
+    let platforms = this.physics.add.staticGroup();
+    platforms.create(200, 568, 'ground').setScale(2).refreshBody();
+    
     keyA = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A);
     keyD = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
     keyJump = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.W);
-    //ground.body.innovable = True;
-    //player.body.collideWorldBounds = true;
+
+
+    this.physics.add.collider(this.player, platforms);
+
+
+    
 
 
   }
@@ -28,8 +33,11 @@ class Menu extends Phaser.Scene {
 
   update() {
 
+
     //update prefeb
     this.player.update();
+
+    
     
 
   }

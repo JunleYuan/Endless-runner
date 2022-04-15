@@ -9,6 +9,7 @@ class Player extends Phaser.GameObjects.Sprite {
     }
 
     update() {
+        
         this.body.velocity.x = 0
         if (keyA.isDown){
             this.body.velocity.x = -100;
