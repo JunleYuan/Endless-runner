@@ -22,6 +22,8 @@ let borderUISize = game.config.height / 20;
 let borderPadding = borderUISize / 3;
 
 // reserve keyboard variables
-let keyJump, keySlide, keyLEFT, keyRIGHT;
+let keyJump, keySlide, keyA, keyD;
+
+
 //testing
 var high_score = 0;

@@ -9,16 +9,19 @@ class Player extends Phaser.GameObjects.Sprite {
     }
 
     update() {
+        this.body.velocity.x = 0
+        if (keyA.isDown){
+            this.body.velocity.x = -100;
 
-        if(Phaser.Input.Keyboard.JustDown(keyA)){
-
+        }else if(keyD.isDown){
+            this.body.velocity.x = 100;
 
         }
-        if(Phaser.Input.Keyboard.JustDown(keyD)){
-
-
+        if(keyJump.isDown && this.body.touching.down){
+            this.body.velocity.y = -200;
+            
         }
-
+        
 
     }
 
