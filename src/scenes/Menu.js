@@ -13,17 +13,18 @@ class Menu extends Phaser.Scene {
   
   create() {
 
-  
+    //items on screen
     this.player = new Player(this, 480,342, 'spaceship');
     let platforms = this.physics.add.staticGroup();
     platforms.create(200, 568, 'ground').setScale(2).refreshBody();
     
+    //initialize controls
     keyA = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A);
     keyD = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
     keyJump = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.W);
     keySlide = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S);
 
-    
+    //add collision with objects
     this.physics.add.collider(this.player, platforms);
 
 
