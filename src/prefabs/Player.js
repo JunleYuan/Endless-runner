@@ -28,7 +28,7 @@ class Player extends Phaser.GameObjects.Sprite {
         }
 
         //slide
-        if(keySlide.isDown ){
+        if(keySlide.isDown&& this.body.touching.down ){
             this.body.setSize(50, 20);
             this.canD = true;
     
