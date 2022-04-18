@@ -2,12 +2,17 @@ let config = {
     type: Phaser.CANVAS,
     width: 800,
     height: 600,
+    fps: {
+        target: 60,
+        forceSetTimeOut: true
+    },
     physics: {
         default: 'arcade',
         arcade: {
             gravity: {y:100},
             debug: true
         }
+        
     },
     scene: [ Menu, Play ]
 
