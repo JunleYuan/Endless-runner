@@ -29,6 +29,10 @@ let borderPadding = borderUISize / 3;
 // reserve keyboard variables
 let keyJump, keySlide, keyA, keyD;
 
+//number of hits
+let hit_count = 0;
+
+
     // //testing out pathing
     // var FlyingStar = new Phaser.Class({
 

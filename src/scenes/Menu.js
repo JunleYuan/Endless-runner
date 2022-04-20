@@ -35,8 +35,8 @@ class Menu extends Phaser.Scene {
 
     //add collision with objects
     this.physics.add.collider(this.player, platforms);
-    this.physics.add.collider(this.player, this.stars);
-
+    //this.physics.add.collider(this.player, this.stars);
+    this.physics.add.overlap(this.player, this.stars);
   }
   
 
@@ -47,6 +47,14 @@ class Menu extends Phaser.Scene {
     //update prefeb
     this.player.update();
     this.path.update();
+
+    //overlap 
+    if(this.path.body.touching.none){
+
+    }else{
+
+      console.log("working?");
+    }
     
     
 
