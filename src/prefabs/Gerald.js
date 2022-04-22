@@ -17,7 +17,6 @@ class Gerald extends Phaser.Physics.Arcade.Sprite {
         this.setPosition(x+100, y);
 
 
-        
     }
     
 }
