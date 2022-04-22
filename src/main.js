@@ -32,4 +32,6 @@ let keyJump, keySlide, keyA, keyD;
 //number of hits
 let hit_count = 0;
 
+let playerGotHit = false;
+
 
