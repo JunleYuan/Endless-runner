@@ -21,7 +21,7 @@ class Path extends Phaser.Physics.Arcade.Sprite {
 
     update(time, delta) {
 
-        this.anims.update(time, delta);
+        //this.anims.update(time, delta);
   
         this.path.getPoint(this.pathIndex, this.pathVector);
   
