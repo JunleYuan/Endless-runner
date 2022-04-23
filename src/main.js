@@ -14,7 +14,7 @@ let config = {
         }
         
     },
-    scene: [ Menu, Play ]
+    scene: [ PlayingScene, Play, Menu ]
 
     
 }
@@ -32,4 +32,14 @@ let keyJump, keySlide, keyA, keyD;
 //number of hits
 let hit_count = 0;
 
+let playerGotHit = false;
+
+//Platform Options
+let Obstacle_settings = {
+    platformSpeed: 300,
+    platformSpawnRange: [200,200],
+    platformLength: [120,150],
+    wallSpawnRate : 0,
+    spikeSpawnRate : 100
+}
 
