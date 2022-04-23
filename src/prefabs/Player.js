@@ -6,18 +6,23 @@ class Player extends Phaser.GameObjects.Sprite {
         scene.add.existing(this);   // add to existing, displayList, updateList
         scene.physics.add.existing(this);   //give object physics
         this.body.collideWorldBounds = true;    //so it don't go out of canvas
-        this.body.setSize(50, 40,0,0);          //give hitbox
+        this.body.setSize(50, 40);          //give hitbox
+        this.setOrigin(0,1);
         this.canD = false;          //detect slide and use for returning original hitbox
+        
     }
 
     update() {
 
         //movement controls
-        this.body.velocity.x = 0
-        if (keyA.isDown){
+        if(!playerGotHit)
+        this.body.velocity.x = 0;
+
+
+        if (keyA.isDown && !playerGotHit){
             this.body.velocity.x = -100;
 
-        }else if(keyD.isDown){
+        }else if(keyD.isDown && !playerGotHit){
             this.body.velocity.x = 100;
 
         }

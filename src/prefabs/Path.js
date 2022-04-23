@@ -1,12 +1,12 @@
 // Path prefab
 class Path extends Phaser.Physics.Arcade.Sprite {
-    constructor(scene, x, y, sprite, speed) {
-        super(scene, x, y,sprite, speed);
+    constructor(scene, x, y, sprite, speed,points) {
+        super(scene, x, y,sprite, speed,points);
 
         Phaser.Physics.Arcade.Sprite.call(this, scene, x, y, sprite);
   
         //  This is the path the sprite will follow
-        var points = [ 50, 400, 200, 400, 350, 300, 500, 500, 700, 400 ];
+        //var points = [700, 400,500, 500,350, 300, 50, 400, 200, 400];
 
         
         this.path = new Phaser.Curves.Spline(points);
@@ -21,7 +21,7 @@ class Path extends Phaser.Physics.Arcade.Sprite {
 
     update(time, delta) {
 
-        this.anims.update(time, delta);
+        //this.anims.update(time, delta);
   
         this.path.getPoint(this.pathIndex, this.pathVector);
   
