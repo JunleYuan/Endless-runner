@@ -40,6 +40,7 @@ let Obstacle_settings = {
     platformSpawnRange: [200,200],
     platformLength: [120,150],
     wallSpawnRate : 0,
-    spikeSpawnRate : 100
+    spikeSpawnRate : 100,
+    toastSpawnRate: 100
 }
 

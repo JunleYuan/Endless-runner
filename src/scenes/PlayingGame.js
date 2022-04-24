@@ -8,9 +8,11 @@ preload() {
     this.load.image('grass', './assets/Grass.png');
     this.load.image('Wall', './assets/Wall.png');
     this.load.image('Spikes', './assets/Spike.png');
+    this.load.image('Toast', './assets/toast.png');
   }
 
   create(){
+      //Keeps Track of platforms
       this.grassPool = this.add.group({
           removeCallback: function(grass){
               grass.scene.grassGroup.add(grass)
@@ -23,6 +25,7 @@ preload() {
           }
       });
 
+    //Keeps track of slidable walls
     this.wallPool = this.add.group({
         removeCallBack: function(wall){
             wall.scene.wallGroup.add(wall)
@@ -35,7 +38,7 @@ preload() {
         }
     });
 
-
+    //Keep track of Spike Pools
     this.spikePool = this.add.group({
         removeCallBack: function(spike){
             spike.scene.spikeGroup.add(spike)
@@ -47,10 +50,25 @@ preload() {
         }
     });
 
+    //Pool for all instances of Toast Collectible
+    this.toastPool = this.add.group({
+        removeCallback: function(toast){
+            toast.scene.toastGroup.add(toast)
+        }
+    });
+
+    this.toastGroup = this.add.group({
+        removeCallBack: function(toast){
+           toast.scene.toastPool.add(toast)
+        }
+    });
+
+    //Declare Number of Added Platforms
     this.addedPlatforms = 0;
     this.addPlatform(game.config.width,game.config.width/2,game.config.height*0.8); 
   }
   
+  //Function Add Platforms. Takes in width of the platforms and X,Y coordinates
   addPlatform(platWidth, platX, platY){
     this.addedPlatforms ++;
     let grass;
@@ -96,7 +114,7 @@ preload() {
             if(this.spikePool.getLength()){
                 let spike = this.spikePool.getFirst();
                 spike.x = platX - platWidth / 2 + Phaser.Math.Between(1, platWidth);
-                spike.y = platY - 146;
+                spike.y = platY - 256;
                 spike.alpha = 1;
                 spike.active = true;
                 spike.visible = true;
@@ -112,7 +130,25 @@ preload() {
                 this.spikeGroup.add(spike);
             }
         }
-
+        if(Phaser.Math.Between(1,100) <= Obstacle_settings.toastSpawnRate){
+            if(this.toastPool.getLength()){
+                let toast = this.toastPool.getFirst();
+                toast.x = platX - platWidth / 2 + Phaser.Math.Between(1, platWidth);
+                toast.y = platY - 256;
+                toast.alpha = 1;
+                toast.active = true;
+                toast.visible = true;
+                this.firePool.remove(fire);
+            }
+            else{
+                let toast = this.physics.add.sprite(platX - platWidth / 2 + Phaser.Math.Between(1, platWidth), platY - 246, 'Toast');
+                toast.body.allowGravity = false;
+                toast.setImmovable(true);
+                toast.setVelocityX(grass.body.velocity.x);
+                toast.setDepth(2);
+                this.toastGroup.add(toast);
+            }
+        }
     }
 
   }
@@ -120,7 +156,6 @@ preload() {
   update(){
 
     //Recycle Platforms
-    
     let minDistance = game.config.width;
     this.grassGroup.getChildren().forEach(function(grass){
         let platformDistance = game.config.width - grass.x - grass.displayWidth / 2;
@@ -137,6 +172,7 @@ preload() {
         this.addPlatform(nextPlatformWidth, game.config.width + nextPlatformWidth /2, game.config.height);
     }
 
+    //Recycle Sliding Walls
     this.wallGroup.getChildren().forEach(function(wall){
         if(wall.x < - wall.displayWidth / 2){
             this.wallGroup.killAndHide(wall);
@@ -144,6 +180,7 @@ preload() {
         }
     }, this);
     
+    //Recycle Spikes
     this.spikeGroup.getChildren().forEach(function(spike){
         if(spike.x < - spike.displayWidth / 2){
             this.spikeGroup.killAndHide(spike);
