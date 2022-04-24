@@ -14,8 +14,7 @@ let config = {
         }
         
     },
-    scene: [ Menu,PlayingScene, Play ]
-
+    scene: [PlayingScene, Play, Menu]
     
 }
     
@@ -36,9 +35,9 @@ let playerGotHit = false;
 
 //Platform Options
 let Obstacle_settings = {
-    platformSpeed: 300,
-    platformSpawnRange: [200,200],
-    platformLength: [120,150],
+    platformSpeed: 200,
+    platformSpawnRange: [200,300],
+    platformLength: [500,800],
     wallSpawnRate : 0,
     spikeSpawnRate : 100,
     toastSpawnRate: 100

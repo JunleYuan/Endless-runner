@@ -74,7 +74,7 @@ preload() {
 
         //Declare Number of Added Platforms
         this.addedPlatforms = 0;
-        this.addPlatform(game.config.width,game.config.width/2,game.config.height*0.8); 
+        this.addPlatform(game.config.width,game.config.width/2,game.config.height); 
         
         //spawn in player
         this.player = new Player(this, 480,342, 'spaceship');
@@ -139,7 +139,7 @@ preload() {
     //Adding New platforms
     if(minDistance > this.nextPlatformDistance){
         let nextPlatformWidth = Phaser.Math.Between(Obstacle_settings.platformLength[0],Obstacle_settings.platformLength[1]);
-        this.addPlatform(nextPlatformWidth, game.config.width + nextPlatformWidth /2, game.config.height);
+        this.addPlatform(nextPlatformWidth, game.config.width + nextPlatformWidth /2, game.config.height );
     }
 
     //Recycle Sliding Walls
@@ -183,16 +183,18 @@ preload() {
     if(this.grassPool.getLength()){
         grass = this.grassPool.getFirst();
         grass.x = platX;
-        grass.y = 100;
+        grass.y = platY;
         grass.active = true;
         grass.visible = true;
         this.grassPool.remove(grass);
     }
     else{
-        grass = this.physics.add.sprite(platX, platY * 0.8, "grass");
+        grass = this.add.tileSprite(platX, platY * 0.8, platWidth, 32, "grass");
+        this.physics.add.existing(grass);
         grass.body.allowGravity = false;
-        grass.setImmovable(true);
-        grass.setVelocityX(Obstacle_settings.platformSpeed * -1);
+        grass.body.setImmovable(true);
+        grass.body.setVelocityX(Obstacle_settings.platformSpeed * -1);
+        grass.body.setFriction(0);
         this.grassGroup.add(grass);
     }
     this.nextPlatformDistance = Phaser.Math.Between(Obstacle_settings.platformSpawnRange[0],Obstacle_settings.platformSpawnRange[1]);
