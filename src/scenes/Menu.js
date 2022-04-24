@@ -33,8 +33,6 @@ class Menu extends Phaser.Scene {
 
     //This is the path the sprite will follow
     this.points = [700, 400,500, 500,350, 300, 50, 400, 200, 400]
-
-
     this.smallG = this.physics.add.group({ allowGravity: false , immovable: true});
     this.path = new Path(this, 200, 300, 'spaceship', 0.005,this.points);
     this.smallG.add(this.path, true);
@@ -72,7 +70,7 @@ class Menu extends Phaser.Scene {
     this.path.update();
     this.gerald.update();
 
-
+    //reset and spawn in gerrard
     if(keySlide.isDown){
 
       this.path.body.reset(700, 400);
