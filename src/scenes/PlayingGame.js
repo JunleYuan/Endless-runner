@@ -123,7 +123,7 @@ preload() {
   
   
 
-  update(){
+  update(time, delta){
 
     //Recycle Platforms
     let minDistance = game.config.width;
@@ -159,7 +159,7 @@ preload() {
     }, this);
 
     //update prefab
-    this.player.update();
+    this.player.update(time, delta);
     this.gerald.update();
     this.path.update();
 

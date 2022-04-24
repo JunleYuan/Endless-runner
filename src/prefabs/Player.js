@@ -46,6 +46,7 @@ class Player extends Phaser.GameObjects.Sprite {
         //if airborne, count up jump time
         if(this.isJumping){
             this.jumpTime += delta;
+            //console.log(this.jumpTime);
         }
 
         //player double jumps if in the air for at least 0.25 seconds and the W key is pressed
