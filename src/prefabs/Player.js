@@ -15,31 +15,45 @@ class Player extends Phaser.GameObjects.Sprite {
     update() {
 
         //movement controls
-        if(!playerGotHit)
+        if(!playerGotHit && !keySlide.isDown)
         this.body.velocity.x = 0;
 
+        if(!keySlide.isDown){
+            //left right
+            if (keyA.isDown && !playerGotHit){
+                this.body.velocity.x = -100;
 
-        if (keyA.isDown && !playerGotHit){
-            this.body.velocity.x = -100;
+            }else if(keyD.isDown && !playerGotHit){
+                this.body.velocity.x = 100;
 
-        }else if(keyD.isDown && !playerGotHit){
-            this.body.velocity.x = 100;
-
+            }
         }
+        
+
+        //jump
         if(keyJump.isDown && this.body.touching.down){
             this.body.velocity.y = -200;
-            
-            
+
         }
 
         //slide
         if(keySlide.isDown&& this.body.touching.down ){
             this.body.setSize(50, 20);
+            if(keySlide.getDuration()<400){
+                console.log(keySlide.getDuration());
+                this.body.velocity.x = 300;
+            }else{
+                this.body.velocity.x = 0;
+                this.body.setSize(50, 40);
+                this.body.velocity.y = -50;
+                this.canD = false;
+            }
+            
             this.canD = true;
     
         }
         //return to original size after slide
-        if(!keySlide.isDown&& this.canD == true && this.body.touching.down){
+        if(keySlide.isUp&& this.canD == true && this.body.touching.down){
             this.body.setSize(50, 40);
             this.body.velocity.y = -50;
             this.canD = false;

@@ -21,7 +21,7 @@ class Menu extends Phaser.Scene {
     //items on screen
     this.player = new Player(this, 480,342, 'spaceship');
     let platforms = this.physics.add.staticGroup();
-    platforms.create(200, 568, 'ground').setScale(2).refreshBody();
+    platforms.create(200, 520, 'ground').setScale(2).refreshBody();
 
     this.gerald = new Gerald(this,0,0,'gerald',0).setOrigin(.8,0).setPushable(false).setScale(1,5);
     this.gerald.depth = 2;
