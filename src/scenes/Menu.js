@@ -65,14 +65,14 @@ class Menu extends Phaser.Scene {
 
   }
   
-  update() {
+  update(time, delta) {
 
     //update prefeb
-    this.player.update();
+    this.player.update(time, delta);
     this.path.update();
     this.gerald.update();
 
-
+    /*
     if(keySlide.isDown){
 
       this.path.body.reset(700, 400);
@@ -81,7 +81,7 @@ class Menu extends Phaser.Scene {
       this.path.pathIndex = 0;
       this.path.body.enable = true;
     }
-    
+    */
     
 
   }
