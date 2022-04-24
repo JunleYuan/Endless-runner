@@ -1,7 +1,7 @@
 let config = {
     type: Phaser.CANVAS,
-    width: 800,
-    height: 600,
+    width: 960,
+    height: 540,
     fps: {
         target: 60,
         forceSetTimeOut: true
@@ -14,7 +14,7 @@ let config = {
         }
         
     },
-    scene: [ PlayingScene, Play, Menu ]
+    scene: [ Menu,PlayingScene, Play ]
 
     
 }
