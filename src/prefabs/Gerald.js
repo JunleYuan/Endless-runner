@@ -17,7 +17,7 @@ class Gerald extends Phaser.Physics.Arcade.Sprite {
         this.anims.update(time, delta);
 
         //console.log(this.body.x);
-
+        //move gerald if hit
         if(this.body.x < -300 && this.HP == 1){
             this.body.velocity.x = 60;
             console.log("one");

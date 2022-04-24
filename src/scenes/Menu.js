@@ -21,9 +21,10 @@ class Menu extends Phaser.Scene {
     //items on screen
     this.player = new Player(this, 480,342, 'spaceship');
     let platforms = this.physics.add.staticGroup();
-    platforms.create(200, 568, 'ground').setScale(2).refreshBody();
+    platforms.create(200, 520, 'ground').setScale(2).refreshBody();
 
     this.gerald = new Gerald(this,0,0,'gerald',0).setOrigin(.8,0).setPushable(false).setScale(1,5);
+    this.gerald.depth = 2;
     
     //initialize controls
     keyA = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A);
@@ -33,8 +34,6 @@ class Menu extends Phaser.Scene {
 
     //This is the path the sprite will follow
     this.points = [700, 400,500, 500,350, 300, 50, 400, 200, 400]
-
-
     this.smallG = this.physics.add.group({ allowGravity: false , immovable: true});
     this.path = new Path(this, 200, 300, 'spaceship', 0.005,this.points);
     this.smallG.add(this.path, true);
@@ -65,14 +64,14 @@ class Menu extends Phaser.Scene {
 
   }
   
-  update(time, delta) {
+  update() {
 
     //update prefeb
-    this.player.update(time, delta);
+    this.player.update();
     this.path.update();
     this.gerald.update();
 
-    /*
+    //reset and spawn in gerrard
     if(keySlide.isDown){
 
       this.path.body.reset(700, 400);
@@ -81,7 +80,7 @@ class Menu extends Phaser.Scene {
       this.path.pathIndex = 0;
       this.path.body.enable = true;
     }
-    */
+    
     
 
   }

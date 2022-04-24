@@ -1,7 +1,7 @@
 let config = {
     type: Phaser.CANVAS,
-    width: 800,
-    height: 600,
+    width: 960,
+    height: 540,
     fps: {
         target: 60,
         forceSetTimeOut: true
@@ -14,8 +14,7 @@ let config = {
         }
         
     },
-    scene: [ Menu, Play ]
-
+    scene: [PlayingScene, Play, Menu]
     
 }
     
@@ -34,4 +33,13 @@ let hit_count = 0;
 
 let playerGotHit = false;
 
+//Platform Options
+let Obstacle_settings = {
+    platformSpeed: 200,
+    platformSpawnRange: [200,300],
+    platformLength: [500,800],
+    wallSpawnRate : 0,
+    spikeSpawnRate : 100,
+    toastSpawnRate: 100
+}
 
