@@ -30,6 +30,7 @@ preload() {
               grass.scene.grassPool.add(grass)
           }
       });
+      this.grassGroup.depth = 1;
 
         //Keeps track of slidable walls
         this.wallPool = this.add.group({
@@ -43,6 +44,7 @@ preload() {
                 wall.scene.wallPool.add(wall)
             }
         });
+        this.wallGroup.depth = 1;
 
         //Keep track of Spike Pools
         this.spikePool = this.add.group({
@@ -55,6 +57,7 @@ preload() {
                 spike.scene.spikePool.add(spike)
             }
         });
+        this.spikeGroup.depth = 1;
 
         //Pool for all instances of Toast Collectible
         this.toastPool = this.add.group({
@@ -85,7 +88,7 @@ preload() {
         //spawn gerald
         this.gerald = new Gerald(this,0,0,'gerald',0).setOrigin(.8,0).setPushable(false).setScale(1,5);
         this.physics.add.overlap(this.player, this.gerald,this.playerHitG);
-
+        this.gerald.depth = 3;
         //add collision with objects
         this.physics.add.collider(this.player, this.grassGroup);
 

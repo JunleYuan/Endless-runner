@@ -24,6 +24,7 @@ class Menu extends Phaser.Scene {
     platforms.create(200, 568, 'ground').setScale(2).refreshBody();
 
     this.gerald = new Gerald(this,0,0,'gerald',0).setOrigin(.8,0).setPushable(false).setScale(1,5);
+    this.gerald.depth = 2;
     
     //initialize controls
     keyA = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A);
