@@ -103,7 +103,7 @@ preload() {
         //if player gets hit there is a knock back
         this.hitG = this.physics.add.overlap(this.player, this.smallG, null, function (){ 
             hit_count += 1;
-            console.log("maybe");
+            console.log("hit");
             this.path.setActive(false);
             this.path.setVisible(false);
             this.path.body.enable = false;

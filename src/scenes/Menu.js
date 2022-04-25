@@ -80,8 +80,6 @@ class Menu extends Phaser.Scene {
       this.path.pathIndex = 0;
       this.path.body.enable = true;
     }
-    
-    
 
   }
   

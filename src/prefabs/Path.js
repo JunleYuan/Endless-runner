@@ -28,6 +28,13 @@ class Path extends Phaser.Physics.Arcade.Sprite {
         this.setPosition(this.pathVector.x, this.pathVector.y);
   
         this.pathIndex = Phaser.Math.Wrap(this.pathIndex + this.pathSpeed, 0, 1);
+
+        if(this.pathIndex >.99){
+            this.setActive(false);
+            this.setVisible(false);
+            this.body.enable = false;
+
+        }
         
     }
     
