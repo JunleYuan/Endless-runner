@@ -24,9 +24,9 @@ class Gerald extends Phaser.Physics.Arcade.Sprite {
         }else if(this.body.x < -100 && this.HP == 2){
             this.body.velocity.x = 60;
             console.log("2");
-        }else if(this.body.x < 200 && this.HP == 2){
+        }else if(this.body.x < 200 && this.HP == 3){
             this.body.velocity.x = 60;
-            console.log("2");
+            console.log("3");
         }else{
             this.body.velocity.x = 0;
         }
