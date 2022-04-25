@@ -23,11 +23,11 @@ class Player extends Phaser.GameObjects.Sprite {
         this.body.velocity.x = 0;
 
         //move left
-        if (keyA.isDown && !playerGotHit){
+        if (keyA.isDown && !playerGotHit&&!this.canD){
             this.moveLeft();
         }
         //move right
-        else if(keyD.isDown && !playerGotHit){
+        else if(keyD.isDown && !playerGotHit&&!this.canD){
             this.moveRight();
         }
 
