@@ -49,7 +49,7 @@ class Player extends Phaser.GameObjects.Sprite {
             this.slide();
         }
         //return to original size after slide
-        if((!keySlide.isDown && this.canD) || keySlide.getDuration()>500){
+        if((!keySlide.isDown && this.canD) || keySlide.getDuration()>200){
             this.standUp();
         }
     }
@@ -72,7 +72,7 @@ class Player extends Phaser.GameObjects.Sprite {
     slide(){
         this.setPosition(this.x, this.y + this.body.halfHeight/2); //move bounding box down
         this.body.setSize(45, this.body.halfHeight); //resize bounding box
-        this.body.velocity.x = 300;
+        this.body.velocity.x = 500;
         this.canD = true;
     }
 
