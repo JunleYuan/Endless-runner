@@ -94,9 +94,9 @@ preload() {
         this.physics.add.collider(this.player, this.grassGroup);
 
         //This is the path the sprite will follow
-        this.points = [700, 400,500, 500,350, 300, 50, 400, 200, 400]
+        this.points = [1100, 400,800, 500,350, 300, 50, 400, 200, 400]
         this.smallG = this.physics.add.group({ allowGravity: false , immovable: true});
-        this.path = new Path(this, 200, 300, 'spaceship', 0.005,this.points);
+        this.path = new Path(this, 1000, 300, 'spaceship', 0.005,this.points);
         this.smallG.add(this.path, true);
 
             
@@ -122,8 +122,6 @@ preload() {
 
     }
   
-  
-
   update(time, delta){
 
     //Recycle Platforms
@@ -168,7 +166,7 @@ preload() {
     //spawn minions
     if(keySlide.isDown){
 
-        this.path.body.reset(700, 400);
+        //this.path.body.reset(1000, 400);
         this.path.setActive(true);
         this.path.setVisible(true);
         this.path.pathIndex = 0;
