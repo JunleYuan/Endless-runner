@@ -64,10 +64,10 @@ class Menu extends Phaser.Scene {
 
   }
   
-  update() {
+  update(time, delta) {
 
     //update prefeb
-    this.player.update();
+    this.player.update(time, delta);
     this.path.update();
     this.gerald.update();
 
