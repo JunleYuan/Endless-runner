@@ -18,6 +18,7 @@ preload() {
   }
 
   create(){
+      
       //Keeps Track of platforms
       this.grassPool = this.add.group({
           removeCallback: function(grass){

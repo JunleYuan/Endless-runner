@@ -39,18 +39,9 @@ class Player extends Phaser.GameObjects.Sprite {
         }
 
         //player jumps if jump key is pressed while on the ground
-        if(keyJump.isDown && !this.isJumping){
-            this.jump();    
-        }
-
-        //if airborne, count up jump time
-        if(this.isJumping){
-            this.jumpTime += delta;
-        }
-
-        //player double jumps if in the air for at least 0.25 seconds and the W key is pressed
-        if(this.jumpCount == 1 && this.jumpTime > 250 && keyJump.isDown){
-            this.jump();
+        if(Phaser.Input.Keyboard.JustDown(keyJump) && (!this.isJumping || this.jumpCount < 2)){
+            this.jump();   
+            console.log("Jump Count" + this.jumpCount);
         }
 
         //player slide/crouch if S key is pressed
@@ -73,7 +64,7 @@ class Player extends Phaser.GameObjects.Sprite {
     }
 
     jump(){
-        this.body.velocity.y = (-1)*this.jumpStrength; //move player upwards
+        this.body.setVelocityY(this.jumpStrength * -1); //move player upwards
         this.jumpCount += 1; //increment jumps taken
         this.isJumping = true; //flag player as jumping
     }
