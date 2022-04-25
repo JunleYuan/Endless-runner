@@ -84,7 +84,7 @@ preload() {
         keyD = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
         keyJump = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.W);
         keySlide = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S);
-
+        spawn = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.E);
 
         //spawn gerald
         this.gerald = new Gerald(this,0,0,'gerald',0).setOrigin(.8,0).setPushable(false).setScale(1,5);
@@ -164,7 +164,7 @@ preload() {
 
 
     //spawn minions
-    if(keySlide.isDown){
+    if(spawn.isDown){
 
         //this.path.body.reset(1000, 400);
         this.path.setActive(true);
