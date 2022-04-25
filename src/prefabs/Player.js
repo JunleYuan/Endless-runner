@@ -45,7 +45,7 @@ class Player extends Phaser.GameObjects.Sprite {
         }
 
         //player slide/crouch if S key is pressed
-        if(keySlide.isDown && !this.isJumping && !this.canD ){
+        if(keySlide.isDown && !this.isJumping && !this.canD && keySlide){
             this.slide();
         }
         //return to original size after slide
