@@ -28,6 +28,9 @@ let borderPadding = borderUISize / 3;
 // reserve keyboard variables
 let keyJump, keySlide, keyA, keyD;
 
+//test key for path
+let spawn;
+
 //number of hits
 let hit_count = 0;
 
