@@ -19,7 +19,7 @@ class Player extends Phaser.GameObjects.Sprite {
     update(time, delta) {
 
         //movement controls
-        if(!playerGotHit)
+        if(!playerGotHit&& !this.canD)
         this.body.velocity.x = 0;
 
         //move left
@@ -45,11 +45,11 @@ class Player extends Phaser.GameObjects.Sprite {
         }
 
         //player slide/crouch if S key is pressed
-        if(keySlide.isDown && !this.isJumping && !this.canD ){
+        if(keySlide.isDown && !this.isJumping && !this.canD){
             this.slide();
         }
         //return to original size after slide
-        if(!keySlide.isDown && this.canD){
+        if((!keySlide.isDown && this.canD) || keySlide.getDuration()>500){
             this.standUp();
         }
     }
@@ -72,12 +72,14 @@ class Player extends Phaser.GameObjects.Sprite {
     slide(){
         this.setPosition(this.x, this.y + this.body.halfHeight/2); //move bounding box down
         this.body.setSize(45, this.body.halfHeight); //resize bounding box
+        this.body.velocity.x = 300;
         this.canD = true;
     }
 
     standUp(){
         this.setPosition(this.x, this.y - this.body.halfHeight); //move bounding box up
         this.body.setSize(30, this.body.height*2); //resize bounding box to original size
+        this.body.velocity.x = 0;
         this.canD = false;
     }
     

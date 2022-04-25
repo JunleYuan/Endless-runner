@@ -84,7 +84,7 @@ preload() {
         keyD = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
         keyJump = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.W);
         keySlide = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S);
-
+        spawn = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.E);
 
         //spawn gerald
         this.gerald = new Gerald(this,0,0,'gerald',0).setOrigin(.8,0).setPushable(false).setScale(1,5);
@@ -94,16 +94,16 @@ preload() {
         this.physics.add.collider(this.player, this.grassGroup);
 
         //This is the path the sprite will follow
-        this.points = [700, 400,500, 500,350, 300, 50, 400, 200, 400]
+        this.points = [1100, 400,800, 500,350, 300, 50, 400, 200, 400]
         this.smallG = this.physics.add.group({ allowGravity: false , immovable: true});
-        this.path = new Path(this, 200, 300, 'spaceship', 0.005,this.points);
+        this.path = new Path(this, 1000, 300, 'spaceship', 0.005,this.points);
         this.smallG.add(this.path, true);
 
             
         //if player gets hit there is a knock back
         this.hitG = this.physics.add.overlap(this.player, this.smallG, null, function (){ 
             hit_count += 1;
-            console.log("maybe");
+            console.log("hit");
             this.path.setActive(false);
             this.path.setVisible(false);
             this.path.body.enable = false;
@@ -122,8 +122,6 @@ preload() {
 
     }
   
-  
-
   update(time, delta){
 
     //Recycle Platforms
@@ -166,9 +164,9 @@ preload() {
 
 
     //spawn minions
-    if(keySlide.isDown){
+    if(spawn.isDown){
 
-        this.path.body.reset(700, 400);
+        //this.path.body.reset(1000, 400);
         this.path.setActive(true);
         this.path.setVisible(true);
         this.path.pathIndex = 0;
