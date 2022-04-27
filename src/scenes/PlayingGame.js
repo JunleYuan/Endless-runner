@@ -127,15 +127,13 @@ class PlayingScene extends Phaser.Scene {
         
         //this.wall2 = new Wall(this,500,500,'grass',0).setOrigin(.8,0).setPushable(false).setScale(5,1);
         this.starting();
-        this.obs1();
-
+        //this.obs1();
+        this.obs3();
         
 
         //add collision with objects
         //this.physics.add.collider(this.player, this.grassGroup);
         
-
-
 
     }//end of create
   
@@ -152,15 +150,17 @@ class PlayingScene extends Phaser.Scene {
     if(shouldSpawnP){
         shouldSpawnP = false;
         
-        switch (Math.floor(Math.random() * 2)) {
+        switch (Math.floor(Math.random() * 3)) {
             case 0:
-                this.starting();
+                this.obs1();
                 console.log("0");
                 break;
             case 1:
-                this.obs1();
+                this.obs2();
                 console.log("1");
                 break;
+            case 2:
+                this.obs3();
         }
 
 
@@ -327,6 +327,38 @@ class PlayingScene extends Phaser.Scene {
         this.group.add(this.wall1);
         this.group.add(this.wall2);
         this.group.add(this.wall3);
+        this.group.runChildUpdate = true;
+
+        this.physics.add.collider(this.player, this.group);
+
+    }
+    obs2(){
+        this.group = this.physics.add.group({ allowGravity: false });
+        this.wall1 = new Wall(this,960,500,'grass',false).setOrigin(0,0).setPushable(false).setScale(5,1);
+        this.wall2 = new Wall(this,1600,400,'grass',false).setOrigin(0,0).setPushable(false).setScale(5,1);
+        this.wall3 = new Wall(this,1900,300,'grass',true).setOrigin(0,0).setPushable(false).setScale(5,1);
+
+        this.group.add(this.wall1);
+        this.group.add(this.wall2);
+        this.group.add(this.wall3);
+        this.group.runChildUpdate = true;
+
+        this.physics.add.collider(this.player, this.group);
+
+    }
+    obs3(){
+        this.group = this.physics.add.group({ allowGravity: false });
+        this.wall1 = new Wall(this,200+game.config.width,400,'grass',false).setOrigin(0,0).setPushable(false).setScale(.5,1);
+        this.wall2 = new Wall(this,400+game.config.width,400,'grass',false).setOrigin(0,0).setPushable(false).setScale(.5,1);
+        this.wall3 = new Wall(this,600+game.config.width,400,'grass',false).setOrigin(0,0).setPushable(false).setScale(.5,1);
+        this.wall4 = new Wall(this,800+game.config.width,400,'grass',false).setOrigin(0,0).setPushable(false).setScale(.5,1);
+        this.wall5 = new Wall(this,1000+game.config.width,400,'grass',true).setOrigin(0,0).setPushable(false).setScale(.5,1);
+
+        this.group.add(this.wall1);
+        this.group.add(this.wall2);
+        this.group.add(this.wall3);
+        this.group.add(this.wall4);
+        this.group.add(this.wall5);
         this.group.runChildUpdate = true;
 
         this.physics.add.collider(this.player, this.group);
