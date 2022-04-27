@@ -88,8 +88,13 @@ preload() {
 
         //spawn gerald
         this.gerald = new Gerald(this,0,0,'gerald',0).setOrigin(.8,0).setPushable(false).setScale(1,5);
-        this.physics.add.overlap(this.player, this.gerald,this.playerHitG);
+        //ends game if hits gerald
+        this.physics.add.overlap(this.player, this.gerald,function (){
+            isGameOver = true;
+        });
         this.gerald.depth = 3;
+
+
         //add collision with objects
         this.physics.add.collider(this.player, this.grassGroup);
 
@@ -118,11 +123,14 @@ preload() {
     
         }, this);
     
-        this.physics.add.overlap(this.player, this.gerald,this.playerHitG);
-
+        this.physics.world.setBoundsCollision( true,true,true,false);
     }
   
   update(time, delta){
+
+    if(this.player.body.y > game.config.height){
+        isGameOver = true;
+    }
 
     //Recycle Platforms
     let minDistance = game.config.width;
@@ -172,9 +180,14 @@ preload() {
         this.path.pathIndex = 0;
         this.path.body.enable = true;
     }
+    if (isGameOver){
+        this.scene.start("end");
+    }
+
+    
+  }//end of update
 
 
-  }
   //Function Add Platforms. Takes in width of the platforms and X,Y coordinates
   addPlatform(platWidth, platX, platY){
     this.addedPlatforms ++;
@@ -260,13 +273,9 @@ preload() {
         }
     }
 
-  }
-
-  //game over if hit gerald
-  playerHitG(){
-    console.log("GG");
-
+    
 
   }
+
 
 }

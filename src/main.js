@@ -14,7 +14,7 @@ let config = {
         }
         
     },
-    scene: [End,PlayingScene, Menu]
+    scene: [PlayingScene,End, Menu]
     
 }
     
@@ -34,7 +34,11 @@ let spawn;
 //number of hits
 let hit_count = 0;
 
+//did player get hit?
 let playerGotHit = false;
+
+//is game over?
+let isGameOver = false;
 
 //Platform Options
 let Obstacle_settings = {

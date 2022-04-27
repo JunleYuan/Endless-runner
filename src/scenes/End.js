@@ -25,6 +25,8 @@ class End extends Phaser.Scene {
         });
         again.on('pointerdown', () => {
             this.scene.start("playingScene");
+            isGameOver = false;
+            hit_count = 0;
         });
 
     }
