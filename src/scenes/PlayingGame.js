@@ -132,9 +132,8 @@ class PlayingScene extends Phaser.Scene {
         
 
         //add collision with objects
-        this.physics.add.collider(this.player, this.grassGroup);
-        this.physics.add.collider(this.player, this.group);
-        this.physics.add.collider(this.player, this.startingP);
+        //this.physics.add.collider(this.player, this.grassGroup);
+        
 
 
 
@@ -145,6 +144,26 @@ class PlayingScene extends Phaser.Scene {
     //if player is under the map game over
     if(this.player.body.y > game.config.height){
         isGameOver = true;
+    }
+
+    //console.log(this.pick = Math.floor(Math.random() * 2));
+
+    //spawn new platform
+    if(shouldSpawnP){
+        shouldSpawnP = false;
+        
+        switch (Math.floor(Math.random() * 2)) {
+            case 0:
+                this.starting();
+                console.log("0");
+                break;
+            case 1:
+                this.obs1();
+                console.log("1");
+                break;
+        }
+
+
     }
 
     // //Recycle Platforms
@@ -295,6 +314,7 @@ class PlayingScene extends Phaser.Scene {
         this.startp.add(this.startingP);
         this.startp.runChildUpdate = true;
 
+        this.physics.add.collider(this.player, this.startingP);
     }
 
     obs1(){
@@ -309,6 +329,7 @@ class PlayingScene extends Phaser.Scene {
         this.group.add(this.wall3);
         this.group.runChildUpdate = true;
 
+        this.physics.add.collider(this.player, this.group);
 
     }
 
