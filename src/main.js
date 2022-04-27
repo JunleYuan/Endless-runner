@@ -40,6 +40,12 @@ let playerGotHit = false;
 //is game over?
 let isGameOver = false;
 
+//Platform speed
+let pspeed = -100;
+
+//  spawn next plaform if finish
+let shouldSpawnP = false;
+
 //Platform Options
 let Obstacle_settings = {
     platformSpeed: 200,

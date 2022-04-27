@@ -17,7 +17,7 @@ class Player extends Phaser.GameObjects.Sprite {
     }
 
     update(time, delta) {
-
+        
         //movement controls
         if(!playerGotHit&& !this.canD)
         this.body.velocity.x = 0;

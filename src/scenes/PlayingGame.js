@@ -99,7 +99,9 @@ class PlayingScene extends Phaser.Scene {
         this.smallG = this.physics.add.group({ allowGravity: false , immovable: true});
         this.path = new Path(this, 1000, 300, 'spaceship', 0.005,this.points);
         this.smallG.add(this.path, true);
-
+        this.path.setActive(false);
+        this.path.setVisible(false);
+        this.path.body.enable = false;
             
         //if player gets hit there is a knock back
         this.hitG = this.physics.add.overlap(this.player, this.smallG, null, function (){ 
@@ -124,21 +126,15 @@ class PlayingScene extends Phaser.Scene {
 
         
         //this.wall2 = new Wall(this,500,500,'grass',0).setOrigin(.8,0).setPushable(false).setScale(5,1);
+        this.starting();
+        this.obs1();
+
         
-
-        this.group = this.physics.add.group({ allowGravity: false });
-        //this.group.runChildUpdate = false;
-        this.wall1 = new Wall(this,400,500,'grass',0).setOrigin(.8,0).setPushable(false).setScale(5,1);
-        this.wall2 = new Wall(this,800,300,'grass',0).setOrigin(.8,0).setPushable(false).setScale(5,1);
-
-        this.group.add(this.wall1);
-        this.group.add(this.wall2);
-        this.group.runChildUpdate = true;
-
 
         //add collision with objects
         this.physics.add.collider(this.player, this.grassGroup);
         this.physics.add.collider(this.player, this.group);
+        this.physics.add.collider(this.player, this.startingP);
 
 
 
@@ -187,21 +183,21 @@ class PlayingScene extends Phaser.Scene {
     this.player.update(time, delta);
     this.gerald.update();
     this.path.update();
-
+    
     //spawn minions
     if(spawn.isDown){
 
-        //this.path.body.reset(1000, 400);
+        this.path.body.reset(1000, 400);
+        this.path.body.enable = true;
         this.path.setActive(true);
         this.path.setVisible(true);
         this.path.pathIndex = 0;
-        this.path.body.enable = true;
+        
     }
     if (isGameOver){
         this.scene.start("end");
     }
 
-    
   }//end of update
 
 
@@ -290,6 +286,30 @@ class PlayingScene extends Phaser.Scene {
             }
         }
     }//end of add pat
+
+    starting(){
+        this.startp = this.physics.add.group({ allowGravity: false });
+        this.startingP = new Wall(this,100,500,'grass',0).setOrigin(0,0).setPushable(false).setScale(5,1);
+
+        this.startp.add(this.startingP);
+        this.startp.runChildUpdate = true;
+
+    }
+
+    obs1(){
+
+        this.group = this.physics.add.group({ allowGravity: false });
+        this.wall1 = new Wall(this,960,500,'grass',false).setOrigin(0,0).setPushable(false).setScale(5,1);
+        this.wall2 = new Wall(this,1600,300,'grass',false).setOrigin(0,0).setPushable(false).setScale(5,1);
+        this.wall3 = new Wall(this,1900,500,'grass',true).setOrigin(0,0).setPushable(false).setScale(5,1);
+
+        this.group.add(this.wall1);
+        this.group.add(this.wall2);
+        this.group.add(this.wall3);
+        this.group.runChildUpdate = true;
+
+
+    }
 
 
 }
