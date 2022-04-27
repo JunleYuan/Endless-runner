@@ -142,6 +142,7 @@ class PlayingScene extends Phaser.Scene {
   
   update(time, delta){
 
+    //if player is under the map game over
     if(this.player.body.y > game.config.height){
         isGameOver = true;
     }
@@ -201,95 +202,95 @@ class PlayingScene extends Phaser.Scene {
   }//end of update
 
 
-  //Function Add Platforms. Takes in width of the platforms and X,Y coordinates
-    addPlatform(platWidth, platX, platY){
-        this.addedPlatforms ++;
-        let grass;
-        if(this.grassPool.getLength()){
-            grass = this.grassPool.getFirst();
-            grass.x = platX;
-            grass.y = platY;
-            grass.active = true;
-            grass.visible = true;
-            this.grassPool.remove(grass);
-        }
-        else{
-            grass = this.add.tileSprite(platX, platY * 0.8, platWidth, 32, "grass");
-            this.physics.add.existing(grass);
-            grass.body.allowGravity = false;
-            grass.body.setImmovable(true);
-            grass.body.setVelocityX(Obstacle_settings.platformSpeed * -1);
-            grass.body.setFriction(0);
-            this.grassGroup.add(grass);
-        }
-        this.nextPlatformDistance = Phaser.Math.Between(Obstacle_settings.platformSpawnRange[0],Obstacle_settings.platformSpawnRange[1]);
+//   //Function Add Platforms. Takes in width of the platforms and X,Y coordinates
+//     addPlatform(platWidth, platX, platY){
+//         this.addedPlatforms ++;
+//         let grass;
+//         if(this.grassPool.getLength()){
+//             grass = this.grassPool.getFirst();
+//             grass.x = platX;
+//             grass.y = platY;
+//             grass.active = true;
+//             grass.visible = true;
+//             this.grassPool.remove(grass);
+//         }
+//         else{
+//             grass = this.add.tileSprite(platX, platY * 0.8, platWidth, 32, "grass");
+//             this.physics.add.existing(grass);
+//             grass.body.allowGravity = false;
+//             grass.body.setImmovable(true);
+//             grass.body.setVelocityX(Obstacle_settings.platformSpeed * -1);
+//             grass.body.setFriction(0);
+//             this.grassGroup.add(grass);
+//         }
+//         this.nextPlatformDistance = Phaser.Math.Between(Obstacle_settings.platformSpawnRange[0],Obstacle_settings.platformSpawnRange[1]);
     
-        //Add Slidable Walls
-        if(this.addedPlatforms > 1){
-            if(Phaser.Math.Between(1, 100) <= Obstacle_settings.wallSpawnRate){
-                if(this.wallPool.getLength()){
-                    let wall = this.wallPool.getFirst();
-                    wall.x = platX;
-                    wall.y = platY - 250;
-                    wall.alpha = 1;
-                    wall.active = true;
-                    wall.visible = true;
-                    this.wallPool.remove(wall);
-                }
-                else{
-                    let wall = this.physics.add.sprite(platX, platY - 250, "Wall");
-                    wall.body.allowGravity = false;
-                    wall.setImmovable(true);
-                    wall.setVelocityX(grass.body.velocity.x);
-                    this.wallGroup.add(wall);
+//         //Add Slidable Walls
+//         if(this.addedPlatforms > 1){
+//             if(Phaser.Math.Between(1, 100) <= Obstacle_settings.wallSpawnRate){
+//                 if(this.wallPool.getLength()){
+//                     let wall = this.wallPool.getFirst();
+//                     wall.x = platX;
+//                     wall.y = platY - 250;
+//                     wall.alpha = 1;
+//                     wall.active = true;
+//                     wall.visible = true;
+//                     this.wallPool.remove(wall);
+//                 }
+//                 else{
+//                     let wall = this.physics.add.sprite(platX, platY - 250, "Wall");
+//                     wall.body.allowGravity = false;
+//                     wall.setImmovable(true);
+//                     wall.setVelocityX(grass.body.velocity.x);
+//                     this.wallGroup.add(wall);
 
-                }
-            }
-            if(Phaser.Math.Between(1,100) <= Obstacle_settings.spikeSpawnRate){
-                if(this.spikePool.getLength()){
-                    let spike = this.spikePool.getFirst();
-                    spike.x = platX - platWidth / 2 + Phaser.Math.Between(1, platWidth);
-                    spike.y = platY - 256;
-                    spike.alpha = 1;
-                    spike.active = true;
-                    spike.visible = true;
-                    this.firePool.remove(fire);
-                }
-                else{
-                    let spike = this.physics.add.sprite(platX - platWidth / 2 + Phaser.Math.Between(1, platWidth), platY - 146, 'Spikes');
-                    spike.body.allowGravity = false;
-                    spike.setImmovable(true);
-                    spike.setVelocityX(grass.body.velocity.x);
-                    spike.setSize(8,2,true);
-                    spike.setDepth(2);
-                    this.spikeGroup.add(spike);
-                }
-            }
-            if(Phaser.Math.Between(1,100) <= Obstacle_settings.toastSpawnRate){
-                if(this.toastPool.getLength()){
-                    let toast = this.toastPool.getFirst();
-                    toast.x = platX - platWidth / 2 + Phaser.Math.Between(1, platWidth);
-                    toast.y = platY - 256;
-                    toast.alpha = 1;
-                    toast.active = true;
-                    toast.visible = true;
-                    this.firePool.remove(fire);
-                }
-                else{
-                    let toast = this.physics.add.sprite(platX - platWidth / 2 + Phaser.Math.Between(1, platWidth), platY - 246, 'Toast');
-                    toast.body.allowGravity = false;
-                    toast.setImmovable(true);
-                    toast.setVelocityX(grass.body.velocity.x);
-                    toast.setDepth(2);
-                    this.toastGroup.add(toast);
-                }
-            }
-        }
-    }//end of add pat
+//                 }
+//             }
+//             if(Phaser.Math.Between(1,100) <= Obstacle_settings.spikeSpawnRate){
+//                 if(this.spikePool.getLength()){
+//                     let spike = this.spikePool.getFirst();
+//                     spike.x = platX - platWidth / 2 + Phaser.Math.Between(1, platWidth);
+//                     spike.y = platY - 256;
+//                     spike.alpha = 1;
+//                     spike.active = true;
+//                     spike.visible = true;
+//                     this.firePool.remove(fire);
+//                 }
+//                 else{
+//                     let spike = this.physics.add.sprite(platX - platWidth / 2 + Phaser.Math.Between(1, platWidth), platY - 146, 'Spikes');
+//                     spike.body.allowGravity = false;
+//                     spike.setImmovable(true);
+//                     spike.setVelocityX(grass.body.velocity.x);
+//                     spike.setSize(8,2,true);
+//                     spike.setDepth(2);
+//                     this.spikeGroup.add(spike);
+//                 }
+//             }
+//             if(Phaser.Math.Between(1,100) <= Obstacle_settings.toastSpawnRate){
+//                 if(this.toastPool.getLength()){
+//                     let toast = this.toastPool.getFirst();
+//                     toast.x = platX - platWidth / 2 + Phaser.Math.Between(1, platWidth);
+//                     toast.y = platY - 256;
+//                     toast.alpha = 1;
+//                     toast.active = true;
+//                     toast.visible = true;
+//                     this.firePool.remove(fire);
+//                 }
+//                 else{
+//                     let toast = this.physics.add.sprite(platX - platWidth / 2 + Phaser.Math.Between(1, platWidth), platY - 246, 'Toast');
+//                     toast.body.allowGravity = false;
+//                     toast.setImmovable(true);
+//                     toast.setVelocityX(grass.body.velocity.x);
+//                     toast.setDepth(2);
+//                     this.toastGroup.add(toast);
+//                 }
+//             }
+//         }
+//     }//end of add pat
 
     starting(){
         this.startp = this.physics.add.group({ allowGravity: false });
-        this.startingP = new Wall(this,100,500,'grass',0).setOrigin(0,0).setPushable(false).setScale(5,1);
+        this.startingP = new Wall(this,100,500,'grass',false).setOrigin(0,0).setPushable(false).setScale(5,1);
 
         this.startp.add(this.startingP);
         this.startp.runChildUpdate = true;
