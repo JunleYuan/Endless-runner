@@ -202,7 +202,6 @@ class PlayingScene extends Phaser.Scene {
 
         this.physics.add.collider(this.player, this.group);
 
-
     }
 
 
