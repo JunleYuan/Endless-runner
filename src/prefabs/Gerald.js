@@ -16,7 +16,6 @@ class Gerald extends Phaser.Physics.Arcade.Sprite {
         this.HP = hit_count;
         this.anims.update(time, delta);
 
-        //console.log(this.body.x);
         //move gerald if hit
         if((this.body.x < -300 && this.HP == 1) || (this.body.x < -100 && this.HP == 2) ||(this.body.x < 200 && this.HP == 3)){
             this.body.velocity.x = 60;
@@ -25,10 +24,6 @@ class Gerald extends Phaser.Physics.Arcade.Sprite {
             this.body.velocity.x = 0;
         }
         
-        
-        //if(hit_count == 1)
-        //this.setPosition(x+100, y);
-
     }
     
 }

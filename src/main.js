@@ -42,8 +42,13 @@ let isGameOver = false;
 
 //Platform speed
 let pspeed = -100;
-
+//Platform max speed
 let MaxPSpeed = -1000;
+
+//how much toast per collect
+let nubToast = 0;
+//max toast player can have
+let MaxToast = 5;
 
 //  spawn next plaform if finish
 let shouldSpawnP = false;

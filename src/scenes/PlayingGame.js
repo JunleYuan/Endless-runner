@@ -10,7 +10,6 @@ class PlayingScene extends Phaser.Scene {
         this.load.image('Spikes', './assets/Spike.png');
         this.load.image('Toast', './assets/toast.png');
 
-
         this.load.image('spaceship', './assets/CoreFighter2.png');
         this.load.image('CoreFighter', './assets/CoreFighter.png');
         this.load.image('ground', './assets/ground.png');
@@ -80,7 +79,6 @@ class PlayingScene extends Phaser.Scene {
         if (this.player.body.y > game.config.height) {
             isGameOver = true;
         }
-
 
         //spawn new platform
         if (shouldSpawnP) {
