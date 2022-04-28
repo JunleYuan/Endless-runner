@@ -26,7 +26,7 @@ let borderUISize = game.config.height / 20;
 let borderPadding = borderUISize / 3;
 
 // reserve keyboard variables
-let keyJump, keySlide, keyA, keyD;
+let keyJump, keySlide, keyA, keyD,keyF;
 
 //test key for path
 let spawn;

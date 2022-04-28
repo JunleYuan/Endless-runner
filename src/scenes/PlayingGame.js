@@ -25,6 +25,8 @@ class PlayingScene extends Phaser.Scene {
         keyD = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
         keyJump = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.W);
         keySlide = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S);
+        keyToast = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.F);
+
         spawn = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.E);
 
         //spawn gerald
