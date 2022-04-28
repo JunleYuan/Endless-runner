@@ -25,7 +25,7 @@ class Wall extends Phaser.Physics.Arcade.Sprite {
             console.log("spawn next");
         }
 
-        if(this.body.x+this.body.width-100<0){
+        if(this.body.x+this.body.width<0){
             this.destroy();
         }
 
