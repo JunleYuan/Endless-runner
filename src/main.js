@@ -54,4 +54,3 @@ let MaxToast = 5;
 let shouldSpawnP = false;
 
 
-

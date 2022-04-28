@@ -63,13 +63,14 @@ class PlayingScene extends Phaser.Scene {
         }, this);
 
         //so player will fall through the ground
-        this.physics.world.setBoundsCollision(true, true, true, false);
+        this.physics.world.setBoundsCollision(true, true, true, true);
 
-        //increase speed of platforms
+        //increase speed of platforms as time goes
         this.speeed();
 
         //spawn starting platform
         this.starting();
+        this.obs3();
 
     }//end of create
 
@@ -175,20 +176,30 @@ class PlayingScene extends Phaser.Scene {
     }
     obs3() {
         this.group = this.physics.add.group({ allowGravity: false });
+
+        this.group2 = this.physics.add.group({ allowGravity: false });
+
         this.wall1 = new Wall(this, 100 + game.config.width, 400, 'grass', false).setOrigin(0, 0).setPushable(false).setScale(.5, 1);
         this.wall2 = new Wall(this, 300 + game.config.width, 400, 'grass', false).setOrigin(0, 0).setPushable(false).setScale(.5, 1);
         this.wall3 = new Wall(this, 500 + game.config.width, 400, 'grass', false).setOrigin(0, 0).setPushable(false).setScale(.5, 1);
         this.wall4 = new Wall(this, 700 + game.config.width, 400, 'grass', false).setOrigin(0, 0).setPushable(false).setScale(.5, 1);
         this.wall5 = new Wall(this, 900 + game.config.width, 400, 'grass', true).setOrigin(0, 0).setPushable(false).setScale(.5, 1);
 
+        this.toast1 = new Toast(this, 600 + game.config.width, 450, 'Toast',this.player, false).setOrigin(0, 0).setPushable(false).setScale(1, 1);
+
         this.group.add(this.wall1);
         this.group.add(this.wall2);
         this.group.add(this.wall3);
         this.group.add(this.wall4);
         this.group.add(this.wall5);
+
+        this.group2.add(this.toast1);
+
         this.group.runChildUpdate = true;
+        this.group2.runChildUpdate = true;
 
         this.physics.add.collider(this.player, this.group);
+
 
     }
 
