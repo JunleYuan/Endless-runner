@@ -46,13 +46,5 @@ let pspeed = -100;
 //  spawn next plaform if finish
 let shouldSpawnP = false;
 
-//Platform Options
-let Obstacle_settings = {
-    platformSpeed: 200,
-    platformSpawnRange: [200,300],
-    platformLength: [500,800],
-    wallSpawnRate : 0,
-    spikeSpawnRate : 100,
-    toastSpawnRate: 100
-}
+
 
