@@ -9,8 +9,8 @@ class Player extends Phaser.GameObjects.Sprite {
         this.body.setSize(30, 60);          //give hitbox
         this.setOrigin(0.5,1); //set box origin to center of bottom edge
         this.canD = false;          //detect slide and use for returning original hitbox
-        this.moveSpeed = 200; //player movement speed
-        this.jumpStrength = 600; //player jump velocity
+        this.moveSpeed = 150; //player movement speed
+        this.jumpStrength = 500; //player jump velocity
         this.isJumping = false; //player jumping flag
         this.isAirborne = false;
         this.jumpCount = 0; //number of jumps taken since last touching the ground

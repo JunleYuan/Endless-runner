@@ -128,7 +128,7 @@ class PlayingScene extends Phaser.Scene {
         //this.wall2 = new Wall(this,500,500,'grass',0).setOrigin(.8,0).setPushable(false).setScale(5,1);
         this.starting();
         //this.obs1();
-        this.obs3();
+        //this.obs3();
         
 
         //add collision with objects
@@ -161,6 +161,8 @@ class PlayingScene extends Phaser.Scene {
                 break;
             case 2:
                 this.obs3();
+                console.log("2");
+                break;
         }
 
 
@@ -309,7 +311,7 @@ class PlayingScene extends Phaser.Scene {
 
     starting(){
         this.startp = this.physics.add.group({ allowGravity: false });
-        this.startingP = new Wall(this,100,500,'grass',false).setOrigin(0,0).setPushable(false).setScale(5,1);
+        this.startingP = new Wall(this,50,500,'grass',true).setOrigin(0,0).setPushable(false).setScale(7,1);
 
         this.startp.add(this.startingP);
         this.startp.runChildUpdate = true;
@@ -348,11 +350,11 @@ class PlayingScene extends Phaser.Scene {
     }
     obs3(){
         this.group = this.physics.add.group({ allowGravity: false });
-        this.wall1 = new Wall(this,200+game.config.width,400,'grass',false).setOrigin(0,0).setPushable(false).setScale(.5,1);
-        this.wall2 = new Wall(this,400+game.config.width,400,'grass',false).setOrigin(0,0).setPushable(false).setScale(.5,1);
-        this.wall3 = new Wall(this,600+game.config.width,400,'grass',false).setOrigin(0,0).setPushable(false).setScale(.5,1);
-        this.wall4 = new Wall(this,800+game.config.width,400,'grass',false).setOrigin(0,0).setPushable(false).setScale(.5,1);
-        this.wall5 = new Wall(this,1000+game.config.width,400,'grass',true).setOrigin(0,0).setPushable(false).setScale(.5,1);
+        this.wall1 = new Wall(this,100+game.config.width,400,'grass',false).setOrigin(0,0).setPushable(false).setScale(.5,1);
+        this.wall2 = new Wall(this,300+game.config.width,400,'grass',false).setOrigin(0,0).setPushable(false).setScale(.5,1);
+        this.wall3 = new Wall(this,500+game.config.width,400,'grass',false).setOrigin(0,0).setPushable(false).setScale(.5,1);
+        this.wall4 = new Wall(this,700+game.config.width,400,'grass',false).setOrigin(0,0).setPushable(false).setScale(.5,1);
+        this.wall5 = new Wall(this,900+game.config.width,400,'grass',true).setOrigin(0,0).setPushable(false).setScale(.5,1);
 
         this.group.add(this.wall1);
         this.group.add(this.wall2);
