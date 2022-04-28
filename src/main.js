@@ -43,6 +43,8 @@ let isGameOver = false;
 //Platform speed
 let pspeed = -100;
 
+let MaxPSpeed = -1000;
+
 //  spawn next plaform if finish
 let shouldSpawnP = false;
 

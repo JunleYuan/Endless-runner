@@ -17,8 +17,8 @@ class Wall extends Phaser.Physics.Arcade.Sprite {
 
     update(time, delta) {
         this.body.velocity.x = pspeed;
-        //console.log(this.body.x+"and"+ this.body.width);
 
+        //spawn in next set of platforms
         if(this.isLast && this.body.x + this.body.width < game.config.width && this.notDone){
             this.notDone = false;
             shouldSpawnP = true;
@@ -29,7 +29,6 @@ class Wall extends Phaser.Physics.Arcade.Sprite {
             this.destroy();
         }
 
-        //spawn in next set of platforms
         
     }
     

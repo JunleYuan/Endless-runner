@@ -66,6 +66,9 @@ class PlayingScene extends Phaser.Scene {
         //so player will fall through the ground
         this.physics.world.setBoundsCollision( true,true,true,false);
 
+        //increase speed of platforms
+        this.speeed();
+
         //spawn starting platform
         this.starting();
       
@@ -121,6 +124,19 @@ class PlayingScene extends Phaser.Scene {
     }
 
   }//end of update
+
+    //add speed as game goes on
+    speeed(){
+        this.clock = this.time.delayedCall(10000, () => {
+            
+            pspeed = pspeed - 20;
+            console.log("speed is increased, current speed:", + pspeed);
+            if(pspeed < MaxPSpeed){
+                this.speeed();
+            }
+
+        }, null, this);
+    }
 
     starting(){
         this.startp = this.physics.add.group({ allowGravity: false });
