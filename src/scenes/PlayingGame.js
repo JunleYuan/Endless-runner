@@ -17,10 +17,10 @@ class PlayingScene extends Phaser.Scene {
         this.load.image('gerald', './assets/gerald temp.png');
     }
 
-    create(){
+    create() {
 
         //spawn in player
-        this.player = new Player(this, 200,442, 'spaceship');
+        this.player = new Player(this, 200, 442, 'spaceship');
         //initialize controls
         keyA = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A);
         keyD = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
@@ -29,118 +29,116 @@ class PlayingScene extends Phaser.Scene {
         spawn = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.E);
 
         //spawn gerald
-        this.gerald = new Gerald(this,0,0,'gerald',0).setOrigin(.8,0).setPushable(false).setScale(1,5);
+        this.gerald = new Gerald(this, 0, 0, 'gerald', 0).setOrigin(.8, 0).setPushable(false).setScale(1, 5);
         //ends game if hits gerald
-        this.physics.add.overlap(this.player, this.gerald,function (){
+        this.physics.add.overlap(this.player, this.gerald, function () {
             isGameOver = true;
         });
         this.gerald.depth = 3;
 
         //This is the path the sprite will follow
-        this.points = [1100, 400,800, 500,350, 300, 50, 400, 200, 400]
-        this.smallG = this.physics.add.group({ allowGravity: false , immovable: true});
-        this.path = new Path(this, 1000, 300, 'spaceship', 0.005,this.points);
+        this.points = [1100, 400, 800, 500, 350, 300, 50, 400, 200, 400]
+        this.smallG = this.physics.add.group({ allowGravity: false, immovable: true });
+        this.path = new Path(this, 1000, 300, 'spaceship', 0.005, this.points);
         this.smallG.add(this.path, true);
         this.path.setActive(false);
         this.path.setVisible(false);
         this.path.body.enable = false;
-            
+
         //if player gets hit there is a knock back
-        this.hitG = this.physics.add.overlap(this.player, this.smallG, null, function (){ 
+        this.hitG = this.physics.add.overlap(this.player, this.smallG, null, function () {
             hit_count += 1;
             console.log("hit");
             this.path.setActive(false);
             this.path.setVisible(false);
             this.path.body.enable = false;
-    
+
             playerGotHit = true;
             this.player.body.velocity.x = -300;
             this.player.body.velocity.y = -50;
             this.time.delayedCall(500, () => {
-            playerGotHit = false;
-        
+                playerGotHit = false;
+
             }, null, this);
-    
+
         }, this);
-        
+
         //so player will fall through the ground
-        this.physics.world.setBoundsCollision( true,true,true,false);
+        this.physics.world.setBoundsCollision(true, true, true, false);
 
         //increase speed of platforms
         this.speeed();
 
         //spawn starting platform
         this.starting();
-      
+
     }//end of create
-  
-  update(time, delta){
 
-    //if player is under the map game over
-    if(this.player.body.y > game.config.height){
-        isGameOver = true;
-    }
+    update(time, delta) {
 
-
-    //spawn new platform
-    if(shouldSpawnP){
-        shouldSpawnP = false;
-        
-        switch (Math.floor(Math.random() * 3)) {
-            case 0:
-                this.obs1();
-                console.log("0");
-                break;
-            case 1:
-                this.obs2();
-                console.log("1");
-                break;
-            case 2:
-                this.obs3();
-                console.log("2");
-                break;
+        //if player is under the map game over
+        if (this.player.body.y > game.config.height) {
+            isGameOver = true;
         }
 
 
-    }
+        //spawn new platform
+        if (shouldSpawnP) {
+            shouldSpawnP = false;
 
-    //update prefab
-    this.player.update(time, delta);
-    this.gerald.update();
-    this.path.update();
-    
-    //spawn minions
-    if(spawn.isDown){
+            switch (Math.floor(Math.random() * 3)) {
+                case 0:
+                    this.obs1();
+                    console.log("0");
+                    break;
+                case 1:
+                    this.obs2();
+                    console.log("1");
+                    break;
+                case 2:
+                    this.obs3();
+                    console.log("2");
+                    break;
+            }
+        }
 
-        this.path.body.reset(1000, 400);
-        this.path.body.enable = true;
-        this.path.setActive(true);
-        this.path.setVisible(true);
-        this.path.pathIndex = 0;
-        
-    }
-    if (isGameOver){
-        this.scene.start("end");
-    }
+        //update prefab
+        this.player.update(time, delta);
+        this.gerald.update();
+        this.path.update();
 
-  }//end of update
+        //spawn minions
+        if (spawn.isDown) {
+
+            this.path.body.reset(1000, 400);
+            this.path.body.enable = true;
+            this.path.setActive(true);
+            this.path.setVisible(true);
+            this.path.pathIndex = 0;
+
+        }
+        if (isGameOver) {
+            this.scene.start("end");
+        }
+
+    }//end of update
 
     //add speed as game goes on
-    speeed(){
+    speeed() {
         this.clock = this.time.delayedCall(10000, () => {
-            
+
             pspeed = pspeed - 20;
             console.log("speed is increased, current speed:", + pspeed);
-            if(pspeed < MaxPSpeed){
+            if (pspeed < MaxPSpeed) {
                 this.speeed();
             }
 
         }, null, this);
     }
 
-    starting(){
+    starting() {
         this.startp = this.physics.add.group({ allowGravity: false });
-        this.startingP = new Wall(this,50,500,'grass',true).setOrigin(0,0).setPushable(false).setScale(7,1);
+        this.startingP = new Wall(this, 50, 500, 'grass', true).setOrigin(0, 0).setPushable(false).setScale(7, 1);
 
         this.startp.add(this.startingP);
         this.startp.runChildUpdate = true;
@@ -148,12 +146,12 @@ class PlayingScene extends Phaser.Scene {
         this.physics.add.collider(this.player, this.startingP);
     }
 
-    obs1(){
+    obs1() {
 
         this.group = this.physics.add.group({ allowGravity: false });
-        this.wall1 = new Wall(this,960,500,'grass',false).setOrigin(0,0).setPushable(false).setScale(5,1);
-        this.wall2 = new Wall(this,1600,300,'grass',false).setOrigin(0,0).setPushable(false).setScale(5,1);
-        this.wall3 = new Wall(this,1900,500,'grass',true).setOrigin(0,0).setPushable(false).setScale(5,1);
+        this.wall1 = new Wall(this, 960, 500, 'grass', false).setOrigin(0, 0).setPushable(false).setScale(5, 1);
+        this.wall2 = new Wall(this, 1600, 300, 'grass', false).setOrigin(0, 0).setPushable(false).setScale(5, 1);
+        this.wall3 = new Wall(this, 1900, 500, 'grass', true).setOrigin(0, 0).setPushable(false).setScale(5, 1);
 
         this.group.add(this.wall1);
         this.group.add(this.wall2);
@@ -163,11 +161,11 @@ class PlayingScene extends Phaser.Scene {
         this.physics.add.collider(this.player, this.group);
 
     }
-    obs2(){
+    obs2() {
         this.group = this.physics.add.group({ allowGravity: false });
-        this.wall1 = new Wall(this,960,500,'grass',false).setOrigin(0,0).setPushable(false).setScale(5,1);
-        this.wall2 = new Wall(this,1600,400,'grass',false).setOrigin(0,0).setPushable(false).setScale(5,1);
-        this.wall3 = new Wall(this,1900,300,'grass',true).setOrigin(0,0).setPushable(false).setScale(5,1);
+        this.wall1 = new Wall(this, 960, 500, 'grass', false).setOrigin(0, 0).setPushable(false).setScale(5, 1);
+        this.wall2 = new Wall(this, 1600, 400, 'grass', false).setOrigin(0, 0).setPushable(false).setScale(5, 1);
+        this.wall3 = new Wall(this, 1900, 300, 'grass', true).setOrigin(0, 0).setPushable(false).setScale(5, 1);
 
         this.group.add(this.wall1);
         this.group.add(this.wall2);
@@ -177,13 +175,13 @@ class PlayingScene extends Phaser.Scene {
         this.physics.add.collider(this.player, this.group);
 
     }
-    obs3(){
+    obs3() {
         this.group = this.physics.add.group({ allowGravity: false });
-        this.wall1 = new Wall(this,100+game.config.width,400,'grass',false).setOrigin(0,0).setPushable(false).setScale(.5,1);
-        this.wall2 = new Wall(this,300+game.config.width,400,'grass',false).setOrigin(0,0).setPushable(false).setScale(.5,1);
-        this.wall3 = new Wall(this,500+game.config.width,400,'grass',false).setOrigin(0,0).setPushable(false).setScale(.5,1);
-        this.wall4 = new Wall(this,700+game.config.width,400,'grass',false).setOrigin(0,0).setPushable(false).setScale(.5,1);
-        this.wall5 = new Wall(this,900+game.config.width,400,'grass',true).setOrigin(0,0).setPushable(false).setScale(.5,1);
+        this.wall1 = new Wall(this, 100 + game.config.width, 400, 'grass', false).setOrigin(0, 0).setPushable(false).setScale(.5, 1);
+        this.wall2 = new Wall(this, 300 + game.config.width, 400, 'grass', false).setOrigin(0, 0).setPushable(false).setScale(.5, 1);
+        this.wall3 = new Wall(this, 500 + game.config.width, 400, 'grass', false).setOrigin(0, 0).setPushable(false).setScale(.5, 1);
+        this.wall4 = new Wall(this, 700 + game.config.width, 400, 'grass', false).setOrigin(0, 0).setPushable(false).setScale(.5, 1);
+        this.wall5 = new Wall(this, 900 + game.config.width, 400, 'grass', true).setOrigin(0, 0).setPushable(false).setScale(.5, 1);
 
         this.group.add(this.wall1);
         this.group.add(this.wall2);
