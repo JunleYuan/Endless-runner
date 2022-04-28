@@ -66,6 +66,7 @@ class PlayingScene extends Phaser.Scene {
         //so player will fall through the ground
         this.physics.world.setBoundsCollision( true,true,true,false);
 
+        //spawn starting platform
         this.starting();
       
     }//end of create
