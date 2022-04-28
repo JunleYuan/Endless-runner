@@ -36,7 +36,7 @@ class Controls extends Phaser.Scene {
     // });
 
     menuButton.on('pointerdown', () => {
-      this.scene.start("playingScene");
+      this.scene.start("menuScene");
       isGameOver = false;
       hit_count = 0;
     });
