@@ -23,7 +23,7 @@ class Controls extends Phaser.Scene {
     }
 
     //controls text
-    let controlsText = this.add.bitmapText(game.config.width / 2, game.config.height / 2, 'bm', 'Press A to move left, and press D to move right \n\nPress W to jump, and W again while in the air to double jump \n\nPress S to slide under obstacles', 15).setOrigin(0.5, 0.5);
+    let controlsText = this.add.bitmapText(game.config.width / 2, game.config.height / 2, 'bm', 'Press A to move left, and press D to move right \n\nPress W to jump, and W again while in the air to double jump \n\nPress S to slide under obstacles', 20).setOrigin(0.5, 0.5);
     //this.controlsText = this.add.text(game.config.width/2, game.config.height/2, '', menuConfig).setOrigin(0.5,0.5);
     //this.controlsText.text = 'Press A to move left, and press D to move right \n\n Press W to jump, and W again while in the air to double jump \n\n Press S to slide under obstacles';
 
