@@ -128,7 +128,7 @@ class PlayingScene extends Phaser.Scene {
         //this.wall2 = new Wall(this,500,500,'grass',0).setOrigin(.8,0).setPushable(false).setScale(5,1);
         this.starting();
         //this.obs1();
-        this.obs3();
+        //this.obs3();
         
 
         //add collision with objects
@@ -311,7 +311,7 @@ class PlayingScene extends Phaser.Scene {
 
     starting(){
         this.startp = this.physics.add.group({ allowGravity: false });
-        this.startingP = new Wall(this,200,500,'grass',false).setOrigin(0,0).setPushable(false).setScale(6,1);
+        this.startingP = new Wall(this,50,500,'grass',true).setOrigin(0,0).setPushable(false).setScale(7,1);
 
         this.startp.add(this.startingP);
         this.startp.runChildUpdate = true;
