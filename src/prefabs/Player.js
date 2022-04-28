@@ -12,6 +12,7 @@ class Player extends Phaser.GameObjects.Sprite {
         this.moveSpeed = 200; //player movement speed
         this.jumpStrength = 600; //player jump velocity
         this.isJumping = false; //player jumping flag
+        this.isAirborne = false;
         this.jumpCount = 0; //number of jumps taken since last touching the ground
         this.jumpTime = 0; //jump duration timer
     }
@@ -34,14 +35,34 @@ class Player extends Phaser.GameObjects.Sprite {
         //check if the player is touching the ground
         if(this.body.touching.down){
             this.isJumping = false;
+            this.isAirborne = false;
             this.jumpTime = 0; //reset jump timer
             this.jumpCount = 0; //reset jumps taken
         }
+        
+        if(!this.body.touching.down){
+            this.isAirborne = true;
+        }
 
         //player jumps if jump key is pressed while on the ground
-        if(Phaser.Input.Keyboard.JustDown(keyJump) && (!this.isJumping || this.jumpCount < 2)){
-            this.jump();   
-            console.log("Jump Count" + this.jumpCount);
+        if(Phaser.Input.Keyboard.JustDown(keyJump)){
+            if(!this.isJumping && !this.isAirborne){
+                this.jump();   
+                console.log("Single Jump from Ground");
+                console.log("Jump Count" + this.jumpCount);
+            }
+            else if(this.isJumping && this.jumpCount < 2){
+                this.jump();   
+                console.log("Double Jump after Jump in air");
+                console.log("Jump Count" + this.jumpCount);
+            }
+            else if(this.isAirborne && !this.isJumping && this.jumpCount == 0){
+                this.jump();
+                this.jumpCount++;
+                console.log("Falling From Platform Double Jump");
+                console.log("Jump Count" + this.jumpCount);
+            }
+            
         }
 
         //player slide/crouch if S key is pressed
