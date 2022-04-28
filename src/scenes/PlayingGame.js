@@ -71,7 +71,8 @@ class PlayingScene extends Phaser.Scene {
         this.speeed();
 
         //spawn starting platform
-        this.starting();
+        //this.starting();
+        this.obs4();
         
 
     }//end of create
@@ -202,6 +203,20 @@ class PlayingScene extends Phaser.Scene {
 
         this.physics.add.collider(this.player, this.group);
 
+    }
+    obs4(){
+
+        this.group = this.physics.add.group({ allowGravity: false });
+        this.wall1 = new Wall(this, 100, 500, 'grass', false).setOrigin(0, 0).setPushable(false).setScale(5, 1);
+        this.wall2 = new Wall(this, 500, 230, 'Wall', false).setOrigin(0, 0).setPushable(false).setScale(1, 2);
+        this.wall3 = new Wall(this, 1000, 500, 'grass', true).setOrigin(0, 0).setPushable(false).setScale(5, 1);
+
+        this.group.add(this.wall1);
+        this.group.add(this.wall2);
+        this.group.add(this.wall3);
+        this.group.runChildUpdate = true;
+
+        this.physics.add.collider(this.player, this.group);
     }
 
 

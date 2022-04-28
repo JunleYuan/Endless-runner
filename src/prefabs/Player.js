@@ -15,6 +15,10 @@ class Player extends Phaser.GameObjects.Sprite {
         this.isAirborne = false;
         this.jumpCount = 0; //number of jumps taken since last touching the ground
         this.jumpTime = 0; //jump duration timer
+
+        this.curScene = scene;  //save the player scene into var use for later
+
+        this.offSlideCD = true;
     }
 
     update(time, delta) {
@@ -66,13 +70,30 @@ class Player extends Phaser.GameObjects.Sprite {
         }
 
         //player slide/crouch if S key is pressed
-        if(keySlide.isDown && !this.isJumping && !this.canD){
+        if(keySlide.isDown && !this.isJumping && !this.canD && keySlide.getDuration()<200 && this.offSlideCD){
             this.slide();
+            this.offSlideCD = false;
+
+            
+            this.curScene.time.delayedCall(300, () => {
+                //console.log("worj pls");
+                this.standUp();
+
+            }, null, this);
+
+            //give slide a cooldown
+            this.curScene.time.delayedCall(3000, () => {
+                this.offSlideCD = true;
+
+            }, null, this);
+        
         }
+        //console.log(keySlide.getDuration());
+
         //return to original size after slide
-        if((!keySlide.isDown && this.canD) || keySlide.getDuration()>200){
-            this.standUp();
-        }
+        // if((keySlide.isUp && this.canD) || keySlide.getDuration()>200){
+        //     this.standUp();
+        // }
     }
 
     //player actions
