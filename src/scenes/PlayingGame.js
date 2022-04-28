@@ -151,9 +151,9 @@ class PlayingScene extends Phaser.Scene {
     obs1() {
 
         this.group = this.physics.add.group({ allowGravity: false });
-        this.wall1 = new Wall(this, 960, 500, 'grass', false).setOrigin(0, 0).setPushable(false).setScale(5, 1);
-        this.wall2 = new Wall(this, 1600, 300, 'grass', false).setOrigin(0, 0).setPushable(false).setScale(5, 1);
-        this.wall3 = new Wall(this, 1900, 500, 'grass', true).setOrigin(0, 0).setPushable(false).setScale(5, 1);
+        this.wall1 = new Wall(this, 100 + game.config.width, 500, 'grass', false).setOrigin(0, 0).setPushable(false).setScale(5, 1);
+        this.wall2 = new Wall(this, 700 + game.config.width, 300, 'grass', false).setOrigin(0, 0).setPushable(false).setScale(5, 1);
+        this.wall3 = new Wall(this, 900 + game.config.width, 500, 'grass', true).setOrigin(0, 0).setPushable(false).setScale(5, 1);
 
         this.group.add(this.wall1);
         this.group.add(this.wall2);
@@ -165,9 +165,9 @@ class PlayingScene extends Phaser.Scene {
     }
     obs2() {
         this.group = this.physics.add.group({ allowGravity: false });
-        this.wall1 = new Wall(this, 960, 500, 'grass', false).setOrigin(0, 0).setPushable(false).setScale(5, 1);
-        this.wall2 = new Wall(this, 1600, 400, 'grass', false).setOrigin(0, 0).setPushable(false).setScale(5, 1);
-        this.wall3 = new Wall(this, 1900, 300, 'grass', true).setOrigin(0, 0).setPushable(false).setScale(5, 1);
+        this.wall1 = new Wall(this, 100 + game.config.width, 500, 'grass', false).setOrigin(0, 0).setPushable(false).setScale(5, 1);
+        this.wall2 = new Wall(this, 700 + game.config.width, 500, 'grass', false).setOrigin(0, 0).setPushable(false).setScale(5, 1);
+        this.wall3 = new Wall(this, 900 + game.config.width, 300, 'grass', true).setOrigin(0, 0).setPushable(false).setScale(5, 1);
 
         this.group.add(this.wall1);
         this.group.add(this.wall2);
@@ -207,14 +207,23 @@ class PlayingScene extends Phaser.Scene {
     obs4(){
 
         this.group = this.physics.add.group({ allowGravity: false });
+        this.group2 = this.physics.add.group({ allowGravity: false });
+
         this.wall1 = new Wall(this, 100, 500, 'grass', false).setOrigin(0, 0).setPushable(false).setScale(5, 1);
-        this.wall2 = new Wall(this, 500, 230, 'Wall', false).setOrigin(0, 0).setPushable(false).setScale(1, 2);
-        this.wall3 = new Wall(this, 1000, 500, 'grass', true).setOrigin(0, 0).setPushable(false).setScale(5, 1);
+        this.wall2 = new Wall(this, 600, 230, 'Wall', false).setOrigin(0, 0).setPushable(false).setScale(1, 2);
+        this.wall3 = new Wall(this, 1000, 500, 'grass', true).setOrigin(0, 0).setPushable(false).setScale(3, 1);
+
+        this.toast1 = new Toast(this, 620 , 250, 'Toast',this.player, false).setOrigin(0, 0).setPushable(false).setScale(1, 1);
 
         this.group.add(this.wall1);
         this.group.add(this.wall2);
         this.group.add(this.wall3);
+
+        this.group2.add(this.toast1);
+
         this.group.runChildUpdate = true;
+        this.group2.runChildUpdate = true;
+        
 
         this.physics.add.collider(this.player, this.group);
     }
