@@ -70,7 +70,7 @@ class PlayingScene extends Phaser.Scene {
 
         //spawn starting platform
         this.starting();
-        this.obs3();
+        
 
     }//end of create
 
