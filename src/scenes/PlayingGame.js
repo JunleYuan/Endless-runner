@@ -82,22 +82,21 @@ class PlayingScene extends Phaser.Scene {
         }, this);
 
         //so player will fall through the ground
-        this.physics.world.setBoundsCollision(true, true, true, false);
+        this.physics.world.setBoundsCollision(true, true, true, true);
 
         //increase speed of platforms as time goes
         this.speeed();
 
         //spawn starting platform
         this.starting();
-        
 
     }//end of create
 
     update(time, delta) {
 
         //If Middleground goes off screen loop back
-        this.foreground.body.velocity.x = -100;
-        this.middleground.body.velocity.x = -200;
+        this.foreground.body.velocity.x = pspeed+50;
+        this.middleground.body.velocity.x = pspeed;
         
         if(this.foreground.body.x + this.foreground.body.width < game.config.width){
             this.foreground.body.x = 0;
@@ -175,8 +174,10 @@ class PlayingScene extends Phaser.Scene {
     }
 
     starting() {
-        this.startp = this.physics.add.group({ allowGravity: false });
-        this.startingP = new Wall(this, 50, 500, 'platform', true).setOrigin(0, 0).setPushable(false).setScale(7, 1);
+        this.startp = this.physics.add.group({ allowGravity: false, immovable: true});
+        //this.startingP = new Wall(this, 0, 500, 'platform', true).setOrigin(0, 0).setPushable(false).setScale(5, 1);
+
+        this.startingP = new Walla(this, 0, 500,platsizeX*5,platsizeY, 'platform', true).setOrigin(0, 0);
 
         this.startp.add(this.startingP);
         this.startp.runChildUpdate = true;
@@ -186,10 +187,10 @@ class PlayingScene extends Phaser.Scene {
 
     obs1() {
 
-        this.group = this.physics.add.group({ allowGravity: false });
-        this.wall1 = new Wall(this, 100 + game.config.width, 500, 'platform', false).setOrigin(0, 0).setPushable(false).setScale(5, 1);
-        this.wall2 = new Wall(this, 700 + game.config.width, 300, 'platform', false).setOrigin(0, 0).setPushable(false).setScale(5, 1);
-        this.wall3 = new Wall(this, 900 + game.config.width, 500, 'platform', true).setOrigin(0, 0).setPushable(false).setScale(5, 1);
+        this.group = this.physics.add.group({ allowGravity: false, immovable: true });
+        this.wall1 = new Walla(this, 100 + game.config.width, 500,platsizeX*2,platsizeY, 'platform', false).setOrigin(0, 0);
+        this.wall2 = new Walla(this, 500 + game.config.width, 320,platsizeX*3,platsizeY, 'platform', false).setOrigin(0, 0);
+        this.wall3 = new Walla(this, 900 + game.config.width, 500,platsizeX*2,platsizeY, 'platform', true).setOrigin(0, 0);
 
         this.group.add(this.wall1);
         this.group.add(this.wall2);
@@ -201,10 +202,10 @@ class PlayingScene extends Phaser.Scene {
     }
 
     obs2() {
-        this.group = this.physics.add.group({ allowGravity: false });
-        this.wall1 = new Wall(this, 100 + game.config.width, 500, 'platform', false).setOrigin(0, 0).setPushable(false).setScale(5, 1);
-        this.wall2 = new Wall(this, 700 + game.config.width, 500, 'platform', false).setOrigin(0, 0).setPushable(false).setScale(5, 1);
-        this.wall3 = new Wall(this, 900 + game.config.width, 300, 'platform', true).setOrigin(0, 0).setPushable(false).setScale(5, 1);
+        this.group = this.physics.add.group({ allowGravity: false, immovable: true });
+        this.wall1 = new Walla(this, 100 + game.config.width, 500,platsizeX*2,platsizeY, 'platform', false).setOrigin(0, 0);
+        this.wall2 = new Walla(this, 400 + game.config.width, 400,platsizeX*2,platsizeY, 'platform', false).setOrigin(0, 0);
+        this.wall3 = new Walla(this, 700 + game.config.width, 300,platsizeX*2,platsizeY, 'platform', true).setOrigin(0, 0);
 
         this.group.add(this.wall1);
         this.group.add(this.wall2);
@@ -216,15 +217,15 @@ class PlayingScene extends Phaser.Scene {
     }
 
     obs3() {
-        this.group = this.physics.add.group({ allowGravity: false });
+        this.group = this.physics.add.group({ allowGravity: false, immovable: true });
 
         this.group2 = this.physics.add.group({ allowGravity: false });
 
-        this.wall1 = new Wall(this, 100 + game.config.width, 400, 'platform', false).setOrigin(0, 0).setPushable(false).setScale(.5, 1);
-        this.wall2 = new Wall(this, 300 + game.config.width, 400, 'platform', false).setOrigin(0, 0).setPushable(false).setScale(.5, 1);
-        this.wall3 = new Wall(this, 500 + game.config.width, 400, 'platform', false).setOrigin(0, 0).setPushable(false).setScale(.5, 1);
-        this.wall4 = new Wall(this, 700 + game.config.width, 400, 'platform', false).setOrigin(0, 0).setPushable(false).setScale(.5, 1);
-        this.wall5 = new Wall(this, 900 + game.config.width, 400, 'platform', true).setOrigin(0, 0).setPushable(false).setScale(.5, 1);
+        this.wall1 = new Walla(this, 100 + game.config.width, 400,platsizeX*.5,platsizeY, 'platform', false).setOrigin(0, 0);
+        this.wall2 = new Walla(this, 300 + game.config.width, 400,platsizeX*.5,platsizeY, 'platform', false).setOrigin(0, 0);
+        this.wall3 = new Walla(this, 500 + game.config.width, 400,platsizeX*.5,platsizeY, 'platform', false).setOrigin(0, 0);
+        this.wall4 = new Walla(this, 700 + game.config.width, 400,platsizeX*.5,platsizeY, 'platform', false).setOrigin(0, 0);
+        this.wall5 = new Walla(this, 900 + game.config.width, 400,platsizeX*.5,platsizeY, 'platform', true).setOrigin(0, 0);
 
         this.toast1 = new Toast(this, 600 + game.config.width, 450, 'Toast',this.player, false).setOrigin(0, 0).setPushable(false).setScale(1, 1);
 
@@ -245,15 +246,15 @@ class PlayingScene extends Phaser.Scene {
 
     obs4(){
 
-        this.group = this.physics.add.group({ allowGravity: false });
+        this.group = this.physics.add.group({ allowGravity: false, immovable: true });
         this.group2 = this.physics.add.group({ allowGravity: false });
 
-        this.wall1 = new Wall(this, 100 + game.config.width, 500, 'platform', false).setOrigin(0, 0).setPushable(false).setScale(5, 1);
-        this.wall2 = new Wall(this, 600 + game.config.width, 230, 'Wall', false).setOrigin(0, 0).setPushable(false).setScale(1, 2);
-        this.wall3 = new Wall(this, 1000 + game.config.width, 500, 'platform', true).setOrigin(0, 0).setPushable(false).setScale(3, 1);
+        this.wall1 = new Walla(this, 100 + game.config.width, 400,platsizeX*3,platsizeY, 'platform', false).setOrigin(0, 0);
+        this.wall2 = new Wall(this, 700 + game.config.width, 130, 'Wall', false).setOrigin(0, 0).setScale(2);
+        this.wall3 = new Walla(this, 1000 + game.config.width, 400,platsizeX*2,platsizeY, 'platform', true).setOrigin(0, 0);
 
 
-        this.toast1 = new Toast(this, 620 + game.config.width, 250, 'Toast', this.player, false).setOrigin(0, 0).setPushable(false).setScale(1, 1);
+        this.toast1 = new Toast(this, 1000 + game.config.width, 250, 'Toast', this.player, false).setOrigin(0, 0).setPushable(false).setScale(1, 1);
 
         this.group.add(this.wall1);
         this.group.add(this.wall2);
@@ -268,8 +269,8 @@ class PlayingScene extends Phaser.Scene {
     }
 
     obs5() {
-        this.group = this.physics.add.group({ allowGravity: false });
-        this.wall1 = new Wall(this, 100 + game.config.width, 500, 'platform', true).setOrigin(0, 0).setPushable(false).setScale(5, 1);
+        this.group = this.physics.add.group({ allowGravity: false, immovable: true });
+        this.wall1 = new Walla(this, 100 + game.config.width, 500,platsizeX*5,platsizeY, 'platform', true).setOrigin(0, 0);
         this.toast1 = new Toast(this, 400 + game.config.width, 290, 'Toast', this.player, false).setOrigin(0.5, 0.5).setPushable(false).setScale(1, 1);
         this.spike1 = new Trap(this, 400 + game.config.width, this.toast1.y + this.toast1.height, 'Spikes', this.player, false).setOrigin(0.5, 0.5).setPushable(false).setScale(2, 2);
         this.spike2 = new Trap(this, 400 + game.config.width, this.toast1.y - this.toast1.height, 'Spikes', this.player, false).setOrigin(0.5, 0.5).setPushable(false).setScale(2, 2);

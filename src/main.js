@@ -45,6 +45,10 @@ let pspeed = -100;
 //Platform max speed
 let MaxPSpeed = -1000;
 
+let platsizeX = 205
+let platsizeY = 40
+
+
 //how much toast per collect
 let nubToast = 0;
 //max toast player can have
