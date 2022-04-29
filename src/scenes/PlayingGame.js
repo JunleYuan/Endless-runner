@@ -55,7 +55,7 @@ class PlayingScene extends Phaser.Scene {
         this.path.body.enable = false;
 
         //if player gets hit there is a knock back
-        this.hitG = this.physics.add.overlap(this.player, this.smallG, null, function () {
+        /*this.hitG = this.physics.add.overlap(this.player, this.smallG, null, function () {
             hit_count += 1;
             console.log("hit");
             this.path.setActive(false);
@@ -70,7 +70,7 @@ class PlayingScene extends Phaser.Scene {
 
             }, null, this);
 
-        }, this);
+        }, this);*/
 
         //so player will fall through the ground
         this.physics.world.setBoundsCollision(true, true, true, false);
@@ -79,8 +79,7 @@ class PlayingScene extends Phaser.Scene {
         this.speeed();
 
         //spawn starting platform
-        //this.starting();
-        this.obs4();
+        this.starting();
         
 
     }//end of create
@@ -92,7 +91,7 @@ class PlayingScene extends Phaser.Scene {
         this.middleground.tilePositionX += 0.7;
 
         //if player is under the map game over
-        if (this.player.body.y > game.config.height) {
+        if (this.player.body.y > game.config.height + this.player.body.height) {
             isGameOver = true;
         }
 
@@ -102,15 +101,15 @@ class PlayingScene extends Phaser.Scene {
 
             switch (Math.floor(Math.random() * 3)) {
                 case 0:
-                    this.obs1();
+                    this.obs5();
                     console.log("0");
                     break;
                 case 1:
-                    this.obs2();
+                    this.obs5();
                     console.log("1");
                     break;
                 case 2:
-                    this.obs3();
+                    this.obs5();
                     console.log("2");
                     break;
             }
@@ -175,6 +174,7 @@ class PlayingScene extends Phaser.Scene {
         this.physics.add.collider(this.player, this.group);
 
     }
+
     obs2() {
         this.group = this.physics.add.group({ allowGravity: false });
         this.wall1 = new Wall(this, 100 + game.config.width, 500, 'platform', false).setOrigin(0, 0).setPushable(false).setScale(5, 1);
@@ -189,6 +189,7 @@ class PlayingScene extends Phaser.Scene {
         this.physics.add.collider(this.player, this.group);
 
     }
+
     obs3() {
         this.group = this.physics.add.group({ allowGravity: false });
 
@@ -216,6 +217,7 @@ class PlayingScene extends Phaser.Scene {
         this.physics.add.collider(this.player, this.group);
 
     }
+
     obs4(){
 
         this.group = this.physics.add.group({ allowGravity: false });
@@ -225,7 +227,8 @@ class PlayingScene extends Phaser.Scene {
         this.wall2 = new Wall(this, 600, 230, 'Wall', false).setOrigin(0, 0).setPushable(false).setScale(1, 2);
         this.wall3 = new Wall(this, 1000, 500, 'platform', true).setOrigin(0, 0).setPushable(false).setScale(3, 1);
 
-        this.toast1 = new Toast(this, 620 , 250, 'Toast',this.player, false).setOrigin(0, 0).setPushable(false).setScale(1, 1);
+
+        this.toast1 = new Toast(this, 620 + game.config.width, 250, 'Toast', this.player, false).setOrigin(0, 0).setPushable(false).setScale(1, 1);
 
         this.group.add(this.wall1);
         this.group.add(this.wall2);
@@ -239,5 +242,21 @@ class PlayingScene extends Phaser.Scene {
         this.physics.add.collider(this.player, this.group);
     }
 
+    obs5() {
+        this.group = this.physics.add.group({ allowGravity: false });
+        this.wall1 = new Wall(this, 100 + game.config.width, 500, 'grass', true).setOrigin(0, 0).setPushable(false).setScale(5, 1);
+        this.toast1 = new Toast(this, 400 + game.config.width, 290, 'Toast', this.player, false).setOrigin(0.5, 0.5).setPushable(false).setScale(1, 1);
+        this.spike1 = new Trap(this, 400 + game.config.width, this.toast1.y + this.toast1.height, 'Spikes', this.player, false).setOrigin(0.5, 0.5).setPushable(false).setScale(2, 2);
+        this.spike2 = new Trap(this, 400 + game.config.width, this.toast1.y - this.toast1.height, 'Spikes', this.player, false).setOrigin(0.5, 0.5).setPushable(false).setScale(2, 2);
+
+        this.group.add(this.wall1);
+        this.group.add(this.toast1);
+        this.group.add(this.spike1);
+        this.group.add(this.spike2);
+        this.group.runChildUpdate = true;
+
+        this.physics.add.collider(this.player, this.group);
+
+    }
 
 }
