@@ -8,14 +8,14 @@ class Path extends Phaser.Physics.Arcade.Sprite {
         Phaser.Physics.Arcade.Sprite.call(this, scene, x, y, sprite);
   
         this.path = new Phaser.Curves.Spline(points);
-        this.pathIndex = 0;
-        this.pathSpeed = speed;
+        this.pathIndex = 0; //which x and y it's going
+        this.pathSpeed = speed; //speed of the path
         this.pathVector = new Phaser.Math.Vector2();
         this.path.getPoint(0, this.pathVector);
         this.setPosition(this.pathVector.x, this.pathVector.y);
 
-        this.coll = player;
-        this.curScene = scene;
+        this.coll = player; //save player as var use for hitG
+        this.curScene = scene;  //save scene as var use for hitG
 
         scene.physics.add.overlap(player, this, null, this.hitG(this));
 
@@ -32,14 +32,14 @@ class Path extends Phaser.Physics.Arcade.Sprite {
         this.pathIndex = Phaser.Math.Wrap(this.pathIndex + this.pathSpeed, 0, 1);
 
         if(this.pathIndex >.99){
-            // this.setActive(false);
-            // this.setVisible(false);
-            // this.body.enable = false;
+           
             this.destroy();
 
         }
         
     }
+
+    //hit detect function
     hitG(obj){
 
         return function() {
