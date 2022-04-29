@@ -5,7 +5,7 @@ class PlayingScene extends Phaser.Scene {
 
     preload() {
         this.load.image('playerfigure', './assets/PlayerRunner.png');
-        this.load.image('platform', './assets/Platform.png');
+        this.load.image('platform', './assets/Grass.png');
         this.load.image('Wall', './assets/Wall.png');
         this.load.image('Spikes', './assets/Spike.png');
         this.load.image('Toast', './assets/toast.png');
