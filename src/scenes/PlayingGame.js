@@ -5,7 +5,7 @@ class PlayingScene extends Phaser.Scene {
 
     preload() {
         this.load.image('playerfigure', './assets/PlayerRunner.png');
-        this.load.image('platform', './assets/Platform.png');
+        this.load.image('platform', './assets/PLAT.png');
         this.load.image('Wall', './assets/Wall.png');
         this.load.image('Spikes', './assets/Spike.png');
         this.load.image('Toast', './assets/toast.png');
@@ -15,16 +15,17 @@ class PlayingScene extends Phaser.Scene {
         this.load.image('ground', './assets/ground.png');
         this.load.image('gerald', './assets/gerald temp.png');
     
-        this.load.image('middleground', './assets/MiddleGround.png');
-        this.load.image('foreground', './assets/ForeGround.png');
+        this.load.image('middleground', './assets/TempMid.png');
+        this.load.image('foreground', './assets/TempFore.png');
 
     }
 
 
     create() {
 
-       
-     
+        this.foreground = this.add.tileSprite(0,0,game.config.width*8,game.config.height*8, 'foreground');
+        this.middleground = this.add.tileSprite(0,0,game.config.width*8,game.config.height*8, 'middleground');
+        
         //spawn in player
         this.player = new Player(this, 200, 442, 'spaceship');
         //initialize controls
@@ -85,6 +86,10 @@ class PlayingScene extends Phaser.Scene {
     }//end of create
 
     update(time, delta) {
+
+        //If Middleground goes off screen loop back
+        this.foreground.tilePositionX += 0.5;
+        this.middleground.tilePositionX += 0.7;
 
         //if player is under the map game over
         if (this.player.body.y > game.config.height) {
