@@ -99,12 +99,6 @@ class Player extends Phaser.GameObjects.Sprite {
                 this.isInvulnerable = false;
             }, null, this);
         }
-        //console.log(keySlide.getDuration());
-
-        //return to original size after slide
-        // if((keySlide.isUp && this.canD) || keySlide.getDuration()>200){
-        //     this.standUp();
-        // }
     }
 
     //player actions
