@@ -99,18 +99,26 @@ class PlayingScene extends Phaser.Scene {
         if (shouldSpawnP) {
             shouldSpawnP = false;
 
-            switch (Math.floor(Math.random() * 3)) {
+            switch (Math.floor(Math.random() * 4)) {
                 case 0:
-                    this.obs5();
+                    this.obs1();
                     console.log("0");
                     break;
                 case 1:
-                    this.obs5();
+                    this.obs2();
                     console.log("1");
                     break;
                 case 2:
-                    this.obs5();
+                    this.obs3();
                     console.log("2");
+                    break;
+                case 3:
+                    this.obs4();
+                    console.log("3");
+                    break;
+                case 4:
+                    this.obs5();
+                    console.log("4");
                     break;
             }
         }
@@ -244,7 +252,7 @@ class PlayingScene extends Phaser.Scene {
 
     obs5() {
         this.group = this.physics.add.group({ allowGravity: false });
-        this.wall1 = new Wall(this, 100 + game.config.width, 500, 'grass', true).setOrigin(0, 0).setPushable(false).setScale(5, 1);
+        this.wall1 = new Wall(this, 100 + game.config.width, 500, 'platform', true).setOrigin(0, 0).setPushable(false).setScale(5, 1);
         this.toast1 = new Toast(this, 400 + game.config.width, 290, 'Toast', this.player, false).setOrigin(0.5, 0.5).setPushable(false).setScale(1, 1);
         this.spike1 = new Trap(this, 400 + game.config.width, this.toast1.y + this.toast1.height, 'Spikes', this.player, false).setOrigin(0.5, 0.5).setPushable(false).setScale(2, 2);
         this.spike2 = new Trap(this, 400 + game.config.width, this.toast1.y - this.toast1.height, 'Spikes', this.player, false).setOrigin(0.5, 0.5).setPushable(false).setScale(2, 2);
