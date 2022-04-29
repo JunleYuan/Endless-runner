@@ -5,7 +5,7 @@ class PlayingScene extends Phaser.Scene {
 
     preload() {
         this.load.image('playerfigure', './assets/PlayerRunner.png');
-        this.load.image('platform', './assets/Grass.png');
+        this.load.image('platform', './assets/Platform.png');
         this.load.image('Wall', './assets/Wall.png');
         this.load.image('Spikes', './assets/Spike.png');
         this.load.image('Toast', './assets/toast.png');
@@ -14,10 +14,17 @@ class PlayingScene extends Phaser.Scene {
         this.load.image('CoreFighter', './assets/CoreFighter.png');
         this.load.image('ground', './assets/ground.png');
         this.load.image('gerald', './assets/gerald temp.png');
+    
+        this.load.image('middleground', './assets/MiddleGround.png');
+        this.load.image('foreground', './assets/ForeGround.png');
+
     }
+
 
     create() {
 
+       
+     
         //spawn in player
         this.player = new Player(this, 200, 442, 'spaceship');
         //initialize controls
