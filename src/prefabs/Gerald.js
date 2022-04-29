@@ -1,7 +1,7 @@
 // Path prefab
 class Gerald extends Phaser.Physics.Arcade.Sprite {
     constructor(scene, x, y, sprite, HP) {
-        super(scene, x, y,sprite, HP);
+        super(scene, x, y, sprite, HP);
 
         //Phaser.Physics.Arcade.Sprite.call(this, scene, x, y, sprite);
 

@@ -1,5 +1,5 @@
-// Path prefab
-class Toast extends Phaser.Physics.Arcade.Sprite {
+// Trap prefab
+class Trap extends Phaser.Physics.Arcade.Sprite {
     constructor(scene, x, y, sprite, player, gone) {
         super(scene, x, y,sprite, gone);
 
@@ -13,7 +13,7 @@ class Toast extends Phaser.Physics.Arcade.Sprite {
 
         this.die = false;
 
-        scene.physics.add.overlap(player, this, null,this.diefun(this));
+        scene.physics.add.overlap(player, this, null, this.dealTrapDamage);
             
     }
 
@@ -23,26 +23,17 @@ class Toast extends Phaser.Physics.Arcade.Sprite {
         this.body.velocity.x = pspeed;
 
         if(this.body.x+this.body.width<0){
-            console.log("toast gone");
-            this.destroy();
-        }
-        if(this.die){
+            console.log("trap destroyed");
             this.destroy();
         }
 
     }
-
-    //destory toast on hit
-    diefun(obj){
-
-        return function() {
-
-            nubToast++;
-            obj.die = true;
-            console.log("diefun called, cur toast:"+ nubToast);
-        };
-
-    }
-
     
+    dealTrapDamage(){
+        if(!playerGotHit){
+            hit_count+= 1;
+            console.log('hit count = ' + hit_count)
+            playerGotHit = true;
+        }
+    }
 }

@@ -15,6 +15,7 @@ class Player extends Phaser.GameObjects.Sprite {
         this.isAirborne = false;
         this.jumpCount = 0; //number of jumps taken since last touching the ground
         this.jumpTime = 0; //jump duration timer
+        this.isInvulnerable = false;
 
         this.curScene = scene;  //save the player scene into var use for later
 
@@ -24,15 +25,15 @@ class Player extends Phaser.GameObjects.Sprite {
     update(time, delta) {
         
         //movement controls
-        if(!playerGotHit&& !this.canD)
+        if(!keyA.isDown && !keyD.isDown)
         this.body.velocity.x = 0;
 
         //move left
-        if (keyA.isDown && !playerGotHit&&!this.canD){
+        if (keyA.isDown && !this.canD){
             this.moveLeft();
         }
         //move right
-        else if(keyD.isDown && !playerGotHit&&!this.canD){
+        else if(keyD.isDown && !this.canD){
             this.moveRight();
         }
 
@@ -87,6 +88,16 @@ class Player extends Phaser.GameObjects.Sprite {
 
             }, null, this);
         
+        }
+
+        //if the player has been hit, make the player invulnerable for 1 second
+        if(playerGotHit && !this.isInvulnerable){
+            this.isInvulnerable = true;
+            console.log('Player should be invulnerable');
+            this.curScene.time.delayedCall(1000, () => {
+                playerGotHit = false;
+                this.isInvulnerable = false;
+            }, null, this);
         }
         //console.log(keySlide.getDuration());
 
