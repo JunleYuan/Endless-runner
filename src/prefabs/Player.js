@@ -25,7 +25,7 @@ class Player extends Phaser.GameObjects.Sprite {
     update(time, delta) {
         
         //movement controls
-        if(!keyA.isDown && !keyD.isDown)
+        if(!keyA.isDown && !keyD.isDown && !this.canD)
         this.body.velocity.x = 0;
 
         //move left
