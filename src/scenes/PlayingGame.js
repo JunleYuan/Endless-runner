@@ -231,9 +231,9 @@ class PlayingScene extends Phaser.Scene {
         this.group = this.physics.add.group({ allowGravity: false });
         this.group2 = this.physics.add.group({ allowGravity: false });
 
-        this.wall1 = new Wall(this, 100, 500, 'platform', false).setOrigin(0, 0).setPushable(false).setScale(5, 1);
-        this.wall2 = new Wall(this, 600, 230, 'Wall', false).setOrigin(0, 0).setPushable(false).setScale(1, 2);
-        this.wall3 = new Wall(this, 1000, 500, 'platform', true).setOrigin(0, 0).setPushable(false).setScale(3, 1);
+        this.wall1 = new Wall(this, 100 + game.config.width, 500, 'platform', false).setOrigin(0, 0).setPushable(false).setScale(5, 1);
+        this.wall2 = new Wall(this, 600 + game.config.width, 230, 'Wall', false).setOrigin(0, 0).setPushable(false).setScale(1, 2);
+        this.wall3 = new Wall(this, 1000 + game.config.width, 500, 'platform', true).setOrigin(0, 0).setPushable(false).setScale(3, 1);
 
 
         this.toast1 = new Toast(this, 620 + game.config.width, 250, 'Toast', this.player, false).setOrigin(0, 0).setPushable(false).setScale(1, 1);
