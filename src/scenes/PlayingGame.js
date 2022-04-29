@@ -76,9 +76,9 @@ class PlayingScene extends Phaser.Scene {
     update(time, delta) {
 
         //If Middleground goes off screen loop back
-        this.foreground.body.velocity.x = pspeed+50;
-        this.middleground.body.velocity.x = pspeed + 20;
-        this.background.body.velocity.x = pspeed;
+        this.foreground.body.velocity.x = pspeed/2;
+        this.middleground.body.velocity.x = pspeed;
+        this.background.body.velocity.x = pspeed/3;
         
         if(this.foreground.body.x + this.foreground.body.width < game.config.width){
             this.foreground.body.x = 0;
