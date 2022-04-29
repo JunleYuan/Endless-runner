@@ -54,32 +54,8 @@ class PlayingScene extends Phaser.Scene {
         });
         this.gerald.depth = 3;
 
-        //This is the path the sprite will follow
-        this.points = [1100, 400, 800, 500, 350, 300, 50, 400, 200, 400]
-        this.smallG = this.physics.add.group({ allowGravity: false, immovable: true });
-        this.path = new Path(this, 1000, 300, 'spaceship', 0.005, this.points);
-        this.smallG.add(this.path, true);
-        this.path.setActive(false);
-        this.path.setVisible(false);
-        this.path.body.enable = false;
-
-        //if player gets hit by gerrad there is a knock back
-        this.hitG = this.physics.add.overlap(this.player, this.smallG, null, function () {
-            hit_count += 1;
-            console.log("hit");
-            this.path.setActive(false);
-            this.path.setVisible(false);
-            this.path.body.enable = false;
-
-            playerGotHit = true;
-            this.player.body.velocity.x = -300;
-            this.player.body.velocity.y = -50;
-            this.time.delayedCall(500, () => {
-                playerGotHit = false;
-
-            }, null, this);
-
-        }, this);
+    
+        
 
         //so player will fall through the ground
         this.physics.world.setBoundsCollision(true, true, true, true);
@@ -88,7 +64,7 @@ class PlayingScene extends Phaser.Scene {
         this.speeed();
 
         //spawn starting platform
-        this.starting();
+        this.obs6();
 
     }//end of create
 
@@ -142,16 +118,12 @@ class PlayingScene extends Phaser.Scene {
         //update prefab
         this.player.update(time, delta);
         this.gerald.update();
-        this.path.update();
 
-        //spawn minions
+        //spawn minions test
         if (spawn.isDown) {
-
-            this.path.body.reset(1000, 400);
-            this.path.body.enable = true;
-            this.path.setActive(true);
-            this.path.setVisible(true);
-            this.path.pathIndex = 0;
+            //This is the path the sprite will follow
+            this.points = [1100, 400, 800, 500, 350, 300, 50, 400, 200, 400]
+            this.makeSmolG(0.05,this.points);
 
         }
         if (isGameOver) {
@@ -171,6 +143,16 @@ class PlayingScene extends Phaser.Scene {
             }
 
         }, null, this);
+    }
+    //create small g
+    makeSmolG(speed,points){
+
+        this.smallG = this.physics.add.group({ allowGravity: false, immovable: true });
+        this.path = new Path(this, 1000, 300, 'spaceship', speed, points,this.player);
+        this.smallG.add(this.path, true);
+
+        this.smallG.runChildUpdate = true;
+
     }
 
     starting() {
@@ -270,10 +252,10 @@ class PlayingScene extends Phaser.Scene {
 
     obs5() {
         this.group = this.physics.add.group({ allowGravity: false, immovable: true });
-        this.wall1 = new Walla(this, 100 + game.config.width, 500,platsizeX*5,platsizeY, 'platform', true).setOrigin(0, 0);
+        this.wall1 = new Walla(this, 100 + game.config.width, 500,platsizeX*5,platsizeY, 'platform', false).setOrigin(0, 0);
         this.toast1 = new Toast(this, 400 + game.config.width, 290, 'Toast', this.player, false).setOrigin(0.5, 0.5).setPushable(false).setScale(1, 1);
         this.spike1 = new Trap(this, 400 + game.config.width, this.toast1.y + this.toast1.height, 'Spikes', this.player, false).setOrigin(0.5, 0.5).setPushable(false).setScale(2, 2);
-        this.spike2 = new Trap(this, 400 + game.config.width, this.toast1.y - this.toast1.height, 'Spikes', this.player, false).setOrigin(0.5, 0.5).setPushable(false).setScale(2, 2);
+        this.spike2 = new Trap(this, 400 + game.config.width, this.toast1.y - this.toast1.height, 'Spikes', this.player, true).setOrigin(0.5, 0.5).setPushable(false).setScale(2, 2);
 
         this.group.add(this.wall1);
         this.group.add(this.toast1);
@@ -284,5 +266,17 @@ class PlayingScene extends Phaser.Scene {
         this.physics.add.collider(this.player, this.group);
 
     }
+    obs6(){
+        this.group = this.physics.add.group({ allowGravity: false, immovable: true });
+        this.wall1 = new Walla(this, game.config.width, 500,platsizeX*5,platsizeY, 'platform', true).setOrigin(0, 0);
+
+        this.group.add(this.wall1);
+        this.group.runChildUpdate = true;
+
+        this.makeSmolG(0.001,[game.config.width*2, game.config.height*2, 700, 500, 350, 300, 0, 500 ]);
+        this.makeSmolG(0.001,[game.config.width*2, game.config.height*2, 700, 300, 350, 500, 0, 300 ]);
+        this.physics.add.collider(this.player, this.group);
+    }
+    
 
 }
