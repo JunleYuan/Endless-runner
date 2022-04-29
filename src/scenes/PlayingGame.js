@@ -15,24 +15,24 @@ class PlayingScene extends Phaser.Scene {
         this.load.image('ground', './assets/ground.png');
         this.load.image('gerald', './assets/gerald temp.png');
     
-        this.load.image('middleground', './assets/TempMid.png');
-        this.load.image('foreground', './assets/TempFore.png');
+        this.load.image('middleground', './assets/MiddleGround.png');
+        this.load.image('foreground', './assets/ForeGround.png');
 
     }
 
 
     create() {
 
-
-        this.foreground = this.add.tileSprite(0,0,game.config.width*8,game.config.height*8, 'foreground');
-        this.middleground = this.add.tileSprite(0,0,game.config.width*8,game.config.height*8, 'middleground');
-
+        //background
+        this.foreground = this.add.tileSprite(0,0,4800*2,2700, 'foreground').setScale(.2).setOrigin(0,0);
+        this.middleground = this.add.tileSprite(0,0,4800*2,2700, 'middleground').setScale(.2).setOrigin(0,0);
         this.physics.add.existing(this.foreground);
         this.physics.add.existing(this.middleground);
 
         this.backgrounds = this.physics.add.group({ allowGravity: false, immovable: true });
         this.backgrounds.add(this.foreground);
         this.backgrounds.add(this.middleground);
+
 
 
         //spawn in player
@@ -63,8 +63,8 @@ class PlayingScene extends Phaser.Scene {
         this.path.setVisible(false);
         this.path.body.enable = false;
 
-        //if player gets hit there is a knock back
-        /*this.hitG = this.physics.add.overlap(this.player, this.smallG, null, function () {
+        //if player gets hit by gerrad there is a knock back
+        this.hitG = this.physics.add.overlap(this.player, this.smallG, null, function () {
             hit_count += 1;
             console.log("hit");
             this.path.setActive(false);
@@ -79,7 +79,7 @@ class PlayingScene extends Phaser.Scene {
 
             }, null, this);
 
-        }, this);*/
+        }, this);
 
         //so player will fall through the ground
         this.physics.world.setBoundsCollision(true, true, true, false);
@@ -98,6 +98,14 @@ class PlayingScene extends Phaser.Scene {
         //If Middleground goes off screen loop back
         this.foreground.body.velocity.x = -100;
         this.middleground.body.velocity.x = -200;
+        
+        if(this.foreground.body.x + this.foreground.body.width < game.config.width){
+            this.foreground.body.x = 0;
+        }
+        if(this.middleground.body.x + this.middleground.body.width < game.config.width){
+            this.middleground.body.x = 0;
+        }
+
 
         //if player is under the map game over
         if (this.player.body.y > game.config.height + this.player.body.height) {
