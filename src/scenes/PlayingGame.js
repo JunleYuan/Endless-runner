@@ -17,6 +17,7 @@ class PlayingScene extends Phaser.Scene {
     
         this.load.image('middleground', './assets/MiddleGround.png');
         this.load.image('foreground', './assets/ForeGround.png');
+        this.load.image('background', './assets/CompleteBack.png');
 
     }
 
@@ -24,14 +25,18 @@ class PlayingScene extends Phaser.Scene {
     create() {
 
         //background
+        this.background = this.add.tileSprite(0,0,4800*2,2700, 'background').setOrigin(0,0)
         this.foreground = this.add.tileSprite(0,0,4800*2,2700, 'foreground').setScale(.2).setOrigin(0,0);
         this.middleground = this.add.tileSprite(0,0,4800*2,2700, 'middleground').setScale(.2).setOrigin(0,0);
         this.physics.add.existing(this.foreground);
         this.physics.add.existing(this.middleground);
+        this.physics.add.existing(this.background);
+
 
         this.backgrounds = this.physics.add.group({ allowGravity: false, immovable: true });
         this.backgrounds.add(this.foreground);
         this.backgrounds.add(this.middleground);
+        this.backgrounds.add(this.background);
 
 
 
@@ -73,6 +78,7 @@ class PlayingScene extends Phaser.Scene {
         //If Middleground goes off screen loop back
         this.foreground.body.velocity.x = pspeed+50;
         this.middleground.body.velocity.x = pspeed;
+        this.background.body.velocity.x = pspeed - 100;
         
         if(this.foreground.body.x + this.foreground.body.width < game.config.width){
             this.foreground.body.x = 0;
@@ -80,7 +86,9 @@ class PlayingScene extends Phaser.Scene {
         if(this.middleground.body.x + this.middleground.body.width < game.config.width){
             this.middleground.body.x = 0;
         }
-
+        if(this.background.body.x + this.background.body.width < game.config.width){
+            this.background.body.x = 0;
+        }
 
         //if player is under the map game over
         if (this.player.body.y > game.config.height + this.player.body.height) {
