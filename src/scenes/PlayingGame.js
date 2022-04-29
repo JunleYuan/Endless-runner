@@ -23,9 +23,18 @@ class PlayingScene extends Phaser.Scene {
 
     create() {
 
+
         this.foreground = this.add.tileSprite(0,0,game.config.width*8,game.config.height*8, 'foreground');
         this.middleground = this.add.tileSprite(0,0,game.config.width*8,game.config.height*8, 'middleground');
-        
+
+        this.physics.add.existing(this.foreground);
+        this.physics.add.existing(this.middleground);
+
+        this.backgrounds = this.physics.add.group({ allowGravity: false, immovable: true });
+        this.backgrounds.add(this.foreground);
+        this.backgrounds.add(this.middleground);
+
+
         //spawn in player
         this.player = new Player(this, 200, 442, 'spaceship');
         //initialize controls
@@ -87,8 +96,8 @@ class PlayingScene extends Phaser.Scene {
     update(time, delta) {
 
         //If Middleground goes off screen loop back
-        this.foreground.tilePositionX += 0.5;
-        this.middleground.tilePositionX += 0.7;
+        this.foreground.body.velocity.x = -100;
+        this.middleground.body.velocity.x = -200;
 
         //if player is under the map game over
         if (this.player.body.y > game.config.height + this.player.body.height) {
