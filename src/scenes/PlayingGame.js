@@ -65,7 +65,7 @@ class PlayingScene extends Phaser.Scene {
         }, this);
 
         //so player will fall through the ground
-        this.physics.world.setBoundsCollision(true, true, true, true);
+        this.physics.world.setBoundsCollision(true, true, true, false);
 
         //increase speed of platforms as time goes
         this.speeed();
@@ -224,7 +224,6 @@ class PlayingScene extends Phaser.Scene {
         this.group.runChildUpdate = true;
         this.group2.runChildUpdate = true;
         
-
         this.physics.add.collider(this.player, this.group);
     }
 
