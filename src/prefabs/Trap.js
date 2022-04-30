@@ -1,7 +1,7 @@
 // Trap prefab
 class Trap extends Phaser.Physics.Arcade.Sprite {
-    constructor(scene, x, y, sprite, player, gone) {
-        super(scene, x, y,sprite, gone);
+    constructor(scene, x, y, sprite, player) {
+        super(scene, x, y,sprite);
 
         //Phaser.Physics.Arcade.Sprite.call(this, scene, x, y, sprite);
 

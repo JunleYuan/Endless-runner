@@ -69,16 +69,16 @@ class PlayingScene extends Phaser.Scene {
         this.speeed();
 
         //spawn starting platform
-        this.obs6();
+        this.starting();
 
     }//end of create
 
     update(time, delta) {
 
         //If Middleground goes off screen loop back
-        this.foreground.body.velocity.x = pspeed+50;
+        this.foreground.body.velocity.x = pspeed/2;
         this.middleground.body.velocity.x = pspeed;
-        this.background.body.velocity.x = pspeed - 100;
+        this.background.body.velocity.x = pspeed/3;
         
         if(this.foreground.body.x + this.foreground.body.width < game.config.width){
             this.foreground.body.x = 0;
@@ -99,7 +99,7 @@ class PlayingScene extends Phaser.Scene {
         if (shouldSpawnP) {
             shouldSpawnP = false;
 
-            switch (Math.floor(Math.random() * 5)) {
+            switch (Math.floor(Math.random() * 6)) {
                 case 0:
                     this.obs1();
                     console.log("0");
@@ -120,6 +120,9 @@ class PlayingScene extends Phaser.Scene {
                     this.obs5();
                     console.log("4");
                     break;
+                case 5:
+                    this.obs6();
+                    console.log("t");
             }
         }
 
@@ -262,8 +265,8 @@ class PlayingScene extends Phaser.Scene {
         this.group = this.physics.add.group({ allowGravity: false, immovable: true });
         this.wall1 = new Walla(this, 100 + game.config.width, 500,platsizeX*5,platsizeY, 'platform', true).setOrigin(0, 0);
         this.toast1 = new Toast(this, 400 + game.config.width, 290, 'Toast', this.player, false).setOrigin(0.5, 0.5).setPushable(false).setScale(1, 1);
-        this.spike1 = new Trap(this, 400 + game.config.width, this.toast1.y + this.toast1.height, 'Spikes', this.player, false).setOrigin(0.5, 0.5).setPushable(false).setScale(2, 2);
-        this.spike2 = new Trap(this, 400 + game.config.width, this.toast1.y - this.toast1.height, 'Spikes', this.player, false).setOrigin(0.5, 0.5).setPushable(false).setScale(2, 2);
+        this.spike1 = new Trap(this, 400 + game.config.width, this.toast1.y + this.toast1.height, 'Spikes', this.player).setOrigin(0.5, 0.5).setPushable(false).setScale(2, 2);
+        this.spike2 = new Trap(this, 400 + game.config.width, this.toast1.y - this.toast1.height, 'Spikes', this.player).setOrigin(0.5, 0.5).setPushable(false).setScale(2, 2);
 
         this.group.add(this.wall1);
         this.group.add(this.toast1);
