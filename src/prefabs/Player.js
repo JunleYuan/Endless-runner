@@ -53,16 +53,19 @@ class Player extends Phaser.GameObjects.Sprite {
         if(Phaser.Input.Keyboard.JustDown(keyJump)){
             if(!this.isJumping && !this.isAirborne){
                 this.jump();   
+                this.curScene.sound.play('GroundJump');
                 console.log("Single Jump from Ground");
                 console.log("Jump Count" + this.jumpCount);
             }
             else if(this.isJumping && this.jumpCount < 2){
                 this.jump();   
+                this.curScene.sound.play('FlutterJump');
                 console.log("Double Jump after Jump in air");
                 console.log("Jump Count" + this.jumpCount);
             }
             else if(this.isAirborne && !this.isJumping && this.jumpCount == 0){
                 this.jump();
+                this.curScene.sound.play('FlutterJump');
                 this.jumpCount++;
                 console.log("Falling From Platform Double Jump");
                 console.log("Jump Count" + this.jumpCount);
@@ -74,7 +77,7 @@ class Player extends Phaser.GameObjects.Sprite {
         if(keySlide.isDown && !this.isJumping && !this.canD && keySlide.getDuration()<200 && this.offSlideCD){
             this.slide();
             this.offSlideCD = false;
-
+            this.curScene.sound.play('slideSound');
             
             this.curScene.time.delayedCall(300, () => {
                 //console.log("worj pls");

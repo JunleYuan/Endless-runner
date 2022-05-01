@@ -19,6 +19,12 @@ class PlayingScene extends Phaser.Scene {
         this.load.image('foreground', './assets/ForeGround.png');
         this.load.image('background', './assets/CompleteBack.png');
 
+        this.load.audio('slideSound', './assets/slideSound.wav');
+        this.load.audio('ToastCollection', './assets/ToastCollection.wav');
+        this.load.audio('FlutterJump', './assets/FlutterJump.wav');
+        this.load.audio('GroundJump', './assets/GroundJump.wav');
+        this.load.audio('HurtVoice', './assets/HurtVoice.wav');
+        
     }
 
 

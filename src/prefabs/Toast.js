@@ -13,6 +13,8 @@ class Toast extends Phaser.Physics.Arcade.Sprite {
 
         this.die = false;
 
+        this.curScene = scene;
+
         scene.physics.add.overlap(player, this, null,this.diefun(this));
             
     }
@@ -36,7 +38,7 @@ class Toast extends Phaser.Physics.Arcade.Sprite {
     diefun(obj){
 
         return function() {
-
+            obj.curScene.sound.play('ToastCollection');
             nubToast++;
             obj.die = true;
             console.log("diefun called, cur toast:"+ nubToast);

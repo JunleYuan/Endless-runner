@@ -45,7 +45,7 @@ class Path extends Phaser.Physics.Arcade.Sprite {
         return function() {
             hit_count += 1;
             console.log("hit");
-
+            obj.curScene.sound.play('HurtVoice');
             playerGotHit = true;
             obj.coll.body.velocity.x = -300;
             obj.coll.body.velocity.y = -50;
