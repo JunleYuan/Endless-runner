@@ -154,8 +154,9 @@ class PlayingScene extends Phaser.Scene {
         this.clock = this.time.delayedCall(10000, () => {
 
             pspeed = pspeed - 20;
-            console.log("speed is increased, current speed:", + pspeed);
-            if (pspeed < MaxPSpeed) {
+            
+            if (pspeed > MaxPSpeed) {
+                console.log("speed is increased, current speed:", + pspeed);
                 this.speeed();
             }
 
