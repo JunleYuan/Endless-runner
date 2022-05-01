@@ -16,6 +16,9 @@ class Player extends Phaser.GameObjects.Sprite {
         this.jumpCount = 0; //number of jumps taken since last touching the ground
         this.jumpTime = 0; //jump duration timer
         this.isInvulnerable = false;
+        this.isIdle = true;
+        this.isFacingRight = false;
+        this.isFacingLeft = false;
 
         this.curScene = scene;  //save the player scene into var use for later
 
@@ -31,12 +34,23 @@ class Player extends Phaser.GameObjects.Sprite {
         //move left
         if (keyA.isDown && !this.canD && !playerGotHit){
             this.moveLeft();
+            this.isIdle = false;
+            this.isFacingRight = false;
+            this.isFacingLeft = true;
         }
         //move right
         else if(keyD.isDown && !this.canD && !playerGotHit){
+            this.isIdle = false;
+            this.isFacingRight = true;
+            this.isFacingLeft = false;
             this.moveRight();
         }
-
+        
+        else{
+            this.isIdle = true;
+            this.isFacingRight = false;
+            this.isFacingLeft = false;
+        }        
         //check if the player is touching the ground
         if(this.body.touching.down){
             this.isJumping = false;

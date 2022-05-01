@@ -57,4 +57,6 @@ let MaxToast = 5;
 //  spawn next plaform if finish
 let shouldSpawnP = false;
 
+// Music variable
+let bkMusic;
 

@@ -4,6 +4,8 @@ class PlayingScene extends Phaser.Scene {
     }
 
     preload() {
+        this.load.atlas('idleAtlas','./assets/idle.png', './assets/idle_atlas.json')
+
         this.load.image('playerfigure', './assets/PlayerRunner.png');
         this.load.image('platform', './assets/PLAT.png');
         this.load.image('Wall', './assets/Wall.png');
@@ -17,18 +19,41 @@ class PlayingScene extends Phaser.Scene {
     
         this.load.image('middleground', './assets/MiddleGround.png');
         this.load.image('foreground', './assets/ForeGround.png');
-        this.load.image('background', './assets/CompleteBack.png');
+        this.load.image('background', './assets/BG_New.png');
 
         this.load.audio('slideSound', './assets/slideSound.wav');
         this.load.audio('ToastCollection', './assets/ToastCollection.wav');
         this.load.audio('FlutterJump', './assets/FlutterJump.wav');
         this.load.audio('GroundJump', './assets/GroundJump.wav');
         this.load.audio('HurtVoice', './assets/HurtVoice.wav');
-        
+        this.load.audio('BackgroundMusic', './assets/BGmusic.wav');
+
+
     }
 
 
     create() {
+
+        bkMusic = this.sound.add('BackgroundMusic');
+        bkMusic.loop = true; // Sets Loop
+        bkMusic.play();
+
+        this.test = this.add.sprite(0,0,'idleAtlas').setOrigin(0,0)
+
+        this.anims.create({
+            key: 'idle',
+            frames: this.anims.generateFrameNumbers('idleAtlas', {
+                prefix: 'Idle',
+                start: 0,
+                end: 2,
+                suffix: '',
+                zeroPad: 1
+            }),
+            frameRate: 9,
+            repeat: -1
+        });
+
+
 
         //background
         this.background = this.add.tileSprite(0,0,4800*2,2700, 'background').setOrigin(0,0)
@@ -37,6 +62,8 @@ class PlayingScene extends Phaser.Scene {
         this.physics.add.existing(this.foreground);
         this.physics.add.existing(this.middleground);
         this.physics.add.existing(this.background);
+
+       
 
 
         this.backgrounds = this.physics.add.group({ allowGravity: false, immovable: true });
@@ -80,6 +107,10 @@ class PlayingScene extends Phaser.Scene {
     }//end of create
 
     update(time, delta) {
+
+        if(this.player.isidle == true){
+            this.player.anims.play('idle', true);
+        }
 
         //If Middleground goes off screen loop back
         this.foreground.body.velocity.x = pspeed/2;
