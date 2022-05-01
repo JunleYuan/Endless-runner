@@ -47,7 +47,7 @@ class PlayingScene extends Phaser.Scene {
                 suffix: '',
                 zeroPad: 2
             }), 
-            frameRate: 30,
+            frameRate: 10,
             repeat: -1 
         });
 
@@ -114,10 +114,11 @@ class PlayingScene extends Phaser.Scene {
     }//end of create
 
     update(time, delta) {
-
-        // if(this.player.isidle == true){
-        //     this.player.anims.play('idle', true);
-        // }
+        //console.log(this.player.isIdle);
+        if(this.player.state == 0){
+            //console.log(this.player.isIdle);
+            this.player.anims.play('walk', true);
+        }
 
         //If Middleground goes off screen loop back
         this.foreground.body.velocity.x = pspeed/2;
