@@ -36,6 +36,7 @@ class Trap extends Phaser.Physics.Arcade.Sprite {
             if(!playerGotHit){
                 hit_count+= 1;
                 console.log('hit count = ' + hit_count)
+                obj.curScene.sound.play('HurtVoice');
                 playerGotHit = true;
                 obj.coll.body.velocity.x = -300;
                 obj.coll.body.velocity.y = -50;

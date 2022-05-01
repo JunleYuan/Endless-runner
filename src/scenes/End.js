@@ -10,7 +10,7 @@ class End extends Phaser.Scene {
     }
 
     create(){
-
+        this.sound.play('GameOver');
         let over = this.add.bitmapText(game.config.width / 2, game.config.height / 2, 'bm','Game Over',40).setOrigin(0.5);
 
         let again = this.add.bitmapText(game.config.width / 2, game.config.height / 1.5, 'bm','Again?',34).setOrigin(0.5);
