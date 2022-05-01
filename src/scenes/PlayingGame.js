@@ -80,7 +80,7 @@ class PlayingScene extends Phaser.Scene {
 
 
         //spawn in player
-        this.player = new Player(this, 200, 442, 'spaceship');
+        this.player = new Player(this, 200, 442, 'platformer_atlas','Idle01');
 
         //initialize controls
         keyA = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A);

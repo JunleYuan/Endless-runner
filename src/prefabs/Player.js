@@ -6,12 +6,14 @@ class Player extends Phaser.GameObjects.Sprite {
         scene.add.existing(this);   // add to existing, displayList, updateList
         scene.physics.add.existing(this);   //give object physics
 
-
+        this.displayWidth = 100;
+        this.displayHeight = 100;
         
         this.body.collideWorldBounds = true;    //so it don't go out of canvas
         //this.setSize(300, 260, true);         //give hitbox
-        this.body.setSize(30, 60);
-        this.setOrigin(0.5,1); //set box origin to center of bottom edge
+        this.body.setSize(1000, 1000);
+        this.body.setOffset(500,1000);
+        this.setOrigin(1,1); //set box origin to center of bottom edge
         this.canD = false;          //detect slide and use for returning original hitbox
         this.moveSpeed = 150; //player movement speed
         this.jumpStrength = 500; //player jump velocity
@@ -140,15 +142,16 @@ class Player extends Phaser.GameObjects.Sprite {
     }
 
     slide(){
-        this.setPosition(this.x, this.y + this.body.halfHeight/2); //move bounding box down
-        this.body.setSize(45, this.body.halfHeight); //resize bounding box
+        this.setPosition(this.x, this.y ); //move bounding box down
+        this.body.setSize(1500, 1000/2); //resize bounding box
         this.body.velocity.x = 500;
         this.canD = true;
     }
 
     standUp(){
-        this.setPosition(this.x, this.y - this.body.halfHeight); //move bounding box up
-        this.body.setSize(30, this.body.height*2); //resize bounding box to original size
+        this.setPosition(this.x, this.y - this.displayHeight/2); //move bounding box up
+        this.body.setSize(1000, 1000); //resize bounding box to original size
+        this.body.setOffset(500,1000);
         this.body.velocity.x = 0;
         this.canD = false;
     }
