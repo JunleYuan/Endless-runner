@@ -1,12 +1,16 @@
 // Player prefab
 class Player extends Phaser.GameObjects.Sprite {
-    constructor(scene, x, y, texture) {
-        super(scene, x, y, texture);
-
+    constructor(scene, x, y, texture,frame) {
+        super(scene, x, y, texture,frame);
+        
         scene.add.existing(this);   // add to existing, displayList, updateList
         scene.physics.add.existing(this);   //give object physics
+
+
+        
         this.body.collideWorldBounds = true;    //so it don't go out of canvas
-        this.body.setSize(30, 60);          //give hitbox
+        //this.setSize(300, 260, true);         //give hitbox
+        this.body.setSize(30, 60);
         this.setOrigin(0.5,1); //set box origin to center of bottom edge
         this.canD = false;          //detect slide and use for returning original hitbox
         this.moveSpeed = 150; //player movement speed
@@ -19,6 +23,8 @@ class Player extends Phaser.GameObjects.Sprite {
         this.isIdle = true;
         this.isFacingRight = false;
         this.isFacingLeft = false;
+
+        
 
         this.curScene = scene;  //save the player scene into var use for later
 
@@ -93,7 +99,7 @@ class Player extends Phaser.GameObjects.Sprite {
             this.offSlideCD = false;
             this.curScene.sound.play('slideSound');
             
-            this.curScene.time.delayedCall(300, () => {
+            this.curScene.time.delayedCall(400, () => {
                 //console.log("worj pls");
                 this.standUp();
 

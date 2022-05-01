@@ -4,7 +4,8 @@ class Menu extends Phaser.Scene {
   }
 
   preload() {
-    
+    this.load.atlas('platformer_atlas', '/assets/idle.png', '/assets/idle_atlas.json');
+
   }
   
   create() {
@@ -37,9 +38,37 @@ class Menu extends Phaser.Scene {
       this.scene.start('controlsScene'); 
     });
 
+//     this.anims.create({ 
+//       key: 'walk', 
+//       frames: this.anims.generateFrameNames('platformer_atlas', {      
+//           prefix: 'Idle',
+//           start: 1,
+//           end: 3,
+//           suffix: '',
+//           zeroPad: 2
+//       }), 
+//       frameRate: 30,
+//       repeat: -1 
+//   });
+
+//   this.anims.create({
+//     key: 'idle',
+//     defaultTextureKey: 'platformer_atlas',
+//     frames: [
+//         { frame: 'Idle01' }
+//     ],
+//     repeat: -1
+// });
+
+  //this.alien = this.physics.add.sprite(game.config.width/2, game.config.height/6, 'platformer_atlas', 'Idle01').setScale(1);
+
+
+
   }
   
   update(time, delta) {
+
+    
 
   }
   

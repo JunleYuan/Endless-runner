@@ -4,7 +4,7 @@ class PlayingScene extends Phaser.Scene {
     }
 
     preload() {
-        this.load.atlas('idleAtlas','./assets/idle.png', './assets/idle_atlas.json')
+        this.load.atlas('platformer_atlas', '/assets/idle.png', '/assets/idle_atlas.json');
 
         this.load.image('playerfigure', './assets/PlayerRunner.png');
         this.load.image('platform', './assets/PLAT.png');
@@ -34,25 +34,33 @@ class PlayingScene extends Phaser.Scene {
 
     create() {
 
-        bkMusic = this.sound.add('BackgroundMusic');
+        bkMusic = this.sound.add('BackgroundMusic',{volume: 0.3});
         bkMusic.loop = true; // Sets Loop
         bkMusic.play();
 
-        this.test = this.add.sprite(0,0,'idleAtlas').setOrigin(0,0)
+        this.anims.create({ 
+            key: 'walk', 
+            frames: this.anims.generateFrameNames('platformer_atlas', {      
+                prefix: 'Idle',
+                start: 1,
+                end: 3,
+                suffix: '',
+                zeroPad: 2
+            }), 
+            frameRate: 30,
+            repeat: -1 
+        });
 
         this.anims.create({
             key: 'idle',
-            frames: this.anims.generateFrameNumbers('idleAtlas', {
-                prefix: 'Idle',
-                start: 0,
-                end: 2,
-                suffix: '',
-                zeroPad: 1
-            }),
-            frameRate: 9,
+            defaultTextureKey: 'platformer_atlas',
+            frames: [
+                { frame: 'Idle01' }
+            ],
             repeat: -1
         });
 
+        
 
 
         //background
@@ -63,18 +71,17 @@ class PlayingScene extends Phaser.Scene {
         this.physics.add.existing(this.middleground);
         this.physics.add.existing(this.background);
 
-       
-
 
         this.backgrounds = this.physics.add.group({ allowGravity: false, immovable: true });
         this.backgrounds.add(this.foreground);
         this.backgrounds.add(this.middleground);
         this.backgrounds.add(this.background);
-
+        this.backgrounds.depth = 1;
 
 
         //spawn in player
         this.player = new Player(this, 200, 442, 'spaceship');
+
         //initialize controls
         keyA = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A);
         keyD = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
@@ -88,7 +95,7 @@ class PlayingScene extends Phaser.Scene {
         this.gerald = new Gerald(this, 0, 0, 'gerald', 0).setOrigin(.8, 0).setPushable(false).setScale(1, 5);
         //ends game if hits gerald
         this.physics.add.overlap(this.player, this.gerald, function () {
-            isGameOver = true;
+            //isGameOver = true;
         });
         this.gerald.depth = 3;
 
@@ -108,9 +115,9 @@ class PlayingScene extends Phaser.Scene {
 
     update(time, delta) {
 
-        if(this.player.isidle == true){
-            this.player.anims.play('idle', true);
-        }
+        // if(this.player.isidle == true){
+        //     this.player.anims.play('idle', true);
+        // }
 
         //If Middleground goes off screen loop back
         this.foreground.body.velocity.x = pspeed/2;
