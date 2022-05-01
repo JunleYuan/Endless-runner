@@ -12,8 +12,10 @@ class Trap extends Phaser.Physics.Arcade.Sprite {
         this.body.allowGravity = false;
 
         this.die = false;
+        this.coll = player;
+        this.curScene = scene;
 
-        scene.physics.add.overlap(player, this, null, this.dealTrapDamage);
+        scene.physics.add.overlap(player, this, null, this.dealTrapDamage(this));
             
     }
 
@@ -29,11 +31,20 @@ class Trap extends Phaser.Physics.Arcade.Sprite {
 
     }
     
-    dealTrapDamage(){
-        if(!playerGotHit){
-            hit_count+= 1;
-            console.log('hit count = ' + hit_count)
-            playerGotHit = true;
+    dealTrapDamage(obj){
+        return function() {
+            if(!playerGotHit){
+                hit_count+= 1;
+                console.log('hit count = ' + hit_count)
+                playerGotHit = true;
+                obj.coll.body.velocity.x = -300;
+                obj.coll.body.velocity.y = -50;
+                obj.curScene.time.delayedCall(500, () => {
+                    playerGotHit = false;
+
+                }, null, this);
+                obj.destroy();
+            }
         }
     }
 }
