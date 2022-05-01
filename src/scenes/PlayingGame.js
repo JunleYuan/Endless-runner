@@ -80,7 +80,7 @@ class PlayingScene extends Phaser.Scene {
 
 
         //spawn in player
-        this.player = new Player(this, 200, 442, 'platformer_atlas','Idle01');
+        this.player = new Player(this, 300, 442, 'platformer_atlas','Idle01');
 
         //initialize controls
         keyA = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A);
@@ -95,7 +95,7 @@ class PlayingScene extends Phaser.Scene {
         this.gerald = new Gerald(this, 0, 0, 'gerald', 0).setOrigin(.8, 0).setPushable(false).setScale(1, 5);
         //ends game if hits gerald
         this.physics.add.overlap(this.player, this.gerald, function () {
-            //isGameOver = true;
+            isGameOver = true;
         });
         this.gerald.depth = 3;
 
