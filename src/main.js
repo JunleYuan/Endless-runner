@@ -31,6 +31,9 @@ let keyJump, keySlide, keyA, keyD,keyF;
 //test key for path
 let spawn;
 
+//Height of which gerrard will spawn
+let ht1,ht2,ht3;
+
 //number of hits
 let hit_count = 0;
 
