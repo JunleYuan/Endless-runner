@@ -5,10 +5,12 @@ class PlayingScene extends Phaser.Scene {
 
     preload() {
         this.load.atlas('platformer_atlas', '/assets/idle.png', '/assets/idle_atlas.json');
+        this.load.atlas('Gerrard_atlas', '/assets/Gerrad.png', '/assets/Gerrad.json');
 
         this.load.image('playerfigure', './assets/PlayerRunner.png');
         this.load.image('platform', './assets/PLAT.png');
         this.load.image('Wall', './assets/Wall.png');
+        this.load.image('NSWall', './assets/VWall.png');
         this.load.image('Spikes', './assets/Spike.png');
         this.load.image('Toast', './assets/toast.png');
 
@@ -60,6 +62,19 @@ class PlayingScene extends Phaser.Scene {
             repeat: -1
         });
 
+
+        this.anims.create({ 
+            key: 'GerrardMovement', 
+            frames: this.anims.generateFrameNames('Gerrard_atlas', {      
+                prefix: 'Gerrard--',
+                start: 1,
+                end: 9,
+                suffix: '',
+                zeroPad: 1
+            }), 
+            frameRate: 10,
+            repeat: -1 
+        });
         
 
 
@@ -81,6 +96,8 @@ class PlayingScene extends Phaser.Scene {
 
         //spawn in player
         this.player = new Player(this, 300, 442, 'platformer_atlas','Idle01');
+
+        this.add.sprite(300, 200).play('GerrardMovement');
 
         //initialize controls
         keyA = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A);
@@ -109,7 +126,7 @@ class PlayingScene extends Phaser.Scene {
         this.speeed();
 
         //spawn starting platform
-        this.obs5();
+        this.obs8();
 
     }//end of create
 
@@ -168,6 +185,14 @@ class PlayingScene extends Phaser.Scene {
                 case 5:
                     this.obs6();
                     console.log("t");
+                    break;
+                case 6:
+                    this.obs7();
+                    console.log("6");
+                    break;
+                case 7:
+                    this.obs8();
+                    console.log("7");
             }
         }
 
@@ -334,6 +359,46 @@ class PlayingScene extends Phaser.Scene {
         this.makeSmolG(0.001,[game.config.width*2, game.config.height*2, 700, 300, 350, 500, 0, 300 ]);
         this.physics.add.collider(this.player, this.group);
     }
-    
+    obs7(){
+        this.group = this.physics.add.group({ allowGravity: false, immovable: true });
+        this.mainpath = new Walla(this, game.config.width, 300,platsizeX*3,platsizeY, 'platform', false).setOrigin(0, 0);
+
+        this.pathEasy = new Walla(this, 800 + game.config.width, 150,platsizeX*7.75,platsizeY, 'platform', false).setOrigin(0, 0);
+        this.pathHard1 = new Walla(this, 700 + game.config.width, 500,platsizeX*1.5,platsizeY, 'platform', false).setOrigin(0, 0);
+        this.pathHard2 = new Walla(this, 1200 + game.config.width, 500,platsizeX*1.5,platsizeY, 'platform', false).setOrigin(0, 0);
+        this.pathHard3 = new Walla(this, 1700 + game.config.width, 500,platsizeX*1.5,platsizeY, 'platform', false).setOrigin(0, 0);
+        this.pathHard4 = new Walla(this, 2100 + game.config.width, 350,platsizeX*1.5,platsizeY, 'platform', false).setOrigin(0, 0);
+        this.FinalPath = new Walla(this, 2500 + game.config.width, 500,platsizeX*3,platsizeY, 'platform', true).setOrigin(0, 0);
+
+        this.group.add(this.pathEasy);
+        this.group.add(this.pathHard1);
+        this.group.add(this.pathHard2);
+        this.group.add(this.pathHard3);
+        this.group.add(this.pathHard4);
+        this.group.add(this.mainpath);
+        this.group.add(this.FinalPath);
+        this.group.runChildUpdate = true;
+
+        this.physics.add.collider(this.player, this.group);
+    }
+    obs8(){
+        this.group = this.physics.add.group({ allowGravity: false, immovable: true });
+        this.Vwall = new Wall(this, 510 + game.config.width, 320, 'NSWall', false).setOrigin(0, 0);
+        this.wall1 = new Walla(this, 142 + game.config.width, 500,platsizeX*2.01,platsizeY, 'platform', false).setOrigin(0, 0);
+        this.wall2 = new Walla(this, 512 + game.config.width, 320,platsizeX*1.5,platsizeY, 'platform', true).setOrigin(0, 0);
+
+        this.spike1 = new Trap(this, 732 + game.config.width, this.wall2.y - 15, 'Spikes', this.player).setOrigin(0.5, 0.5).setPushable(false).setScale(2, 2);
+        this.spike2 = new Trap(this, 762 + game.config.width, this.wall2.y - 15, 'Spikes', this.player).setOrigin(0.5, 0.5).setPushable(false).setScale(2, 2);
+
+        this.group.add(this.wall1);
+        this.group.add(this.wall2);
+        this.group.add(this.Vwall);
+        this.group.add(this.spike1);
+        this.group.add(this.spike2);
+
+        this.group.runChildUpdate = true;
+
+        this.physics.add.collider(this.player, this.group);
+    }
 
 }
