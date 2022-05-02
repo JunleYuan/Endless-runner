@@ -7,6 +7,8 @@ class PlayingScene extends Phaser.Scene {
         this.load.atlas('platformer_atlas', '/assets/idle.png', '/assets/idle_atlas.json');
         this.load.atlas('Gerrard_atlas', '/assets/Gerrad.png', '/assets/Gerrad.json');
 
+        this.load.atlas('gerald_atlas', '/assets/gerald.png', '/assets/gerald.json');
+
         this.load.image('playerfigure', './assets/PlayerRunner.png');
         this.load.image('platform', './assets/PLAT.png');
         this.load.image('Wall', './assets/Wall.png');
@@ -17,7 +19,7 @@ class PlayingScene extends Phaser.Scene {
         this.load.image('spaceship', './assets/CoreFighter2.png');
         this.load.image('CoreFighter', './assets/CoreFighter.png');
         this.load.image('ground', './assets/ground.png');
-        this.load.image('gerald', './assets/gerald temp.png');
+        //this.load.image('gerald', './assets/gerald temp.png');
     
         this.load.image('middleground', './assets/MiddleGround.png');
         this.load.image('foreground', './assets/ForeGround.png');
@@ -41,6 +43,19 @@ class PlayingScene extends Phaser.Scene {
         bkMusic.play();
 
         this.anims.create({ 
+            key: 'geraldMovement', 
+            frames: this.anims.generateFrameNames('gerald_atlas', {      
+                prefix: 'gerald',
+                start: 1,
+                end: 4,
+                suffix: '',
+                zeroPad: 2
+            }), 
+            frameRate: 5,
+            repeat: -1 
+        });
+
+        this.anims.create({ 
             key: 'walk', 
             frames: this.anims.generateFrameNames('platformer_atlas', {      
                 prefix: 'Idle',
@@ -49,7 +64,7 @@ class PlayingScene extends Phaser.Scene {
                 suffix: '',
                 zeroPad: 2
             }), 
-            frameRate: 10,
+            frameRate: 5,
             repeat: -1 
         });
 
@@ -97,7 +112,7 @@ class PlayingScene extends Phaser.Scene {
         //spawn in player
         this.player = new Player(this, 300, 442, 'platformer_atlas','Idle01');
 
-        this.add.sprite(300, 200).play('GerrardMovement');
+        //this.add.sprite(300, 200).play('GerrardMovement');
 
         //initialize controls
         keyA = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A);
@@ -109,7 +124,7 @@ class PlayingScene extends Phaser.Scene {
         spawn = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.E);
 
         //spawn gerald
-        this.gerald = new Gerald(this, 0, 0, 'gerald', 0).setOrigin(.8, 0).setPushable(false).setScale(1, 5);
+        this.gerald = new Gerald(this, -100, 100, 'gerald_atlas', 0).setOrigin(0, 0).setPushable(false).setScale(.2, .2);
         //ends game if hits gerald
         this.physics.add.overlap(this.player, this.gerald, function () {
             isGameOver = true;
@@ -127,14 +142,17 @@ class PlayingScene extends Phaser.Scene {
 
         //spawn starting platform
         this.obs8();
+        
 
     }//end of create
 
     update(time, delta) {
+        this.gerald.anims.play('geraldMovement', true);
         //console.log(this.player.isIdle);
         if(this.player.state == 0){
             //console.log(this.player.isIdle);
             this.player.anims.play('walk', true);
+            
         }
 
         //If Middleground goes off screen loop back
