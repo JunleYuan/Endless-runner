@@ -18,8 +18,6 @@ class PlayingScene extends Phaser.Scene {
         this.load.image('Spikes', './assets/Spike.png');
         this.load.image('Toast', './assets/toast.png');
 
-        this.load.image('spaceship', './assets/CoreFighter2.png');
-        this.load.image('CoreFighter', './assets/CoreFighter.png');
         this.load.image('ground', './assets/ground.png');
         //this.load.image('gerald', './assets/gerald temp.png');
     
@@ -201,7 +199,8 @@ class PlayingScene extends Phaser.Scene {
                 this.player.anims.play('mainRunMovement', true);
                 
                 this.player.body.setSize(500, 1000);
-                this.player.body.setOffset(700, 200);
+                this.player.body.setOffset(700, 120);
+                
                 break;
 
         }
