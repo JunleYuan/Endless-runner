@@ -33,7 +33,7 @@ class Player extends Phaser.GameObjects.Sprite {
 
     update(time, delta) {
         if(playerGotHit){
-            console.log("player hit");
+            
             this.state = 1;
         }
         //movement controls
@@ -71,21 +71,21 @@ class Player extends Phaser.GameObjects.Sprite {
             if(!this.isJumping && !this.isAirborne){
                 this.jump();   
                 this.curScene.sound.play('GroundJump');
-                console.log("Single Jump from Ground");
-                console.log("Jump Count" + this.jumpCount);
+                //console.log("Single Jump from Ground");
+                //console.log("Jump Count" + this.jumpCount);
             }
             else if(this.isJumping && this.jumpCount < 2){
                 this.jump();   
                 this.curScene.sound.play('FlutterJump');
-                console.log("Double Jump after Jump in air");
-                console.log("Jump Count" + this.jumpCount);
+                //console.log("Double Jump after Jump in air");
+                //console.log("Jump Count" + this.jumpCount);
             }
             else if(this.isAirborne && !this.isJumping && this.jumpCount == 0){
                 this.jump();
                 this.curScene.sound.play('FlutterJump');
                 this.jumpCount++;
-                console.log("Falling From Platform Double Jump");
-                console.log("Jump Count" + this.jumpCount);
+                //console.log("Falling From Platform Double Jump");
+                //console.log("Jump Count" + this.jumpCount);
             }
             
         }
@@ -110,15 +110,15 @@ class Player extends Phaser.GameObjects.Sprite {
         
         }
 
-        //if the player has been hit, make the player invulnerable for 1 second
-        if(playerGotHit && !this.isInvulnerable){
-            this.isInvulnerable = true;
-            console.log('Player should be invulnerable');
-            this.curScene.time.delayedCall(1000, () => {
-                playerGotHit = false;
-                this.isInvulnerable = false;
-            }, null, this);
-        }
+        // //if the player has been hit, make the player invulnerable for 1 second
+        // if(playerGotHit && !this.isInvulnerable){
+        //     this.isInvulnerable = true;
+        //     console.log('Player should be invulnerable');
+        //     this.curScene.time.delayedCall(1000, () => {
+        //         playerGotHit = false;
+        //         this.isInvulnerable = false;
+        //     }, null, this);
+        // }
     }
 
     //player actions
