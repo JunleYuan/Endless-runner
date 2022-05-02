@@ -69,6 +69,18 @@ class PlayingScene extends Phaser.Scene {
                 suffix: '',
                 zeroPad: 1
             }), 
+            frameRate: 5,
+            repeat: 0 
+        });
+        this.anims.create({ 
+            key: 'mainRunMovement2', 
+            frames: this.anims.generateFrameNames('main_atlas', {      
+                prefix: 'Run-',
+                start: 1,
+                end: 3,
+                suffix: '',
+                zeroPad: 1
+            }), 
             frameRate: 15,
             repeat: 0 
         });
@@ -182,6 +194,11 @@ class PlayingScene extends Phaser.Scene {
                 this.player.body.setSize(500, 1000);
                 this.player.body.setOffset(700, 120);
                 
+                break;
+            case 3:
+                this.player.anims.play('mainRunMovement2', true);
+                this.player.body.setSize(500, 1000);
+                this.player.body.setOffset(700, 120);
                 break;
 
         }

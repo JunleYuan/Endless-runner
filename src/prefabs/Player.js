@@ -44,15 +44,15 @@ class Player extends Phaser.GameObjects.Sprite {
         if (keyA.isDown && !this.canD && !playerGotHit){
             //move left
             this.moveLeft();
-            this.state = 2;
+            this.state = 0;
 
         }else if(keyD.isDown && !this.canD && !playerGotHit){
             //move right
             this.moveRight();
-            this.state = 2;
+            this.state = 3;
         }else if(!playerGotHit){
             //not moving
-            this.state = 0;
+            this.state = 2;
         }        
         //check if the player is touching the ground
         if(this.body.touching.down){
