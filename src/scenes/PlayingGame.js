@@ -31,6 +31,7 @@ class PlayingScene extends Phaser.Scene {
 
     create() {
 
+        mnMusic.stop();
         bkMusic = this.sound.add('BackgroundMusic',{volume: 0.3});
         bkMusic.loop = true; // Sets Loop
         bkMusic.play();
