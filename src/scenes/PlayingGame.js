@@ -120,7 +120,6 @@ class PlayingScene extends Phaser.Scene {
 
         //spawn in player
         this.player = new Player(this, 300, 442, 'main_atlas','Idle-1');
-
         //this.add.sprite(300, 200).play('GerrardMovement');
 
         //initialize controls
