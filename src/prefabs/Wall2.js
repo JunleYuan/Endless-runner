@@ -7,7 +7,9 @@ class Walla extends Phaser.GameObjects.TileSprite {
         scene.physics.add.existing(this);   //give object physics
         
         this.setPosition(x, y);
+        this.body.setImmovable(false);
         this.body.allowGravity = false;
+        
 
         this.isLast = isLast;   //is this last from a set of platforms
         this.notDone = true;

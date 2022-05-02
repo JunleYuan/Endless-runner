@@ -4,20 +4,15 @@ class PlayingScene extends Phaser.Scene {
     }
 
     preload() {
-        this.load.atlas('platformer_atlas', '/assets/idle.png', '/assets/idle_atlas.json');
-        this.load.atlas('Gerrard_atlas', '/assets/Gerrad.png', '/assets/Gerrad.json');
+        this.load.atlas('Gerrard_atlas', './assets/Gerrad.png', './assets/Gerrad.json');
+        this.load.atlas('gerald_atlas', './assets/gerald.png', './assets/gerald.json');
+        this.load.atlas('main_atlas', './assets/main.png', './assets/main.json');
 
-        this.load.image('playerfigure', './assets/PlayerRunner.png');
         this.load.image('platform', './assets/PLAT.png');
         this.load.image('Wall', './assets/Wall.png');
         this.load.image('NSWall', './assets/VWall.png');
         this.load.image('Spikes', './assets/Spike.png');
         this.load.image('Toast', './assets/toast.png');
-
-        this.load.image('spaceship', './assets/CoreFighter2.png');
-        this.load.image('CoreFighter', './assets/CoreFighter.png');
-        this.load.image('ground', './assets/ground.png');
-        this.load.image('gerald', './assets/gerald temp.png');
     
         this.load.image('middleground', './assets/MiddleGround.png');
         this.load.image('foreground', './assets/ForeGround.png');
@@ -41,26 +36,55 @@ class PlayingScene extends Phaser.Scene {
         bkMusic.play();
 
         this.anims.create({ 
-            key: 'walk', 
-            frames: this.anims.generateFrameNames('platformer_atlas', {      
-                prefix: 'Idle',
+            key: 'mainIdleMovement', 
+            frames: this.anims.generateFrameNames('main_atlas', {      
+                prefix: 'Idle-',
                 start: 1,
                 end: 3,
                 suffix: '',
+                zeroPad: 1
+            }), 
+            frameRate: 5,
+            repeat: -1 
+        });
+        this.anims.create({ 
+            key: 'mainHitMovement', 
+            frames: this.anims.generateFrameNames('main_atlas', {      
+                prefix: 'Ouch-',
+                start: 1,
+                end: 8,
+                suffix: '',
+                zeroPad: 1
+            }), 
+            frameRate: 15,
+            repeat: 0 
+        });
+        this.anims.create({ 
+            key: 'mainRunMovement', 
+            frames: this.anims.generateFrameNames('main_atlas', {      
+                prefix: 'Run-',
+                start: 1,
+                end: 3,
+                suffix: '',
+                zeroPad: 1
+            }), 
+            frameRate: 15,
+            repeat: 0 
+        });
+
+        this.anims.create({ 
+            key: 'geraldMovement', 
+            frames: this.anims.generateFrameNames('gerald_atlas', {      
+                prefix: 'gerald',
+                start: 1,
+                end: 4,
+                suffix: '',
                 zeroPad: 2
             }), 
-            frameRate: 10,
+            frameRate: 5,
             repeat: -1 
         });
 
-        this.anims.create({
-            key: 'idle',
-            defaultTextureKey: 'platformer_atlas',
-            frames: [
-                { frame: 'Idle01' }
-            ],
-            repeat: -1
-        });
 
 
         this.anims.create({ 
@@ -95,9 +119,8 @@ class PlayingScene extends Phaser.Scene {
 
 
         //spawn in player
-        this.player = new Player(this, 300, 442, 'platformer_atlas','Idle01');
-
-        this.add.sprite(300, 200).play('GerrardMovement');
+        this.player = new Player(this, 300, 442, 'main_atlas','Idle-1');
+        //this.add.sprite(300, 200).play('GerrardMovement');
 
         //initialize controls
         keyA = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A);
@@ -109,7 +132,8 @@ class PlayingScene extends Phaser.Scene {
         spawn = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.E);
 
         //spawn gerald
-        this.gerald = new Gerald(this, 0, 0, 'gerald', 0).setOrigin(.8, 0).setPushable(false).setScale(1, 5);
+        this.gerald = new Gerald(this, -100, 100, 'gerald_atlas', 0).setOrigin(0, 0).setPushable(false).setScale(.2, .2);
+        this.gerald.body.setOffset(-300,0);
         //ends game if hits gerald
         this.physics.add.overlap(this.player, this.gerald, function () {
             isGameOver = true;
@@ -126,16 +150,41 @@ class PlayingScene extends Phaser.Scene {
         this.speeed();
 
         //spawn starting platform
-        this.obs8();
+        this.obs6();
+        
 
     }//end of create
 
     update(time, delta) {
+        this.gerald.anims.play('geraldMovement', true);
         //console.log(this.player.isIdle);
-        if(this.player.state == 0){
-            //console.log(this.player.isIdle);
-            this.player.anims.play('walk', true);
+
+
+        //switch case for animation
+        switch(this.player.state){
+            case 0:
+                //idle
+                this.player.anims.play('mainIdleMovement', true);
+                this.player.body.setSize(500, 1000);
+                
+                    break;
+            case 1:
+                
+                //got hit
+                this.player.anims.play('mainHitMovement', true);
+                
+                this.player.body.setOffset(700, 200);
+                break;
+            case 2:
+                this.player.anims.play('mainRunMovement', true);
+                
+                this.player.body.setSize(500, 1000);
+                this.player.body.setOffset(700, 120);
+                
+                break;
+
         }
+        
 
         //If Middleground goes off screen loop back
         this.foreground.body.velocity.x = pspeed/2;
@@ -230,7 +279,9 @@ class PlayingScene extends Phaser.Scene {
     makeSmolG(speed,points){
 
         this.smallG = this.physics.add.group({ allowGravity: false, immovable: true });
-        this.path = new Path(this, 1000, 300, 'spaceship', speed, points,this.player);
+        this.path = new Path(this, 1000, 300, 'Gerrard_atlas','Gerrard--1', speed, points,this.player).setScale(.05);
+        this.path.anims.play('GerrardMovement', true);
+        
         this.smallG.add(this.path, true);
 
         this.smallG.runChildUpdate = true;
@@ -357,6 +408,7 @@ class PlayingScene extends Phaser.Scene {
 
         this.makeSmolG(0.001,[game.config.width*2, game.config.height*2, 700, 500, 350, 300, 0, 500 ]);
         this.makeSmolG(0.001,[game.config.width*2, game.config.height*2, 700, 300, 350, 500, 0, 300 ]);
+
         this.physics.add.collider(this.player, this.group);
     }
     obs7(){

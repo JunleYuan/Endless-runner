@@ -1,12 +1,17 @@
 // Path prefab
 class Path extends Phaser.Physics.Arcade.Sprite {
-    constructor(scene, x, y, sprite, speed,points,player) {
-        console.log(sprite);
-  
-        super(scene, x, y,sprite);
+    constructor(scene, x, y, sprite,frame, speed,points,player) {
+        super(scene, x, y,sprite,frame);
+        
+        
 
-        Phaser.Physics.Arcade.Sprite.call(this, scene, x, y, sprite);
-  
+        //Phaser.Physics.Arcade.Sprite.call(this, scene, x, y, sprite);
+
+        scene.add.existing(this);
+        scene.physics.add.existing(this);
+
+        this.body.setSize(500, 500);
+
         this.path = new Phaser.Curves.Spline(points);
         this.pathIndex = 0; //which x and y it's going
         this.pathSpeed = speed; //speed of the path
@@ -14,7 +19,9 @@ class Path extends Phaser.Physics.Arcade.Sprite {
         this.path.getPoint(0, this.pathVector);
         this.setPosition(this.pathVector.x, this.pathVector.y);
 
-        this.coll = player; //save player as var use for hitG
+            
+
+        this.colle = player; //save player as var use for hitG
         this.curScene = scene;  //save scene as var use for hitG
 
         scene.physics.add.overlap(player, this, null, this.hitG(this));
@@ -32,7 +39,7 @@ class Path extends Phaser.Physics.Arcade.Sprite {
         this.pathIndex = Phaser.Math.Wrap(this.pathIndex + this.pathSpeed, 0, 1);
 
         if(this.pathIndex >.99){
-           
+            
             this.destroy();
 
         }
@@ -47,12 +54,16 @@ class Path extends Phaser.Physics.Arcade.Sprite {
             console.log("hit");
             obj.curScene.sound.play('HurtVoice');
             playerGotHit = true;
-            obj.coll.body.velocity.x = -300;
-            obj.coll.body.velocity.y = -50;
+            obj.colle.body.velocity.y = -500;
+            obj.colle.body.velocity.x = -300;
+
+            console.log("called");
+
             obj.curScene.time.delayedCall(500, () => {
                 playerGotHit = false;
 
             }, null, this);
+            
             obj.destroy();
         }
 
