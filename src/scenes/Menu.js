@@ -4,7 +4,7 @@ class Menu extends Phaser.Scene {
   }
 
   preload() {
-    this.load.atlas('open_atlas', './assets/open.png', './assets/open.json');
+    this.load.atlas('open_atlas', 'assets/open.png', 'assets/open.json');
     
 
   }
