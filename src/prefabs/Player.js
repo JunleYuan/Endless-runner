@@ -6,13 +6,13 @@ class Player extends Phaser.GameObjects.Sprite {
         scene.add.existing(this);   // add to existing, displayList, updateList
         scene.physics.add.existing(this);   //give object physics
 
-        this.displayWidth = 200;
-        this.displayHeight = 200;
+        this.displayWidth = 60;
+        this.displayHeight = 90;
         
         this.body.collideWorldBounds = true;    //so it don't go out of canvas
         //this.setSize(300, 260, true);         //give hitbox
-        this.body.setSize(700, 1000);
-        this.body.setOffset(600,900);
+        this.body.setSize(500, 1000);
+        //this.body.setOffset(600,900);
         this.setOrigin(1,1); //set box origin to center of bottom edge
         this.canD = false;          //detect slide and use for returning original hitbox
         this.moveSpeed = 150; //player movement speed
@@ -32,7 +32,10 @@ class Player extends Phaser.GameObjects.Sprite {
     }
 
     update(time, delta) {
-        
+        if(playerGotHit){
+            console.log("player hit");
+            this.state = 1;
+        }
         //movement controls
         if(!keyA.isDown && !keyD.isDown && !this.canD && !playerGotHit)
         this.body.velocity.x = 0;
@@ -46,8 +49,8 @@ class Player extends Phaser.GameObjects.Sprite {
         }else if(keyD.isDown && !this.canD && !playerGotHit){
             //move right
             this.moveRight();
-            this.state = 1;
-        }else{
+            this.state = 2;
+        }else if(!playerGotHit){
             //not moving
             this.state = 0;
         }        
@@ -135,15 +138,15 @@ class Player extends Phaser.GameObjects.Sprite {
 
     slide(){
         this.setPosition(this.x, this.y+500 ); //move bounding box down
-        this.body.setSize(1500, 1000/2); //resize bounding box
+        this.body.setSize(500, 500/2); //resize bounding box
         this.body.velocity.x = 500;
         this.canD = true;
     }
 
     standUp(){
         this.setPosition(this.x, this.y - this.displayHeight/2); //move bounding box up
-        this.body.setSize(1000, 1000); //resize bounding box to original size
-        this.body.setOffset(500,1000);
+        this.body.setSize(500, 1000); //resize bounding box to original size
+        //this.body.setOffset(500,1000);
         this.body.velocity.x = 0;
         this.canD = false;
     }

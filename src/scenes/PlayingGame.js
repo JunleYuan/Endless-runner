@@ -9,6 +9,8 @@ class PlayingScene extends Phaser.Scene {
 
         this.load.atlas('gerald_atlas', '/assets/gerald.png', '/assets/gerald.json');
 
+        this.load.atlas('main_atlas', '/assets/main.png', '/assets/main.json');
+
         this.load.image('playerfigure', './assets/PlayerRunner.png');
         this.load.image('platform', './assets/PLAT.png');
         this.load.image('Wall', './assets/Wall.png');
@@ -43,6 +45,43 @@ class PlayingScene extends Phaser.Scene {
         bkMusic.play();
 
         this.anims.create({ 
+            key: 'mainIdleMovement', 
+            frames: this.anims.generateFrameNames('main_atlas', {      
+                prefix: 'Idle-',
+                start: 1,
+                end: 3,
+                suffix: '',
+                zeroPad: 1
+            }), 
+            frameRate: 5,
+            repeat: -1 
+        });
+        this.anims.create({ 
+            key: 'mainHitMovement', 
+            frames: this.anims.generateFrameNames('main_atlas', {      
+                prefix: 'Ouch-',
+                start: 1,
+                end: 8,
+                suffix: '',
+                zeroPad: 1
+            }), 
+            frameRate: 15,
+            repeat: 0 
+        });
+        this.anims.create({ 
+            key: 'mainRunMovement', 
+            frames: this.anims.generateFrameNames('main_atlas', {      
+                prefix: 'Run-',
+                start: 1,
+                end: 3,
+                suffix: '',
+                zeroPad: 1
+            }), 
+            frameRate: 15,
+            repeat: 0 
+        });
+
+        this.anims.create({ 
             key: 'geraldMovement', 
             frames: this.anims.generateFrameNames('gerald_atlas', {      
                 prefix: 'gerald',
@@ -66,15 +105,6 @@ class PlayingScene extends Phaser.Scene {
             }), 
             frameRate: 5,
             repeat: -1 
-        });
-
-        this.anims.create({
-            key: 'idle',
-            defaultTextureKey: 'platformer_atlas',
-            frames: [
-                { frame: 'Idle01' }
-            ],
-            repeat: -1
         });
 
 
@@ -110,7 +140,7 @@ class PlayingScene extends Phaser.Scene {
 
 
         //spawn in player
-        this.player = new Player(this, 300, 442, 'platformer_atlas','Idle01');
+        this.player = new Player(this, 300, 442, 'main_atlas','Idle-1');
 
         //this.add.sprite(300, 200).play('GerrardMovement');
 
@@ -150,11 +180,32 @@ class PlayingScene extends Phaser.Scene {
     update(time, delta) {
         this.gerald.anims.play('geraldMovement', true);
         //console.log(this.player.isIdle);
-        if(this.player.state == 0){
-            //console.log(this.player.isIdle);
-            this.player.anims.play('walk', true);
-            
+
+
+        //switch case for animation
+        switch(this.player.state){
+            case 0:
+                //idle
+                this.player.anims.play('mainIdleMovement', true);
+                this.player.body.setSize(500, 1000);
+                
+                    break;
+            case 1:
+                
+                //got hit
+                this.player.anims.play('mainHitMovement', true);
+                
+                this.player.body.setOffset(700, 200);
+                break;
+            case 2:
+                this.player.anims.play('mainRunMovement', true);
+                
+                this.player.body.setSize(500, 1000);
+                this.player.body.setOffset(700, 200);
+                break;
+
         }
+        
 
         //If Middleground goes off screen loop back
         this.foreground.body.velocity.x = pspeed/2;
