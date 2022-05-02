@@ -5,20 +5,14 @@ class PlayingScene extends Phaser.Scene {
 
     preload() {
         this.load.atlas('Gerrard_atlas', './assets/Gerrad.png', './assets/Gerrad.json');
-
         this.load.atlas('gerald_atlas', './assets/gerald.png', './assets/gerald.json');
-
         this.load.atlas('main_atlas', './assets/main.png', './assets/main.json');
 
-        this.load.image('playerfigure', './assets/PlayerRunner.png');
         this.load.image('platform', './assets/PLAT.png');
         this.load.image('Wall', './assets/Wall.png');
         this.load.image('NSWall', './assets/VWall.png');
         this.load.image('Spikes', './assets/Spike.png');
         this.load.image('Toast', './assets/toast.png');
-
-        this.load.image('ground', './assets/ground.png');
-        //this.load.image('gerald', './assets/gerald temp.png');
     
         this.load.image('middleground', './assets/MiddleGround.png');
         this.load.image('foreground', './assets/ForeGround.png');
@@ -91,18 +85,6 @@ class PlayingScene extends Phaser.Scene {
             repeat: -1 
         });
 
-        this.anims.create({ 
-            key: 'walk', 
-            frames: this.anims.generateFrameNames('platformer_atlas', {      
-                prefix: 'Idle',
-                start: 1,
-                end: 3,
-                suffix: '',
-                zeroPad: 2
-            }), 
-            frameRate: 5,
-            repeat: -1 
-        });
 
 
         this.anims.create({ 
@@ -300,6 +282,7 @@ class PlayingScene extends Phaser.Scene {
         this.smallG = this.physics.add.group({ allowGravity: false, immovable: true });
         this.path = new Path(this, 1000, 300, 'Gerrard_atlas','Gerrard--1', speed, points,this.player).setScale(.05);
         this.path.anims.play('GerrardMovement', true);
+        
         this.smallG.add(this.path, true);
 
         this.smallG.runChildUpdate = true;
