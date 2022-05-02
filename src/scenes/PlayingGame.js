@@ -125,6 +125,7 @@ class PlayingScene extends Phaser.Scene {
 
         //spawn gerald
         this.gerald = new Gerald(this, -100, 100, 'gerald_atlas', 0).setOrigin(0, 0).setPushable(false).setScale(.2, .2);
+        this.gerald.body.setOffset(-300,0);
         //ends game if hits gerald
         this.physics.add.overlap(this.player, this.gerald, function () {
             isGameOver = true;
