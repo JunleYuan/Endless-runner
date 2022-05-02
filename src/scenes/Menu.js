@@ -5,7 +5,7 @@ class Menu extends Phaser.Scene {
 
   preload() {
     this.load.atlas('open_atlas', 'assets/open.png', 'assets/open.json');
-    
+    this.load.audio('MenuMusic', './assets/MenuTheme.wav');
 
   }
   
@@ -22,7 +22,9 @@ class Menu extends Phaser.Scene {
 
     // }
 
-    
+    mnMusic = this.sound.add('MenuMusic',{volume: 0.3});
+    mnMusic.loop = true; // Sets Loop
+    mnMusic.play();
 
     this.anims.create({ 
       key: 'open', 

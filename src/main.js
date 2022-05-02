@@ -58,5 +58,5 @@ let MaxToast = 5;
 let shouldSpawnP = false;
 
 // Music variable
-let bkMusic;
+let bkMusic,  mnMusic;
 
