@@ -142,7 +142,7 @@ class PlayingScene extends Phaser.Scene {
         this.speeed();
 
         //spawn starting platform
-        this.obs8();
+        this.obs6();
         
 
     }//end of create
@@ -249,7 +249,8 @@ class PlayingScene extends Phaser.Scene {
     makeSmolG(speed,points){
 
         this.smallG = this.physics.add.group({ allowGravity: false, immovable: true });
-        this.path = new Path(this, 1000, 300, 'spaceship', speed, points,this.player);
+        this.path = new Path(this, 1000, 300, 'Gerrard_atlas','Gerrard--1', speed, points,this.player).setScale(.05);
+        this.path.anims.play('GerrardMovement', true);
         this.smallG.add(this.path, true);
 
         this.smallG.runChildUpdate = true;
