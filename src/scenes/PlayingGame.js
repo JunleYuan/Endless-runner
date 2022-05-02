@@ -408,6 +408,7 @@ class PlayingScene extends Phaser.Scene {
 
         this.makeSmolG(0.001,[game.config.width*2, game.config.height*2, 700, 500, 350, 300, 0, 500 ]);
         this.makeSmolG(0.001,[game.config.width*2, game.config.height*2, 700, 300, 350, 500, 0, 300 ]);
+
         this.physics.add.collider(this.player, this.group);
     }
     obs7(){
