@@ -29,7 +29,7 @@ class Menu extends Phaser.Scene {
       frames: this.anims.generateFrameNames('open_atlas', {      
           prefix: 'Untitled-Artwork-',
           start: 1,
-          end: 7,
+          end: 6,
           suffix: '',
           zeroPad: 1
       }), 

@@ -1,8 +1,6 @@
 // Path prefab
 class Path extends Phaser.Physics.Arcade.Sprite {
     constructor(scene, x, y, sprite,frame, speed,points,player) {
-        console.log(sprite);
-  
         super(scene, x, y,sprite,frame);
 
         Phaser.Physics.Arcade.Sprite.call(this, scene, x, y, sprite);
