@@ -4,7 +4,6 @@ class PlayingScene extends Phaser.Scene {
     }
 
     preload() {
-        this.load.atlas('platformer_atlas', './assets/idle.png', './assets/idle_atlas.json');
         this.load.atlas('Gerrard_atlas', './assets/Gerrad.png', './assets/Gerrad.json');
 
         this.load.atlas('gerald_atlas', './assets/gerald.png', './assets/gerald.json');
