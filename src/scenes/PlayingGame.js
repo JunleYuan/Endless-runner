@@ -6,13 +6,14 @@ class PlayingScene extends Phaser.Scene {
     preload() {
         this.load.atlas('Gerrard_atlas', './assets/Gerrad.png', './assets/Gerrad.json');
         this.load.atlas('gerald_atlas', './assets/gerald.png', './assets/gerald.json');
+        this.load.atlas('toast_atlas', './assets/Toast.png', './assets/Toast.json');
         this.load.atlas('main_atlas', './assets/main.png', './assets/main.json');
 
         this.load.image('platform', './assets/PLAT.png');
         this.load.image('Wall', './assets/Wall.png');
         this.load.image('NSWall', './assets/VWall.png');
         this.load.image('Spikes', './assets/Spike.png');
-        this.load.image('Toast', './assets/toast.png');
+        //this.load.image('Toast', './assets/toast.png');
     
         this.load.image('middleground', './assets/MiddleGround.png');
         this.load.image('foreground', './assets/ForeGround.png');
@@ -35,6 +36,19 @@ class PlayingScene extends Phaser.Scene {
         bkMusic = this.sound.add('BackgroundMusic',{volume: 0.3});
         bkMusic.loop = true; // Sets Loop
         bkMusic.play();
+
+        this.anims.create({ 
+            key: 'toast', 
+            frames: this.anims.generateFrameNames('main_atlas', {      
+                prefix: 'Toast-',
+                start: 1,
+                end: 3,
+                suffix: '',
+                zeroPad: 1
+            }), 
+            frameRate: 5,
+            repeat: -1 
+        });
 
         this.anims.create({ 
             key: 'mainIdleMovement', 
