@@ -11,7 +11,7 @@ class PlayingScene extends Phaser.Scene {
         this.load.atlas('gettoast_atlas', './assets/get.png', './assets/get.json');
 
         this.load.image('platform', './assets/PLAT.png');
-        this.load.image('Wall', './assets/Wall.png');
+        this.load.image('Wall', './assets/Vertical-Spike.png');
         this.load.image('NSWall', './assets/VWall.png');
         this.load.image('Spikes', './assets/Spike.png');
         //this.load.image('Toast', './assets/toast.png');
@@ -191,7 +191,8 @@ class PlayingScene extends Phaser.Scene {
         this.speeed();
 
         //spawn starting platform
-        this.obs5();
+        this.starting();
+        this.obs4();
         
 
     }//end of create
@@ -400,7 +401,7 @@ class PlayingScene extends Phaser.Scene {
         this.wall4 = new Walla(this, 700 + game.config.width, 400,platsizeX*.5,platsizeY, 'platform', false).setOrigin(0, 0);
         this.wall5 = new Walla(this, 900 + game.config.width, 400,platsizeX*.5,platsizeY, 'platform', true).setOrigin(0, 0);
 
-        this.toast1 = new Toast(this, 600 + game.config.width, 450, 'toast_atlas',this.player, false).setOrigin(0, 0).setPushable(false).setScale(.5, .5);
+        this.toast1 = new Toast(this, 600 + game.config.width, 450, 'toast_atlas',this.player, false).setOrigin(0, 0).setPushable(false).setScale(.1, .1);
 
         this.group.add(this.wall1);
         this.group.add(this.wall2);
@@ -423,11 +424,11 @@ class PlayingScene extends Phaser.Scene {
         this.group2 = this.physics.add.group({ allowGravity: false });
 
         this.wall1 = new Walla(this, 100 + game.config.width, 400,platsizeX*3,platsizeY, 'platform', false).setOrigin(0, 0);
-        this.wall2 = new Wall(this, 700 + game.config.width, 130, 'Wall', false).setOrigin(0, 0).setScale(2);
+        this.wall2 = new Wall(this, 700 + game.config.width, 150, 'Wall', false).setOrigin(.5, 0).setScale(.2);
         this.wall3 = new Walla(this, 1000 + game.config.width, 400,platsizeX*2,platsizeY, 'platform', true).setOrigin(0, 0);
 
 
-        this.toast1 = new Toast(this, 1000 + game.config.width, 250, 'toast_atlas', this.player, false).setOrigin(0, 0).setPushable(false).setScale(1, 1);
+        this.toast1 = new Toast(this, 1000 + game.config.width, 250, 'toast_atlas', this.player, false).setOrigin(0, 0).setPushable(false).setScale(.1, .1);
 
         this.group.add(this.wall1);
         this.group.add(this.wall2);
@@ -445,8 +446,8 @@ class PlayingScene extends Phaser.Scene {
         this.group = this.physics.add.group({ allowGravity: false, immovable: true });
         this.wall1 = new Walla(this, 100 + game.config.width, 500,platsizeX*5,platsizeY, 'platform', true).setOrigin(0, 0);
         this.toast1 = new Toast(this, 400 + game.config.width, 290, 'toast_atlas', this.player, false).setOrigin(0.5, 0.5).setPushable(false).setScale(.1, .1);
-        this.spike1 = new Trap(this, 400 + game.config.width, this.toast1.y + this.toast1.height, 'Spikes', this.player).setOrigin(0.5, 0.5).setPushable(false).setScale(2, 2);
-        this.spike2 = new Trap(this, 400 + game.config.width, this.toast1.y - this.toast1.height, 'Spikes', this.player).setOrigin(0.5, 0.5).setPushable(false).setScale(2, 2);
+        this.spike1 = new Trap(this, 400 + game.config.width, 500, 'Spikes', this.player).setOrigin(0.5, 1).setPushable(false).setScale(.1, .1);
+        this.spike2 = new Trap(this, 800 + game.config.width, 500, 'Spikes', this.player).setOrigin(0.5, 1).setPushable(false).setScale(.1, .1);
 
         this.group.add(this.wall1);
         this.group.add(this.toast1);

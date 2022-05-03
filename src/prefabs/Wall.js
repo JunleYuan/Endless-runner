@@ -9,6 +9,7 @@ class Wall extends Phaser.Physics.Arcade.Sprite {
         this.setPosition(x, y);
         this.setPushable(false);
         this.body.allowGravity = false;
+        this.body.setSize(200, 1000);
 
         this.isLast = isLast;   //is this last from a set of platforms
         this.notDone = true;
