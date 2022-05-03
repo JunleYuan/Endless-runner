@@ -11,6 +11,11 @@ class Toast extends Phaser.Physics.Arcade.Sprite {
         this.setPosition(x, y);
         this.body.allowGravity = false;
 
+        this.anims.play('Toast', true);
+
+        
+        this.body.setSize(400, 400);
+
         this.die = false;
 
         this.curScene = scene;
@@ -29,7 +34,12 @@ class Toast extends Phaser.Physics.Arcade.Sprite {
             this.destroy();
         }
         if(this.die){
-            this.destroy();
+
+            this.on('animationcomplete', function(){
+                this.destroy();
+            });
+
+            
         }
 
     }
@@ -42,6 +52,8 @@ class Toast extends Phaser.Physics.Arcade.Sprite {
             nubToast++;
             obj.die = true;
             console.log("diefun called, cur toast:"+ nubToast);
+            obj.body.enable = false;
+            obj.anims.play('getToast', true);
         };
 
     }

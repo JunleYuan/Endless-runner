@@ -1,6 +1,6 @@
 {
 	"frames": {
-		"Toast-Collected-1.png": {
+		"Toast-Collected-1": {
 			"frame": {
 				"x": 1,
 				"y": 1,
@@ -20,7 +20,7 @@
 				"h": 500
 			}
 		},
-		"Toast-Collected-2.png": {
+		"Toast-Collected-2": {
 			"frame": {
 				"x": 503,
 				"y": 1,
@@ -40,7 +40,7 @@
 				"h": 500
 			}
 		},
-		"Toast-Collected-3.png": {
+		"Toast-Collected-3": {
 			"frame": {
 				"x": 1,
 				"y": 503,
@@ -60,7 +60,7 @@
 				"h": 500
 			}
 		},
-		"Toast-Collected-4.png": {
+		"Toast-Collected-4": {
 			"frame": {
 				"x": 503,
 				"y": 503,
@@ -80,7 +80,7 @@
 				"h": 500
 			}
 		},
-		"Toast-Collected-5.png": {
+		"Toast-Collected-5": {
 			"frame": {
 				"x": 1005,
 				"y": 1,
@@ -100,7 +100,7 @@
 				"h": 500
 			}
 		},
-		"Toast-Collected-6.png": {
+		"Toast-Collected-6": {
 			"frame": {
 				"x": 1005,
 				"y": 503,
@@ -120,7 +120,7 @@
 				"h": 500
 			}
 		},
-		"Toast-Collected-7.png": {
+		"Toast-Collected-7": {
 			"frame": {
 				"x": 1,
 				"y": 1005,
@@ -144,7 +144,7 @@
 	"meta": {
 		"app": "http://www.codeandweb.com/texturepacker",
 		"version": "1.0",
-		"image": "spritesheet.png",
+		"image": "get.png",
 		"format": "RGBA8888",
 		"size": {
 			"w": 1506,
