@@ -223,11 +223,7 @@ class PlayingScene extends Phaser.Scene {
         //spawn starting platform
         //this.starting();
         this.starting();
-<<<<<<< HEAD
-        
-=======
         this.obs4();
->>>>>>> ceb89a601802f5b93343ec340972ffe54d98ad00
 
     }//end of create
 
@@ -235,44 +231,11 @@ class PlayingScene extends Phaser.Scene {
         this.gerald.anims.play('geraldMovement', true);
         //console.log(this.player.isIdle);
 
-<<<<<<< HEAD
-=======
         //update score
         this.player.score += delta/1000;
         this.scoreText.text = 'Score: ' + (this.player.score + nubToast*10).toFixed(0);
 
-        //switch case for animation
-        switch(this.player.state){
-            case 0:
-                //idle
-                this.player.anims.play('mainIdleMovement', true);
-                this.player.body.setSize(500, 1000);
-                
-                    break;
-            case 1:
-                
-                //got hit
-                this.player.anims.play('mainHitMovement', true);
-                
-                this.player.body.setOffset(600, 200);
-                break;
-            case 2:
-                this.player.anims.play('mainRunMovement', true);
-                
-                this.player.body.setSize(500, 1000);
-                this.player.body.setOffset(600, 120);
-                
-                break;
-            case 3:
-                this.player.anims.play('mainRunMovement2', true);
-                this.player.body.setSize(500, 1000);
-                this.player.body.setOffset(600, 120);
-                break;
-
-        }
-        
-
->>>>>>> ceb89a601802f5b93343ec340972ffe54d98ad00
+    
         //If Middleground goes off screen loop back
         this.foreground.body.velocity.x = pspeed/2;
         this.middleground.body.velocity.x = pspeed;

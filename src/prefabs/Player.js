@@ -21,14 +21,7 @@ class Player extends Phaser.GameObjects.Sprite {
         this.jumpCount = 0; //number of jumps taken since last touching the ground
         this.jumpTime = 0; //jump duration timer
         this.isInvulnerable = false;
-<<<<<<< HEAD
         this.isSlide = false;
-=======
-        this.state = 0; // 0 is not moving, 1 is moving right, 2 is moving left
-        this.score = 0; //player score
-
-        
->>>>>>> ceb89a601802f5b93343ec340972ffe54d98ad00
 
         this.curScene = scene;  //save the player scene into var use for later
 
@@ -132,43 +125,6 @@ class Player extends Phaser.GameObjects.Sprite {
         
         }
 
-        
-
-        //switch case for animation
-       
-        // if(this.state != this.preAnime){
-
-        //     switch(this.state){
-        //         case 0:
-        //             //idle
-        //             this.anims.play('mainIdleMovement', true);
-                    
-
-        //             break;
-        //         case 1:
-                    
-        //             //got hit
-        //             this.anims.play('mainHitMovement', true);
-                    
-                    
-        //             break;
-        //         case 2:
-        //             this.anims.play('mainRunMovement', true);
-                    
-        //             break;
-        //         case 3:
-        //             this.anims.play('mainRunMovement2', true);
-                    
-
-        //             break;
-        //         case 4:
-        //             this.anims.play('jumpMovement', true);
-                    
-
-        //             break;
-
-        //     }
-        // }
         
     }
 
