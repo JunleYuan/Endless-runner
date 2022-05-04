@@ -19,7 +19,6 @@ class Menu extends Phaser.Scene {
     //   align: 'left',
     //   fixedWidth: 122,
     //   fixedHeight: 70
-
     // }
 
     mnMusic = this.sound.add('MenuMusic',{volume: 0.3});
