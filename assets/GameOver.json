@@ -1,0 +1,95 @@
+{
+	"frames": {
+		"endscreen1": {
+			"frame": {
+				"x": 1,
+				"y": 1,
+				"w": 1778,
+				"h": 1000
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 1778,
+				"h": 1000
+			},
+			"sourceSize": {
+				"w": 1778,
+				"h": 1000
+			}
+		},
+		"endscreen2": {
+			"frame": {
+				"x": 1,
+				"y": 1003,
+				"w": 1778,
+				"h": 1000
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 1778,
+				"h": 1000
+			},
+			"sourceSize": {
+				"w": 1778,
+				"h": 1000
+			}
+		},
+		"endscreen3": {
+			"frame": {
+				"x": 1781,
+				"y": 1,
+				"w": 1778,
+				"h": 1000
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 1778,
+				"h": 1000
+			},
+			"sourceSize": {
+				"w": 1778,
+				"h": 1000
+			}
+		},
+		"endscreen4": {
+			"frame": {
+				"x": 1781,
+				"y": 1003,
+				"w": 1778,
+				"h": 1000
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 1778,
+				"h": 1000
+			},
+			"sourceSize": {
+				"w": 1778,
+				"h": 1000
+			}
+		}
+	},
+	"meta": {
+		"app": "http://www.codeandweb.com/texturepacker",
+		"version": "1.0",
+		"image": "GameOver.png",
+		"format": "RGBA8888",
+		"size": {
+			"w": 3560,
+			"h": 2004
+		},
+		"scale": "1"
+	}
+}
