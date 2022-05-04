@@ -21,9 +21,17 @@ class Menu extends Phaser.Scene {
     //   fixedHeight: 70
     // }
 
+    
     mnMusic = this.sound.add('MenuMusic',{volume: 0.3});
     mnMusic.loop = true; // Sets Loop
-    mnMusic.play();
+
+    if(mnPlaying == 0){
+      mnMusic.play();
+    }
+   
+
+    
+    
 
     this.anims.create({ 
       key: 'open', 
@@ -65,5 +73,6 @@ class Menu extends Phaser.Scene {
     
 
   }
+  
   
 }

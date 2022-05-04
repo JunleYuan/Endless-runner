@@ -137,7 +137,7 @@ class Player extends Phaser.GameObjects.Sprite {
     }
 
     slide(){
-        this.setPosition(this.x, this.y+500 ); //move bounding box down
+        this.setPosition(this.x, this.y ); //move bounding box down
         this.body.setSize(500, 500/2); //resize bounding box
         this.body.velocity.x = 500;
         this.canD = true;

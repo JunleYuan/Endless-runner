@@ -32,7 +32,8 @@ class PlayingScene extends Phaser.Scene {
 
 
     create() {
-
+        
+        mnPlaying = 0;
         mnMusic.stop();
         bkMusic = this.sound.add('BackgroundMusic',{volume: 0.3});
         bkMusic.loop = true; // Sets Loop
@@ -215,19 +216,19 @@ class PlayingScene extends Phaser.Scene {
                 //got hit
                 this.player.anims.play('mainHitMovement', true);
                 
-                this.player.body.setOffset(700, 200);
+                this.player.body.setOffset(600, 200);
                 break;
             case 2:
                 this.player.anims.play('mainRunMovement', true);
                 
                 this.player.body.setSize(500, 1000);
-                this.player.body.setOffset(700, 120);
+                this.player.body.setOffset(600, 120);
                 
                 break;
             case 3:
                 this.player.anims.play('mainRunMovement2', true);
                 this.player.body.setSize(500, 1000);
-                this.player.body.setOffset(700, 120);
+                this.player.body.setOffset(600, 120);
                 break;
 
         }
