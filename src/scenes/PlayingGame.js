@@ -221,7 +221,7 @@ class PlayingScene extends Phaser.Scene {
         this.speeed();
 
         //spawn starting platform
-        this.starting();
+        //this.starting();
         
 
     }//end of create
