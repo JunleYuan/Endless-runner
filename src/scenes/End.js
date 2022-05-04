@@ -57,6 +57,7 @@ class End extends Phaser.Scene {
             isGameOver = false;
             hit_count = 0;
             nubToast = 0;
+            playerGotHit = false;
             this.scene.start("playingScene");
             pspeed = -100;
         });
