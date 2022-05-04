@@ -315,7 +315,7 @@ class PlayingScene extends Phaser.Scene {
         if (spawn.isDown) {
             //This is the path the sprite will follow
             this.points = [1100, 400, 800, 500, 350, 300, 50, 400, 200, 400]
-            this.makeSmolG(0.05,this.points);
+            this.makeSmolG(0.05*(pspeed*-.01),this.points);
 
         }
         if (isGameOver) {
