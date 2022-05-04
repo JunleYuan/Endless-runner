@@ -23,6 +23,7 @@ class Player extends Phaser.GameObjects.Sprite {
         this.jumpTime = 0; //jump duration timer
         this.isInvulnerable = false;
         this.state = 0; // 0 is not moving, 1 is moving right, 2 is moving left
+        this.score = 0; //player score
 
         
 
