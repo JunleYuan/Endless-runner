@@ -29,9 +29,7 @@ class End extends Phaser.Scene {
             repeat: -1 
         });
 
-      
-      
-        let scoreDisplay = this.add.bitmapText(game.config.width / 2, game.config.height- 40, 'bm','Score: ' + runScore.toFixed(0), 34).setOrigin(0.5);
+        let scoreDisplay = this.add.bitmapText(game.config.width / 2, game.config.height/2, 'bm','Score: ' + runScore.toFixed(0), 34).setOrigin(0.5);
 
         this.clock = this.time.delayedCall(3000, () => {
         
