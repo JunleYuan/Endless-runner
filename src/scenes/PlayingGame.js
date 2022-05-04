@@ -215,7 +215,7 @@ class PlayingScene extends Phaser.Scene {
         
 
         //so player will fall through the ground
-        this.physics.world.setBoundsCollision(true, true, true, true);
+        this.physics.world.setBoundsCollision(true, true, true, false);
 
         //increase speed of platforms as time goes
         this.speeed();
@@ -223,7 +223,7 @@ class PlayingScene extends Phaser.Scene {
         //spawn starting platform
         //this.starting();
         this.starting();
-        this.obs4();
+        
 
     }//end of create
 

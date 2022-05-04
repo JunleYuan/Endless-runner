@@ -34,6 +34,7 @@ class End extends Phaser.Scene {
             this.scene.start("playingScene");
             isGameOver = false;
             hit_count = 0;
+            pspeed = -100;
         });
 
     }
