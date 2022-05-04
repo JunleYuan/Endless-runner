@@ -192,8 +192,7 @@ class PlayingScene extends Phaser.Scene {
         this.speeed();
 
         //spawn starting platform
-        this.starting();
-        this.obs4();
+        this.obstest();
         
 
     }//end of create
@@ -302,6 +301,27 @@ class PlayingScene extends Phaser.Scene {
                 case 10:
                     this.obs11();
                     console.log("10");
+                    break;
+                case 11:
+                    this.obs12();
+                    console.log("11");
+                    break;
+                case 12: 
+                    this.obs13();
+                    console.log("12");
+                    break;
+                case 13:
+                    this.obs14();
+                    console.log('13');
+                    break;
+                case 14:
+                    this.obs15();
+                    console.log("14");
+                    break;
+                case 15:
+                    this.obstest();
+                    console.log("15");
+                
             }
         }
 
@@ -343,10 +363,10 @@ class PlayingScene extends Phaser.Scene {
         this.path.anims.play('GerrardMovement', true);
         
         this.smallG.add(this.path, true);
-
         this.smallG.runChildUpdate = true;
 
     }
+
 
     starting() {
         this.startp = this.physics.add.group({ allowGravity: false, immovable: true});
@@ -575,4 +595,116 @@ class PlayingScene extends Phaser.Scene {
         this.physics.add.collider(this.player, this.group);
 
     }
+
+    obs12(){
+        this.group = this.physics.add.group({ allowGravity: false, immovable: true });   
+        this.platform1 = new Walla(this, 142 + game.config.width, 450,platsizeX*8,platsizeY, 'platform', false).setOrigin(0, 0);
+        this.platform2 = new Walla(this, 700 + game.config.width,130,platsizeX,platsizeY, 'platform', false).setOrigin(0, 0);
+        this.platform3 = new Walla(this, 950 + game.config.width,250,platsizeX* 0.75,platsizeY, 'platform', false).setOrigin(0, 0);
+        this.platform4 = new Walla(this, 450 + game.config.width,250,platsizeX* 0.75,platsizeY, 'platform', false).setOrigin(0, 0);
+
+        this.spike1 = new Trap(this, 770 + game.config.width, this.platform1.y - 25, 'Spikes', this.player).setOrigin(0.5,0.5).setPushable(false).setScale(0.1,0.1);
+        this.spike2 = new Trap(this, 800 + game.config.width, this.platform1.y - 25, 'Spikes', this.player).setOrigin(0.5,0.5).setPushable(false).setScale(0.1,0.1);
+
+        this.slide =  new Wall(this, 1500 + game.config.width, 150, 'Wall', false).setOrigin(.5, 0).setScale(.2);
+
+        this.toast1 = new Toast(this, 780 + game.config.width, this.platform2.y - 60, 'toast_atlas',this.player, false).setOrigin(0, 0).setPushable(false).setScale(.1, .1);
+
+        this.group.add(this.platform1);
+        this.group.add(this.platform2);
+        this.group.add(this.platform3);
+        this.group.add(this.platform4);
+        this.group.add(this.spike1);
+        this.group.add(this.spike2);
+
+        this.group.add(this.slide);
+        this.group.add(this.toast1);
+
+        this.group.runChildUpdate = true;
+
+        
+
+
+        this.physics.add.collider(this.player, this.group);
+    }
+    obs13(){
+        this.group = this.physics.add.group({ allowGravity: false, immovable: true });   
+        this.platform1 = new Walla(this, 142 + game.config.width, 450,platsizeX*1.5,platsizeY, 'platform', false).setOrigin(0, 0);
+        this.platform2 = new Walla(this, 572 + game.config.width, 450,platsizeX*1.5,platsizeY, 'platform', false).setOrigin(0, 0);
+        this.platform3 = new Walla(this, 972 + game.config.width, 450,platsizeX*1.5,platsizeY, 'platform', false).setOrigin(0, 0);
+        this.platform4 = new Walla(this, 972 + game.config.width, 450,platsizeX*1.5,platsizeY, 'platform', true).setOrigin(0, 0);
+        this.makeSmolG(0.001,[game.config.width*2, 420, 0, 420, game.config.width*2, 420 ]);
+
+        this.group.add(this.platform1);
+        this.group.add(this.platform2);
+        this.group.add(this.platform3);
+        this.group.add(this.platform4);
+
+        this.group.runChildUpdate = true;
+        this.physics.add.collider(this.player, this.group);
+    }
+    obs14(){
+        this.group = this.physics.add.group({ allowGravity: false, immovable: true });   
+        this.platform1 = new Walla(this, 142 + game.config.width, 200,platsizeX,platsizeY, 'platform', false).setOrigin(0, 0);
+        this.platform2 = new Walla(this, 472 + game.config.width, 300,platsizeX*1.5,platsizeY, 'platform', false).setOrigin(0, 0);
+        this.platform3 = new Walla(this, 872 + game.config.width, 450,platsizeX,platsizeY, 'platform', false).setOrigin(0, 0);
+        this.platform4 = new Walla(this, 872 + game.config.width, 120,platsizeX,platsizeY, 'platform', false).setOrigin(0, 0);
+        this.platform5 = new Walla(this, 1542 + game.config.width, 200,platsizeX,platsizeY, 'platform', true).setOrigin(0, 0);
+        this.platform6 = new Walla(this, 1172 + game.config.width, 300,platsizeX*1.5,platsizeY, 'platform', false).setOrigin(0, 0);
+        this.makeSmolG(0.001,[game.config.width*2, 320, 800, 320,-200,0]);
+        this.makeSmolG(0.001,[game.config.width*2, 320,1200, 320, 50,0]);
+
+        this.toast1 = new Toast(this, 952 + game.config.width, 60, 'toast_atlas',this.player, false).setOrigin(0, 0).setPushable(false).setScale(.1, .1);
+
+        this.group.add(this.platform1);
+        this.group.add(this.platform2);
+        this.group.add(this.platform3);
+        this.group.add(this.platform4);
+        this.group.add(this.platform5);
+        this.group.add(this.platform6);
+        this.group.add(this.toast1);
+
+        this.group.runChildUpdate = true;
+        this.physics.add.collider(this.player, this.group);
+    }
+
+    /*obstest(){
+        this.group = this.physics.add.group({ allowGravity: false, immovable: true });   
+        this.step1 = new Wall2(this, 610 + game.config.width, 290, 'NSWall', false).setOrigin(0, 0).setscale(0.5);
+        this.step2 = new Wall(this, 660 + game.config.width, 290, 'NSWall', false).setOrigin(0, 0).setscale(0.5);
+        this.platform1 = new Walla(this, 142 + game.config.width, 450,platsizeX*2.5,platsizeY, 'platform', false).setOrigin(0, 0);
+        this.platform2 = new Walla(this, 572 + game.config.width, 450,platsizeX*2.5,platsizeY, 'platform', false).setOrigin(0, 0);
+        
+
+        this.group.add(this.platform1);
+        this.group.add(this.platform2);
+        this.group.add(this.step1);
+        this.group.add(this.step2);
+        this.group.runChildUpdate = true;
+        this.physics.add.collider(this.player, this.group);
+    }
+    */
+    obs15(){
+        this.group = this.physics.add.group({ allowGravity: false, immovable: true });   
+        this.platform1 = new Walla(this, 142 + game.config.width, 275,platsizeX*1.5,platsizeY, 'platform', false).setOrigin(0, 0);
+        this.platform2 = new Walla(this, 642 + game.config.width, 400,platsizeX,platsizeY, 'platform', false).setOrigin(0, 0);
+        this.platform3 = new Walla(this, 642 + game.config.width, 150,platsizeX,platsizeY, 'platform', false).setOrigin(0, 0);
+        this.platform4 = new Walla(this, 1042 + game.config.width, 275,platsizeX*1.5,platsizeY, 'platform',true).setOrigin(0, 0);
+        
+        this.makeSmolG(0.001,[game.config.width*2, -100, 320, 320, 20,1110]);
+        this.makeSmolG(0.0015,[game.config.width, 1100, 1220, 420, 200,0]);
+
+
+        this.group.add(this.platform1);
+        this.group.add(this.platform2);
+        this.group.add(this.platform3);
+        this.group.add(this.platform4);
+        
+
+        this.group.runChildUpdate = true;
+        this.physics.add.collider(this.player, this.group);
+    }
+
+    
+    
 }
