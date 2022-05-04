@@ -27,6 +27,7 @@ class PlayingScene extends Phaser.Scene {
         this.load.audio('HurtVoice', './assets/HurtVoice.wav');
         this.load.audio('BackgroundMusic', './assets/BGmusic.wav');
 
+        this.load.bitmapFont('bm', 'assets/bm_0.png', 'assets/bm.xml');
 
     }
 
@@ -166,8 +167,6 @@ class PlayingScene extends Phaser.Scene {
             frameRate: 10,
             repeat: -1 
         });
-        
-
 
         //background
         this.background = this.add.tileSprite(0,0,4800*2,2700, 'background').setOrigin(0,0)
@@ -189,6 +188,10 @@ class PlayingScene extends Phaser.Scene {
         this.player = new Player(this, 300, 442, 'main_atlas','idle_001').setScale(.5);
         
         //this.add.sprite(300, 200).play('GerrardMovement');
+
+        //score set up
+        this.player.score = 0;
+        this.scoreText = this.add.bitmapText(50, 50, 'bm', 'Score: ' + this.player.score, 24).setDepth(2);
 
         //initialize controls
         keyA = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A);
@@ -220,7 +223,11 @@ class PlayingScene extends Phaser.Scene {
         //spawn starting platform
         //this.starting();
         this.starting();
+<<<<<<< HEAD
         
+=======
+        this.obs4();
+>>>>>>> ceb89a601802f5b93343ec340972ffe54d98ad00
 
     }//end of create
 
@@ -228,6 +235,44 @@ class PlayingScene extends Phaser.Scene {
         this.gerald.anims.play('geraldMovement', true);
         //console.log(this.player.isIdle);
 
+<<<<<<< HEAD
+=======
+        //update score
+        this.player.score += delta/1000;
+        this.scoreText.text = 'Score: ' + (this.player.score + nubToast*10).toFixed(0);
+
+        //switch case for animation
+        switch(this.player.state){
+            case 0:
+                //idle
+                this.player.anims.play('mainIdleMovement', true);
+                this.player.body.setSize(500, 1000);
+                
+                    break;
+            case 1:
+                
+                //got hit
+                this.player.anims.play('mainHitMovement', true);
+                
+                this.player.body.setOffset(600, 200);
+                break;
+            case 2:
+                this.player.anims.play('mainRunMovement', true);
+                
+                this.player.body.setSize(500, 1000);
+                this.player.body.setOffset(600, 120);
+                
+                break;
+            case 3:
+                this.player.anims.play('mainRunMovement2', true);
+                this.player.body.setSize(500, 1000);
+                this.player.body.setOffset(600, 120);
+                break;
+
+        }
+        
+
+>>>>>>> ceb89a601802f5b93343ec340972ffe54d98ad00
         //If Middleground goes off screen loop back
         this.foreground.body.velocity.x = pspeed/2;
         this.middleground.body.velocity.x = pspeed;
@@ -311,6 +356,7 @@ class PlayingScene extends Phaser.Scene {
 
         }
         if (isGameOver) {
+            runScore = this.player.score + nubToast*10;
             this.scene.start("end");
         }
 
@@ -329,6 +375,7 @@ class PlayingScene extends Phaser.Scene {
 
         }, null, this);
     }
+
     //create small g
     makeSmolG(speed,points){
 
@@ -340,6 +387,11 @@ class PlayingScene extends Phaser.Scene {
 
         this.smallG.runChildUpdate = true;
 
+    }
+
+    //add to score when collecting toast
+    toastScore() {
+        this.player.score += 10;
     }
 
     starting() {

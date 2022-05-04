@@ -21,7 +21,14 @@ class Player extends Phaser.GameObjects.Sprite {
         this.jumpCount = 0; //number of jumps taken since last touching the ground
         this.jumpTime = 0; //jump duration timer
         this.isInvulnerable = false;
+<<<<<<< HEAD
         this.isSlide = false;
+=======
+        this.state = 0; // 0 is not moving, 1 is moving right, 2 is moving left
+        this.score = 0; //player score
+
+        
+>>>>>>> ceb89a601802f5b93343ec340972ffe54d98ad00
 
         this.curScene = scene;  //save the player scene into var use for later
 

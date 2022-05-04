@@ -61,3 +61,6 @@ let shouldSpawnP = false;
 // Music variable
 let bkMusic, mnMusic;
 let mnPlaying = 0;
+
+//scoring
+let runScore = 0;
