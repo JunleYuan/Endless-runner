@@ -7,7 +7,7 @@ class PlayingScene extends Phaser.Scene {
         this.load.atlas('Gerrard_atlas', './assets/Gerrad.png', './assets/Gerrad.json');
         this.load.atlas('gerald_atlas', './assets/gerald.png', './assets/gerald.json');
         this.load.atlas('toast_atlas', './assets/Toast.png', './assets/Toast.json');
-        this.load.atlas('main_atlas', './assets/main.png', './assets/main.json');
+        this.load.atlas('main_atlas', './assets/MCsprites.png', './assets/MCsprites.json');
         this.load.atlas('gettoast_atlas', './assets/get.png', './assets/get.json');
 
         this.load.image('platform', './assets/PLAT.png');
@@ -64,15 +64,40 @@ class PlayingScene extends Phaser.Scene {
             frameRate: 5,
             repeat: -1 
         });
+        this.anims.create({ 
+            key: 'slide', 
+            frames: this.anims.generateFrameNames('main_atlas', {      
+                prefix: 'slide_',
+                start: 1,
+                end: 15,
+                suffix: '',
+                zeroPad: 3
+            }), 
+            frameRate: 50,
+            repeat: 0 
+        });
+
+        this.anims.create({ 
+            key: 'jumpMovement', 
+            frames: this.anims.generateFrameNames('main_atlas', {      
+                prefix: 'jump_',
+                start: 1,
+                end: 13,
+                suffix: '',
+                zeroPad: 3
+            }), 
+            frameRate: 20,
+            repeat: 0 
+        });
 
         this.anims.create({ 
             key: 'mainIdleMovement', 
             frames: this.anims.generateFrameNames('main_atlas', {      
-                prefix: 'Idle-',
+                prefix: 'idle_',
                 start: 1,
-                end: 3,
+                end: 4,
                 suffix: '',
-                zeroPad: 1
+                zeroPad: 3
             }), 
             frameRate: 5,
             repeat: -1 
@@ -80,11 +105,11 @@ class PlayingScene extends Phaser.Scene {
         this.anims.create({ 
             key: 'mainHitMovement', 
             frames: this.anims.generateFrameNames('main_atlas', {      
-                prefix: 'Ouch-',
+                prefix: 'ouch_',
                 start: 1,
                 end: 8,
                 suffix: '',
-                zeroPad: 1
+                zeroPad: 3
             }), 
             frameRate: 15,
             repeat: 0 
@@ -92,11 +117,11 @@ class PlayingScene extends Phaser.Scene {
         this.anims.create({ 
             key: 'mainRunMovement', 
             frames: this.anims.generateFrameNames('main_atlas', {      
-                prefix: 'Run-',
+                prefix: 'run_',
                 start: 1,
                 end: 3,
                 suffix: '',
-                zeroPad: 1
+                zeroPad: 3
             }), 
             frameRate: 5,
             repeat: 0 
@@ -104,11 +129,11 @@ class PlayingScene extends Phaser.Scene {
         this.anims.create({ 
             key: 'mainRunMovement2', 
             frames: this.anims.generateFrameNames('main_atlas', {      
-                prefix: 'Run-',
+                prefix: 'run_',
                 start: 1,
                 end: 3,
                 suffix: '',
-                zeroPad: 1
+                zeroPad: 3
             }), 
             frameRate: 15,
             repeat: 0 
@@ -161,7 +186,8 @@ class PlayingScene extends Phaser.Scene {
 
 
         //spawn in player
-        this.player = new Player(this, 300, 442, 'main_atlas','Idle-1');
+        this.player = new Player(this, 300, 442, 'main_atlas','idle_001').setScale(.5);
+        
         //this.add.sprite(300, 200).play('GerrardMovement');
 
         //initialize controls
@@ -192,8 +218,8 @@ class PlayingScene extends Phaser.Scene {
         this.speeed();
 
         //spawn starting platform
+        //this.starting();
         this.starting();
-        this.obs4();
         
 
     }//end of create
@@ -201,38 +227,6 @@ class PlayingScene extends Phaser.Scene {
     update(time, delta) {
         this.gerald.anims.play('geraldMovement', true);
         //console.log(this.player.isIdle);
-
-
-        //switch case for animation
-        switch(this.player.state){
-            case 0:
-                //idle
-                this.player.anims.play('mainIdleMovement', true);
-                this.player.body.setSize(500, 1000);
-                
-                    break;
-            case 1:
-                
-                //got hit
-                this.player.anims.play('mainHitMovement', true);
-                
-                this.player.body.setOffset(600, 200);
-                break;
-            case 2:
-                this.player.anims.play('mainRunMovement', true);
-                
-                this.player.body.setSize(500, 1000);
-                this.player.body.setOffset(600, 120);
-                
-                break;
-            case 3:
-                this.player.anims.play('mainRunMovement2', true);
-                this.player.body.setSize(500, 1000);
-                this.player.body.setOffset(600, 120);
-                break;
-
-        }
-        
 
         //If Middleground goes off screen loop back
         this.foreground.body.velocity.x = pspeed/2;
