@@ -2,6 +2,7 @@ let config = {
     type: Phaser.CANVAS,
     width: 960,
     height: 540,
+    backgroundColor: '#4488aa',
     fps: {
         target: 60,
         forceSetTimeOut: true
