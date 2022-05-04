@@ -7,7 +7,7 @@ class End extends Phaser.Scene {
         
         this.load.atlas('endC_atlas', './assets/endC.png', './assets/endC.json');
         this.load.bitmapFont('bm', 'assets/bm_0.png', 'assets/bm.xml');
-
+        this.load.atlas('end_atlas', 'assets/GameOver.png', 'assets/GameOver.json');
         this.load.audio('GameOver', './assets/GameOver.wav');
     }
 
@@ -29,9 +29,10 @@ class End extends Phaser.Scene {
             repeat: -1 
         });
 
-        let scoreDisplay = this.add.bitmapText(game.config.width / 2, game.config.height / 2, 'bm','Score: ' + runScore.toFixed(0), 34).setOrigin(0.5);
+      
+      
+        let scoreDisplay = this.add.bitmapText(game.config.width / 2, game.config.height- 40, 'bm','Score: ' + runScore.toFixed(0), 34).setOrigin(0.5);
 
-        
         this.clock = this.time.delayedCall(3000, () => {
         
             this.ed = this.add.sprite(0, 0).play('end').setOrigin(0,0).setScale(.5399);
