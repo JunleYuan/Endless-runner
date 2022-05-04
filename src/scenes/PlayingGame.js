@@ -259,7 +259,7 @@ class PlayingScene extends Phaser.Scene {
         if (shouldSpawnP) {
             shouldSpawnP = false;
 
-            switch (Math.floor(Math.random() * 6)) {
+            switch (Math.floor(Math.random() * 16)) {
                 case 0:
                     this.obs1();
                     console.log("0");

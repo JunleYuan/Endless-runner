@@ -11,7 +11,7 @@ let config = {
         default: 'arcade',
         arcade: {
             gravity: {y:1200},
-            debug: true
+            debug: false
         }
         
     },
@@ -63,3 +63,22 @@ let mnPlaying = 0;
 
 //scoring
 let runScore = 0;
+
+
+/*
+Creative Tilt:
+We are really proud of how we did our obstacle generation and an enemy type that was introduced.
+For our obstacle generation, instead of what was shown in class,
+we thought it would be better to generate a set of obstacles at random.
+This would provide a better platforming experience since they are handcrafted to provide maximum fun.
+We currently have 15 sets of obstacles that can be spawned.
+In addition to the obstacles, we created a unique flying enemy that would fly in different paths.
+This flying enemy would take a set of [x, y] values and draw a line of where it flies.
+For the art direction, we looked beyond the class examples and attempted basic animation (smear frames, wing beats, etc.)
+and our art assets are lively and colorful, something we are proud of. 
+A hand-drawn "particle burst" is used in a few of our animations like the slide and damage taken animations,
+and it leads to a fluid visual scene.
+We also ensured that sound effects would make the player more satisfied with the game experience, 
+such as the "anti-gravity" sound on the double jump, and the "flash" sound on the slide.
+Our toast collection sound is very satisfying and would provide players another incentive to collect them. 
+*/

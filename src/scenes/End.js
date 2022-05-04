@@ -45,7 +45,7 @@ class End extends Phaser.Scene {
                 isGameOver = false;
                 hit_count = 0;
                 nubToast = 0;
-                pspeed = 0;
+                pspeed = -100;
                 playerGotHit = false;
                 mnMusic.stop();
                 this.scene.start('menuScene'); 
