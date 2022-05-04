@@ -7,7 +7,7 @@ class PlayingScene extends Phaser.Scene {
         this.load.atlas('Gerrard_atlas', './assets/Gerrad.png', './assets/Gerrad.json');
         this.load.atlas('gerald_atlas', './assets/gerald.png', './assets/gerald.json');
         this.load.atlas('toast_atlas', './assets/Toast.png', './assets/Toast.json');
-        this.load.atlas('main_atlas', './assets/main.png', './assets/main.json');
+        this.load.atlas('main_atlas', './assets/MCsprites.png', './assets/MCsprites.json');
         this.load.atlas('gettoast_atlas', './assets/get.png', './assets/get.json');
 
         this.load.image('platform', './assets/PLAT.png');
@@ -27,6 +27,7 @@ class PlayingScene extends Phaser.Scene {
         this.load.audio('HurtVoice', './assets/HurtVoice.wav');
         this.load.audio('BackgroundMusic', './assets/BGmusic.wav');
 
+        this.load.bitmapFont('bm', 'assets/bm_0.png', 'assets/bm.xml');
 
     }
 
@@ -64,15 +65,40 @@ class PlayingScene extends Phaser.Scene {
             frameRate: 5,
             repeat: -1 
         });
+        this.anims.create({ 
+            key: 'slide', 
+            frames: this.anims.generateFrameNames('main_atlas', {      
+                prefix: 'slide_',
+                start: 1,
+                end: 15,
+                suffix: '',
+                zeroPad: 3
+            }), 
+            frameRate: 50,
+            repeat: 0 
+        });
+
+        this.anims.create({ 
+            key: 'jumpMovement', 
+            frames: this.anims.generateFrameNames('main_atlas', {      
+                prefix: 'jump_',
+                start: 1,
+                end: 13,
+                suffix: '',
+                zeroPad: 3
+            }), 
+            frameRate: 20,
+            repeat: 0 
+        });
 
         this.anims.create({ 
             key: 'mainIdleMovement', 
             frames: this.anims.generateFrameNames('main_atlas', {      
-                prefix: 'Idle-',
+                prefix: 'idle_',
                 start: 1,
-                end: 3,
+                end: 4,
                 suffix: '',
-                zeroPad: 1
+                zeroPad: 3
             }), 
             frameRate: 5,
             repeat: -1 
@@ -80,11 +106,11 @@ class PlayingScene extends Phaser.Scene {
         this.anims.create({ 
             key: 'mainHitMovement', 
             frames: this.anims.generateFrameNames('main_atlas', {      
-                prefix: 'Ouch-',
+                prefix: 'ouch_',
                 start: 1,
                 end: 8,
                 suffix: '',
-                zeroPad: 1
+                zeroPad: 3
             }), 
             frameRate: 15,
             repeat: 0 
@@ -92,11 +118,11 @@ class PlayingScene extends Phaser.Scene {
         this.anims.create({ 
             key: 'mainRunMovement', 
             frames: this.anims.generateFrameNames('main_atlas', {      
-                prefix: 'Run-',
+                prefix: 'run_',
                 start: 1,
                 end: 3,
                 suffix: '',
-                zeroPad: 1
+                zeroPad: 3
             }), 
             frameRate: 5,
             repeat: 0 
@@ -104,11 +130,11 @@ class PlayingScene extends Phaser.Scene {
         this.anims.create({ 
             key: 'mainRunMovement2', 
             frames: this.anims.generateFrameNames('main_atlas', {      
-                prefix: 'Run-',
+                prefix: 'run_',
                 start: 1,
                 end: 3,
                 suffix: '',
-                zeroPad: 1
+                zeroPad: 3
             }), 
             frameRate: 15,
             repeat: 0 
@@ -141,8 +167,6 @@ class PlayingScene extends Phaser.Scene {
             frameRate: 10,
             repeat: -1 
         });
-        
-
 
         //background
         this.background = this.add.tileSprite(0,0,4800*2,2700, 'background').setOrigin(0,0)
@@ -161,8 +185,13 @@ class PlayingScene extends Phaser.Scene {
 
 
         //spawn in player
-        this.player = new Player(this, 300, 442, 'main_atlas','Idle-1');
+        this.player = new Player(this, 300, 442, 'main_atlas','idle_001').setScale(.5);
+        
         //this.add.sprite(300, 200).play('GerrardMovement');
+
+        //score set up
+        this.player.score = 0;
+        this.scoreText = this.add.bitmapText(50, 50, 'bm', 'Score: ' + this.player.score, 24).setDepth(2);
 
         //initialize controls
         keyA = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A);
@@ -186,7 +215,7 @@ class PlayingScene extends Phaser.Scene {
         
 
         //so player will fall through the ground
-        this.physics.world.setBoundsCollision(true, true, true, true);
+        this.physics.world.setBoundsCollision(true, true, true, false);
 
         //increase speed of platforms as time goes
         this.speeed();
@@ -201,38 +230,11 @@ class PlayingScene extends Phaser.Scene {
         this.gerald.anims.play('geraldMovement', true);
         //console.log(this.player.isIdle);
 
+        //update score
+        this.player.score += delta/1000;
+        this.scoreText.text = 'Score: ' + (this.player.score + nubToast*10).toFixed(0);
 
-        //switch case for animation
-        switch(this.player.state){
-            case 0:
-                //idle
-                this.player.anims.play('mainIdleMovement', true);
-                this.player.body.setSize(500, 1000);
-                
-                    break;
-            case 1:
-                
-                //got hit
-                this.player.anims.play('mainHitMovement', true);
-                
-                this.player.body.setOffset(600, 200);
-                break;
-            case 2:
-                this.player.anims.play('mainRunMovement', true);
-                
-                this.player.body.setSize(500, 1000);
-                this.player.body.setOffset(600, 120);
-                
-                break;
-            case 3:
-                this.player.anims.play('mainRunMovement2', true);
-                this.player.body.setSize(500, 1000);
-                this.player.body.setOffset(600, 120);
-                break;
-
-        }
-        
-
+    
         //If Middleground goes off screen loop back
         this.foreground.body.velocity.x = pspeed/2;
         this.middleground.body.velocity.x = pspeed;
@@ -333,10 +335,11 @@ class PlayingScene extends Phaser.Scene {
         if (spawn.isDown) {
             //This is the path the sprite will follow
             this.points = [1100, 400, 800, 500, 350, 300, 50, 400, 200, 400]
-            this.makeSmolG(0.05,this.points);
+            this.makeSmolG(0.05*(pspeed*-.01),this.points);
 
         }
         if (isGameOver) {
+            runScore = this.player.score + nubToast*10;
             this.scene.start("end");
         }
 
@@ -355,6 +358,7 @@ class PlayingScene extends Phaser.Scene {
 
         }, null, this);
     }
+
     //create small g
     makeSmolG(speed,points){
 
@@ -367,6 +371,10 @@ class PlayingScene extends Phaser.Scene {
 
     }
 
+    //add to score when collecting toast
+    toastScore() {
+        this.player.score += 10;
+    }
 
     starting() {
         this.startp = this.physics.add.group({ allowGravity: false, immovable: true});

@@ -14,7 +14,9 @@ class End extends Phaser.Scene {
 
 
         this.sound.play('GameOver');
-        let over = this.add.bitmapText(game.config.width / 2, game.config.height / 2, 'bm','Game Over',40).setOrigin(0.5);
+        let over = this.add.bitmapText(game.config.width / 2, game.config.height / 2.5, 'bm','Game Over',40).setOrigin(0.5);
+
+        let scoreDisplay = this.add.bitmapText(game.config.width / 2, game.config.height / 2, 'bm','Score: ' + runScore.toFixed(0), 34).setOrigin(0.5);
 
         let again = this.add.bitmapText(game.config.width / 2, game.config.height / 1.5, 'bm','Again?',34).setOrigin(0.5);
 
@@ -29,9 +31,11 @@ class End extends Phaser.Scene {
       
         });
         again.on('pointerdown', () => {
-            this.scene.start("playingScene");
             isGameOver = false;
             hit_count = 0;
+            nubToast = 0;
+            this.scene.start("playingScene");
+            pspeed = -100;
         });
 
     }

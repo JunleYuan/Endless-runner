@@ -19,8 +19,6 @@ class Path extends Phaser.Physics.Arcade.Sprite {
         this.path.getPoint(0, this.pathVector);
         this.setPosition(this.pathVector.x, this.pathVector.y);
 
-            
-
         this.colle = player; //save player as var use for hitG
         this.curScene = scene;  //save scene as var use for hitG
 
