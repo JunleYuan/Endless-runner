@@ -19,7 +19,6 @@ class Menu extends Phaser.Scene {
     //   align: 'left',
     //   fixedWidth: 122,
     //   fixedHeight: 70
-
     // }
 
     

@@ -13,10 +13,10 @@ class Controls extends Phaser.Scene {
       mnPlaying = 1;
     }
     //controls text
-    let controlsText = this.add.bitmapText(game.config.width / 2, game.config.height / 2, 'bm', 'Press A to move left, and press D to move right \n\nPress W to jump, and W again while in the air to double jump \n\nPress S to slide under obstacles', 20).setOrigin(0.5, 0.5);
+    let controlsText = this.add.bitmapText(game.config.width / 2, game.config.height / 3, 'bm', 'Press A to move left, and press D to move right \n\nPress W to jump, and W again while in the air to double jump \n\nPress S to slide under obstacles', 32).setOrigin(0.5, 0.5);
    
     //menu button
-    let menuButton = this.add.bitmapText(game.config.width / 2, game.config.height / 1.5, 'bm', 'Main Menu', 34).setOrigin(0.5);
+    let menuButton = this.add.bitmapText(game.config.width / 2, game.config.height / 1.5, 'bm', 'Main Menu', 32).setOrigin(0.5);
     menuButton.setInteractive();
 
     menuButton.on('pointerdown', () => {
