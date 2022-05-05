@@ -5,57 +5,44 @@ class End extends Phaser.Scene {
 
     create(){
         bkMusic.stop();
+
         this.sound.play('GameOver');
 
         this.anims.create({ 
-            key: 'GmOr', 
-            frames: this.anims.generateFrameNames('end_atlas', {      
-                prefix: 'endscreen',
+            key: 'end', 
+            frames: this.anims.generateFrameNames('endC_atlas', {      
+                prefix: 'endscreen ',
                 start: 1,
                 end: 4,
                 suffix: '',
                 zeroPad: 1
             }), 
-            frameRate: 10,
+            frameRate: 5,
             repeat: -1 
         });
-      
-      
-        this.end = this.add.sprite(0, 0).play('GmOr').setOrigin(0,0).setScale(.5399);
-      
-        var r1 = this.add.rectangle(game.config.width - 100, game.config.height - 60, 148, 50, 0x290133);
-        r1.setStrokeStyle(4, 0xefc53f);
-        var r2 = this.add.rectangle(game.config.width / 2, game.config.height - 60, 248, 100, 0x290133);
-        r2.setStrokeStyle(4, 0xefc53f);
 
-        let over = this.add.bitmapText(game.config.width / 2, game.config.height - 85, 'bm','Game Over',40).setOrigin(0.5);
+        let scoreDisplay = this.add.bitmapText(game.config.width / 2, game.config.height/2, 'bm','Score: ' + runScore.toFixed(0), 34).setOrigin(0.5);
 
-        let scoreDisplay = this.add.bitmapText(game.config.width / 2, game.config.height- 40, 'bm','Score: ' + runScore.toFixed(0), 34).setOrigin(0.5);
-
-        let again = this.add.bitmapText(game.config.width - 100, game.config.height - 60, 'bm','Again?',34).setOrigin(0.5);
-
-       
+        this.clock = this.time.delayedCall(3000, () => {
+            mnMusic = this.sound.add('MenuMusic',{volume: 0.3});
+            mnMusic.loop = true; // Sets Loop
+            mnMusic.play();
 
 
-        //make it clickable
-        again.setInteractive();
-        again.on('pointerover', () => {
-            again.setScale(1.2);
-      
-        });
-        again.on('pointerout', () => {
-            again.setScale(1);
-      
-        });
-        again.on('pointerdown', () => {
-            isGameOver = false;
-            hit_count = 0;
-            nubToast = 0;
-            playerGotHit = false;
-            this.scene.start("playingScene");
-            pspeed = -100;
-        });
-
+            this.ed = this.add.sprite(0, 0).play('end').setOrigin(0,0).setScale(.5399);
+            this.goMenu = this.add.text(860, 450, ' ').setOrigin(0.5,0).setInteractive();
+            //this.goMenu.setBackgroundColor('#DD002F');
+            this.goMenu.setDisplaySize(70, 40);
+            this.goMenu.on('pointerdown', () => {
+                isGameOver = false;
+                hit_count = 0;
+                nubToast = 0;
+                pspeed = -100;
+                playerGotHit = false;
+                mnMusic.stop();
+                this.scene.start('menuScene'); 
+            });
+        }, null, this);
     }
   
     update(time, delta){
