@@ -616,7 +616,7 @@ class PlayingScene extends Phaser.Scene {
         this.group = this.physics.add.group({ allowGravity: false, immovable: true });   
         this.platform1 = new Walla(this, 142 + game.config.width, 400,platsizeX*8,platsizeY, 'platform', false).setOrigin(0, 0);
         this.platform2 = new Walla(this, 700 + game.config.width,130,platsizeX,platsizeY, 'platform', false).setOrigin(0, 0);
-        this.platform3 = new Walla(this, 975 + game.config.width,250,platsizeX* 0.75,platsizeY, 'platform', false).setOrigin(0, 0);
+        this.platform3 = new Walla(this, 975 + game.config.width,250,platsizeX* 0.75,platsizeY, 'platform', true).setOrigin(0, 0);
         this.platform4 = new Walla(this, 450 + game.config.width,250,platsizeX* 0.75,platsizeY, 'platform',false).setOrigin(0, 0);
 
         this.spike1 = new Trap(this, 770 + game.config.width, this.platform1.y - 25, 'Spikes', this.player).setOrigin(0.5,0.5).setPushable(false).setScale(0.1,0.1);
