@@ -10,8 +10,8 @@ class End extends Phaser.Scene {
 
         this.anims.create({ 
             key: 'end', 
-            frames: this.anims.generateFrameNames('endC_atlas', {      
-                prefix: 'endscreen ',
+            frames: this.anims.generateFrameNames('end_atlas', {      
+                prefix: 'endscreen',
                 start: 1,
                 end: 4,
                 suffix: '',
@@ -23,7 +23,7 @@ class End extends Phaser.Scene {
 
         let scoreDisplay = this.add.bitmapText(game.config.width / 2, game.config.height/2, 'bm','Score: ' + runScore.toFixed(0), 34).setOrigin(0.5);
 
-        this.clock = this.time.delayedCall(3000, () => {
+        this.clock = this.time.delayedCall(6000, () => {
             mnMusic = this.sound.add('MenuMusic',{volume: 0.3});
             mnMusic.loop = true; // Sets Loop
             mnMusic.play();
