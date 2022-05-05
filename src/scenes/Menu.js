@@ -3,12 +3,6 @@ class Menu extends Phaser.Scene {
     super("menuScene");
   }
 
-  preload() {
-    this.load.atlas('open_atlas', 'assets/open.png', 'assets/open.json');
-    this.load.audio('MenuMusic', './assets/MenuTheme.wav');
-
-  }
-  
   create() {
      // menu text configuration
     //  let menuConfig = {

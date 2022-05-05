@@ -15,7 +15,7 @@ let config = {
         }
         
     },
-    scene: [Menu, End, PlayingScene, Controls]
+    scene: [Load, Menu, End, PlayingScene, Controls]
     
 }
     
